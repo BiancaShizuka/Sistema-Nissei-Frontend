@@ -117,3 +117,16 @@ text-align: right;
   color: rgb(0, 0, 0);
   background: rgb(255, 255, 255);
 }
+
+.div-infoServico .div-infoBasica .div-buttons button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+.div-infoServico .div-infoBasica .div-buttons button:disabled,
+button[disabled]:hover{
+  background-color: #cccccc;
+  color: #666666;
+}

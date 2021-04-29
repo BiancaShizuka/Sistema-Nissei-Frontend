@@ -396,7 +396,7 @@ function CadastroServicos(){
                     <div id="mensagem">
 
                     </div> 
-                    <button type="submit" id="btnForm">{button}</button>
+                    <button type="submit" class="btnFormSalvar">{button}</button>
                 </form>
                 <button type="button" onClick={voltar}>Voltar</button>
             </aside>

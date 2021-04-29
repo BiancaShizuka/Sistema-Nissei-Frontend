@@ -85,7 +85,6 @@ function FechaServico()
     function btnClickVizualizar(){
         let date = new Date();
         
-        console.log(date);
         let parcAux=[];
      
         for(var i=1;i<=qtdeParcela;i++){

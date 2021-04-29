@@ -34,7 +34,7 @@ function VisualizarServiço()
             setDtFim(resp.data[0].ser_fim);
             setMaoObra(resp.data[0].ser_maoObra);
             setStatus(resp.data[0].ser_status);
-            setCodFun(resp.data[0].pes_cod);
+            setCodFun(resp.data[0].func_cod);
             listarPecsUtiizadas(resp.data[0].ser_maoObra);
         });
         
@@ -45,7 +45,6 @@ function VisualizarServiço()
             setPecasUti(resp.data); 
             for(let i=0;i<resp.data.length;i++){
                 t+=resp.data[i].uti_precoUni*resp.data[i].uti_qtde;
-                console.log(t);
             }
         });
         t=total+t;
@@ -87,11 +86,12 @@ function VisualizarServiço()
             ser_fim: null,
             ser_status: true
         }).then((response)=>{
+ 
             api.get(`/func/${codFun}}`).then((resp)=>{
-             
-                if(resp.data[0].fun_status===false){
+                if(resp.data[0].fun_status===0){
                     api.put(`/servicoFuncNull/${codFun}`);
                 }
+                recuperarServico();
             });
         })
       
@@ -157,7 +157,7 @@ function VisualizarServiço()
                
                 <div className="div-buttons">
                     <button className="button-acao" onClick={()=>fecharServico()} disabled={!status}>Fechar Serviço</button>
-                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()}>Cancelar fechamento de serviço</button>
+                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()} disabled={status}>Cancelar fechamento de serviço</button>
                     <button className="button-acao" onClick={()=>abrirContasReceber()} disabled={status}>Abrir contas a receber</button>
                 </div>
             </div>

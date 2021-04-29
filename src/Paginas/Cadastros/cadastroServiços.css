@@ -1,11 +1,22 @@
-
+body{
+	margin:0;
+	padding: 0;
+}
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  overflow: auto;
+  background-color: rgb(47,79,79);
+}
 .div-servico{
     width: 70%;
-    background-color: rgb(0, 0, 0,.95);
+    background-color: #000000;
     box-shadow: 0 0 14px 0 rgba(0 , 0 , 0, 0.02);
     border-radius: 25px;
     padding: 30px;
-    color: #ffff;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,12 +129,19 @@
     background: #fefffe;
     color:rgba(34, 33, 33, 0.849)
 }
-
+.div-servico .formularioServico .btnFormSalvar{
+	background: #71da71;
+	color:#000000;
+}
+.div-servico .formularioServico .btnFormSalvar:hover{
+	background: #248f24;
+	color:#ffffff;
+}
 .div-servico button[type=button]{
     width: 100%;
     border: 0;
     margin-top: 30px;
-    color:#ffff;
+    color:#ffffff;
     background:#6b6b6b;
     border-radius: 5px;
     padding: 15px 20px;
@@ -242,4 +260,38 @@
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
     padding-left: 38%;
+}
+#divTable{
+    margin-top: 20px;
+    text-align: center;
+}
+#divTable .btnExcluirPec{
+    background:#ff8080;
+    color: #000000;
+}
+#divTable .btnExcluirPec:hover{
+    background-color: #ff1a1a;
+    color: #ffffff;
+}
+#tabelaCont{
+    width:100%;
+    font-size: 20px;
+    border-collapse: collapse;
+}
+#tabelaCont td{
+    padding:10px;
+}
+#tabelaCont thead,tbody{
+    width: 100%;
+}
+#tabelaCont thead{
+    background-color: rgb(104, 100, 100);
+    color: #fff;
+}
+#tabelaCont tbody{
+    background-color: #ffffff;
+	color: #000000;
+}
+#tabelaCont tbody tr:hover{
+    background-color: #f2f2f2;
 }
