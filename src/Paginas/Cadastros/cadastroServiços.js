@@ -60,22 +60,25 @@ function CadastroServicos(){
     },[peca])
 
     async function alterarServico(){
+        setLoading(true);
         var pecsAux = pecsUti;
 
         setPecsUti([]);
-        await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
-            if(resp.data[0].car_id===null)
+        const resp=await api.get(`/servico/${localStorage.getItem('cod_ser')}`)
+            console.log(resp.data);
+            if(resp.data.carro===null)
                 setCarro("");
             else{
-                setCarro(resp.data[0].car_id);
+                setCarro(resp.data.carro.car_id);
             }
-            setDescricao(resp.data[0].ser_descricao);
-            if(resp.data[0].fun_cod!=null)
-                setFunc(resp.data[0].fun_cod);
+            setDescricao(resp.data.ser_descricao);
+            if(resp.data.funcionario!==null)
+                setFunc(resp.data.funcionario.pes_cod);
             else
                 setFunc("");
-            setMaoObra(resp.data[0].ser_maoObra);
-            var date=new Date(resp.data[0].ser_inicio);
+            setMaoObra(resp.data.ser_maoObra);
+
+            var date=new Date(resp.data.ser_inicio);
             var dat=date.getFullYear()+"-";
             if(date.getMonth()+1<10)
                 dat+='0';
@@ -84,23 +87,23 @@ function CadastroServicos(){
                 dat+='0';
             dat+=date.getDate();
             setDtInicio(dat);
-        });
-        var i=0;
-        await api.get(`/servicopeca/${localStorage.getItem('cod_ser')}`).then((resp)=>{ 
-            while(i<resp.data.length){
+        
+            var i=0;
+            while(i<resp.data.pecas.length){
                 var data= {
                     cod:i,
-                    uti_qtde:resp.data[i].uti_qtde,
-                    uti_precoUni: resp.data[i].uti_precoUni.toFixed(2),
-                    pec_desc:resp.data[i].pec_descricao,
-                    pec_cod:resp.data[i].pec_cod
+                    banco:1,//Saber que essa peça do serviço já está no banco
+                    uti_qtde:resp.data.pecas[i].uti_qtde,
+                    uti_precoUni: resp.data.pecas[i].uti_precoUni.toFixed(2),
+                    pec_desc:resp.data.pecas[i].peca.pec_descricao,
+                    pec_cod:resp.data.pecas[i].peca.pec_cod
                 };
                 pecsAux.push(data);
                 console.log(pecsUti);
                 i=i+1;
             }
-        });
-        setPecsUti(pecsAux);
+            setPecsUti(pecsAux);
+            setLoading(false);
     }
     
     async function Excluir(codigo)
@@ -146,21 +149,10 @@ function CadastroServicos(){
                     ser_descricao:descricao,
                     ser_maoObra:maoObra,
                     ser_inicio:dtInicio,
-
+                    pecas:pecsUti,
                     ser_status:true
                 })
-                codSer=response.data.lastId;
-                console.log(response.data);
-                for(let i=0;i<pecsUti.length;i++)
-                {
-                    const response2=await api.post('/servicopeca',{
-                        ser_cod:codSer,
-                        pec_cod:pecsUti[i].pec_cod,
-                        uti_precoUni:pecsUti[i].uti_precoUni,
-                        uti_qtde:pecsUti[i].uti_qtde
-                    })
-                    console.log(response2);
-                }
+                
                 alert('Serviço Cadastrado');
                 history.goBack();
             }
@@ -172,19 +164,9 @@ function CadastroServicos(){
                     ser_descricao:descricao,
                     ser_maoObra:maoObra,
                     ser_inicio:dtInicio,
+                    pecas:pecsUti,
                     ser_status:true
                 })
-                codSer=localStorage.getItem('cod_ser');
-                for(let i=0;i<pecsUti.length;i++)
-                {
-                    const response2=await api.post('/servicopeca',{
-                        ser_cod:codSer,
-                        pec_cod:pecsUti[i].pec_cod,
-                        uti_precoUni:pecsUti[i].uti_precoUni,
-                        uti_qtde:pecsUti[i].uti_qtde
-                    })
-                    console.log(response2);
-                }
                 alert('Serviço Alterado');
                 localStorage.removeItem("cod_ser");
                 history.goBack();
@@ -224,6 +206,7 @@ function CadastroServicos(){
 
                     const data= {
                         cod:tam,
+                        banco:0, //Saber que essa peça nesse serviço não está no banco
                         uti_qtde:quant,
                         uti_precoUni: valorUni,
                         pec_desc:pecs[i].pec_descricao,
@@ -289,19 +272,19 @@ function CadastroServicos(){
         history.goBack();
     }
     return(
-        <div id="tela" className="background">   
+        <div id="tela" class="background">   
             <Header/> 
-            <aside className="div-servico">
+            <aside class="div-servico">
                 <h1>{titulo}</h1>
-                <form className='formularioServico' onSubmit={cadastrarServico}>
-                    <div className="input-block block-data" >
+                <form class='formularioServico' onSubmit={cadastrarServico}>
+                    <div class="input-block block-data" >
                         <label htmlFor="dtInicio">Data de inicio: </label>
                         <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
                     </div>
 
-                    <div className="input-block block-carro">
+                    <div class="input-block block-carro">
                         <label>Carro: </label>
-                        <select className="select-carro" value={carro} onChange={e=>setCarro(e.target.value)}>
+                        <select class="select-carro" value={carro} onChange={e=>setCarro(e.target.value)}>
                                 <option id="op-selecione" value="">
                                     Selecione uma opcao
                                 </option>
@@ -313,9 +296,9 @@ function CadastroServicos(){
                         </select>
                     </div>
 
-                    <div className="input-block block-func">
+                    <div class="input-block block-func">
                         <label>Funcionário: </label>
-                        <select className="select-func" value={func} onChange={e=>setFunc(e.target.value)}>
+                        <select class="select-func" value={func} onChange={e=>setFunc(e.target.value)}>
                                 <option id="op-selecione" value="">
                                     Selecione uma opcao
                                 </option>
@@ -327,31 +310,31 @@ function CadastroServicos(){
                         </select>
                     </div>
                     
-                    <div className="input-block block-maoObra" >
+                    <div class="input-block block-maoObra" >
                         <label htmlFor="maoObra">Valor Mão de Obra: </label>
                         <input type="number" step="0.01" name="maoObra" id="maoObra" value={maoObra} onChange={e=>setMaoObra(e.target.value)} required/>
                     </div>
 
-                    <div className="input-block block-desc">
+                    <div class="input-block block-desc">
                         <label htmlFor="descricao">Descrição</label>
-                        <textarea name="descricao" className="txtArea" rows="10" cols="110" id="descricao" value={descricao} onChange={e=>setDescricao(e.target.value)} required></textarea>
+                        <textarea name="descricao" class="txtArea" rows="10" cols="110" id="descricao" value={descricao} onChange={e=>setDescricao(e.target.value)} required></textarea>
                     </div>
 
-                    <h1 className="tituloPecas">Adicionar peças Utilizadas</h1>
-                    <div className="cadastroPecas">
-                        <div className="input-block block-quant">
+                    <h1 class="tituloPecas">Adicionar peças Utilizadas</h1>
+                    <div class="cadastroPecas">
+                        <div class="input-block block-quant">
                             <label htmlFor="quant">Qtde:</label>
                             <input type="number" name="quant" id="quant" value={quant} onChange={e=>setQuant(e.target.value)} />
                         </div>
 
-                        <div className="input-block block-valorUni">
+                        <div class="input-block block-valorUni">
                             <label htmlFor="valorUni">Valor Uni:</label>
                             <input type="number" step="0.01" name="valorUni" id="valorUni" value={valorUni} onChange={e=>setValorUni(e.target.value)} />
                         </div>
                         {pecs && (
-                            <div className="input-block block-peca">
+                            <div class="input-block block-peca">
                                 <label>Peça: </label>
-                                <input type="text" autoComplete="off" name="peca" list="pecanome" className="select-peca" value={peca} placeholder="Digite pelo menos 3 letras" onChange={e=>setPeca(e.target.value)}/>
+                                <input type="text" autoComplete="off" name="peca" list="pecanome" class="select-peca" value={peca} placeholder="Digite pelo menos 3 letras" onChange={e=>setPeca(e.target.value)}/>
                                     <datalist id="pecanome">
                                         {pecs.map(pec=>(
                                             <option key={pec.pec_cod} value={pec.pec_descricao}></option>
@@ -359,13 +342,13 @@ function CadastroServicos(){
                                     </datalist>
                             </div>
                         )}
-                        <div className="divAdicionarPec">
-                            <button className="btnAdicionarPec" onClick={addPeca}>+</button>
+                        <div class="divAdicionarPec">
+                            <button class="btnAdicionarPec" onClick={addPeca}>+</button>
                         </div>
-                        <div id="mensagemPecas" className="mensagem">
+                        <div id="mensagemPecas" class="mensagem">
 
                         </div>
-                        <button type="button" onClick={addLista} className="btnFormPecas">Adicionar Peças</button>
+                        <button type="button" onClick={addLista} class="btnFormPecas">Adicionar Peças</button>
                     </div>         
                     <div id="divTable">
                         <table id="tabelaCont">
@@ -384,7 +367,7 @@ function CadastroServicos(){
                                         <td>R$ {pec.uti_precoUni}</td>
                                         <td>{pec.pec_desc}</td>
                                         <td>
-                                            <button id="btexcluir" className="btnExcluirPec" onClick={()=>Excluir(pec.cod)} type="button">
+                                            <button id="btexcluir" class="btnExcluirPec" onClick={()=>Excluir(pec.cod)} type="button">
                                             Excluir
                                             </button>
                                         </td>
@@ -401,7 +384,7 @@ function CadastroServicos(){
                 <button type="button" onClick={voltar}>Voltar</button>
             </aside>
             {loading &&
-                <div className="modalSer">
+                <div class="modalSer">
                     
                     <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                 </div>
