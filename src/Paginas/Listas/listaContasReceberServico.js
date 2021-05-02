@@ -16,7 +16,7 @@ function ListarContasReceberServico()
         listarContas();
     },[]);
     async function listarContas(){
-        await api.get(`/conta/${localStorage.getItem('cod_ser')}`).then((response)=>{
+        await api.get(`/contaReceber/${localStorage.getItem('cod_ser')}`).then((response)=>{
             setContas(response.data);
         })
     }
@@ -37,7 +37,7 @@ function ListarContasReceberServico()
     }
     async function confirmarPagamento(){
         btnFecharModal();
-        await api.put('/conta',{
+        await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: localStorage.getItem('cod_ser'),
             con_dtPgto: dtPgto
@@ -47,7 +47,7 @@ function ListarContasReceberServico()
     }
     async function cancelarPagamento(){
         btnFecharModalCancel();
-        await api.put('/conta',{
+        await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: localStorage.getItem('cod_ser'),
             con_dtPgto: null
