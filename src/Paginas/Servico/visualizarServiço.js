@@ -35,21 +35,12 @@ function VisualizarServiço()
             setMaoObra(resp.data.ser_maoObra);
             setStatus(resp.data.ser_status);
             setCodFun(resp.data.funcionario.pes_cod);
-            listarPecsUtiizadas(resp.data.ser_maoObra);
+            setTotal(resp.data.total);
+            setPecasUti(resp.data.pecas);
         });
         
     }
-    async function listarPecsUtiizadas(valorMaoObra){
-        let t=0;
-        await api.get(`/servicopeca/${localStorage.getItem('cod_ser')}`).then((resp)=>{
-            setPecasUti(resp.data); 
-            for(let i=0;i<resp.data.length;i++){
-                t+=resp.data[i].uti_precoUni*resp.data[i].uti_qtde;
-            }
-        });
-        t=total+t;
-        setTotal(t+valorMaoObra);
-    }
+    
     function abrirContasReceber(){
         history.push('/listaContasReceberServico');
     }
@@ -80,11 +71,9 @@ function VisualizarServiço()
         btnFecharModal();
         await api.delete(`/contaPorServico/${localStorage.getItem('cod_ser')}`);
 
-        await api.put('/servicoFechar',{
+        await api.put('/cancelarFechamento',{
             ser_cod: localStorage.getItem('cod_ser'),
-            ser_total: total,
-            ser_fim: null,
-            ser_status: true
+
         }).then((response)=>{
  
             api.get(`/func/${codFun}}`).then((resp)=>{
@@ -136,18 +125,20 @@ function VisualizarServiço()
                     <table className="tableSerPecas">
                         <thead>
                             <tr>
+                                <td>Descrição</td>
                                 <td>Quantidade</td>
                                 <td>Valor Uni.</td>
-                                <td>Descrição</td>
+                                
                             
                             </tr>
                         </thead>
                         <tbody>
                             {pecsUti.map(pec=>(
                                 <tr key={pec.pec_cod}>
+                                    <td>{pec.peca.pec_descricao}</td>
                                     <td>{pec.uti_qtde}</td>
                                     <td>R$ {pec.uti_precoUni}</td>
-                                    <td>{pec.pec_descricao}</td>
+                                    
                                 
                                 </tr>
                             ))}

@@ -28,8 +28,7 @@ function FechaServico()
             i++;
         }
         setValorPecs(t);
-        setTotal(t+total);
-        setValorParcela(t+total);
+
     },[pecsUti]);
     useEffect(()=>{
         if(pgto==="vista"){
@@ -47,17 +46,14 @@ function FechaServico()
     async function listarServico(){
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
             setServico(resp.data);     
-            setTotal(resp.data.ser_maoObra);
-            listarPecsUtiizadas();
+            setTotal(resp.data.total);
+            setPecasUti(resp.data.pecas); 
+     
             
         });
         
     }
-    async function listarPecsUtiizadas(){
-        await api.get(`/servicopeca/${localStorage.getItem('cod_ser')}`).then((resp)=>{
-            setPecasUti(resp.data); 
-        });
-    }
+  
     function voltarHome(){
 
         history.goBack();
@@ -134,8 +130,8 @@ function FechaServico()
                             </thead>
                             <tbody>
                                 {pecsUti.map(pec=>(
-                                    <tr key={pec.pec_cod}>
-                                        <td>{pec.pec_descricao}</td>
+                                    <tr key={pec.peca.pec_cod}>
+                                        <td>{pec.peca.pec_descricao}</td>
                                         <td>{pec.uti_qtde}</td>
                                         <td>R$ {pec.uti_precoUni}</td>
                                         <td>R$ {pec.uti_qtde*pec.uti_precoUni}</td>
