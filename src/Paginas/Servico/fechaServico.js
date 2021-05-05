@@ -46,8 +46,8 @@ function FechaServico()
     
     async function listarServico(){
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
-            setServico(resp.data[0]);     
-            setTotal(resp.data[0].ser_maoObra);
+            setServico(resp.data);     
+            setTotal(resp.data.ser_maoObra);
             listarPecsUtiizadas();
             
         });
@@ -105,35 +105,13 @@ function FechaServico()
     }
     async function gerarContaReceber(){
         btnFecharModal();
-        var date = new Date();
-        if(pgto==='vista'){
-       
-            await api.post('/conta',{
-                con_cod: 1,
-                ser_cod: localStorage.getItem('cod_ser'),
-                con_valor: valorParcela,
-                con_dtVencimento: date
-            })
-           
-        }
-        else{
-            date.setDate(date.getDate() + 30);
-            for(var i=1;i<=qtdeParcela;i++){
-                await api.post('/conta',{
-                    con_cod: i,
-                    ser_cod: localStorage.getItem('cod_ser'),
-                    con_valor: valorParcela,
-                    con_dtVencimento: date
-                })
-                date.setDate(date.getDate() + 30);
-            }
-        }
-        await api.put('/servicoFechar',{
+     
+        await api.post('/fecharServico',{
             ser_cod: localStorage.getItem('cod_ser'),
-            ser_total: total,
-            ser_fim: new Date(),
-            ser_status: false
+            qtde_parcelas:qtdeParcela,
+
         })
+     
         voltarHome();
     }
    
