@@ -67,11 +67,11 @@ function ListaServicosCliente()
         });
 
     }
-    function getPlaca(cod){
+    function getPlaca(carro){
         var i=0;
-        if(cod!==null){
+        if(carro!==null){
             if(carros.length>0){
-                while(i<carros.length && carros[i].car_id!==cod)
+                while(i<carros.length && carros[i].car_id!==carro.car_id)
                     i++;
                 
                 return carros[i].car_placa +" - "+carros[i].car_modelo;
@@ -142,7 +142,7 @@ function ListaServicosCliente()
                 <tbody>
                     {servicos.map(res=>(
                         <tr key={res.ser_cod}>
-                            <td>{getPlaca(res.carro.car_id)}</td>
+                            <td>{getPlaca(res.carro)}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_status)}</td>
                             <td>

@@ -51,15 +51,11 @@ function Home()
         setShowModal(false);
     }
     async function excluirCarro(){
-        await api.get(`/servicoCarro/${carro}`).then((resp)=>{
-            if(resp.data.length===0){
-                excluirCarroFisico(carro);
-            }else{
-                excluirCarroLogico(carro);
-            }
-        });
+        await api.delete(`/carro/${carro}`);
         setShowModal(false);
+        setCarros(carros.filter(carros=>carros.car_id!==carro));
     }
+    /*
     async function excluirCarroFisico(){
         await api.delete('/carro/'+carro);
         setCarros(carros.filter(carros=>carros.car_id!==carro));
@@ -68,7 +64,7 @@ function Home()
         await api.put('/carroLog/'+carro);
         await api.put(`/servicoCarro/${carro}`)
         setCarros(carros.filter(carros=>carros.car_id!==carro));
-    }
+    }*/
     function voltar(){
         localStorage.removeItem('cod_cli');
         history.goBack();

@@ -52,15 +52,7 @@ function ListaFuncionarios()
     }
     async function excluirFuncionario(){
         btnFecharModal();
-        await api.get(`/servicoFuncionario/${codPes}`).then((resp)=>{
-            if(resp.data.length==0){
-                const response2 = api.delete(`/func/${codPes}`);
-            }
-            else{
-                api.put(`/funcLog/${codPes}`);
-                api.put(`/servicoFuncNull/${codPes}`);
-            }
-        });
+        await api.delete(`/func/${codPes}`);
 
         setPessoas(pessoas.filter(pessoas=>pessoas.pes_cod!==codPes));
         
