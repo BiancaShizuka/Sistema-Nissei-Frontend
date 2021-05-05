@@ -113,7 +113,7 @@ function CadastroServicos(){
             i++;
         }
         console.log(i);
-        if(localStorage.getItem('cod_ser')!==null){
+        if(pecsUti[i].banco===1){
             await api.delete(`/servicopeca/${localStorage.getItem('cod_ser')}/${pecsUti[i].pec_cod}`);
         }
         setPecsUti(pecsUti.filter(pecsUti=>pecsUti.cod!==codigo));

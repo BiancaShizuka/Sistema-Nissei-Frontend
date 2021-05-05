@@ -142,7 +142,7 @@ function ListaServicosCliente()
                 <tbody>
                     {servicos.map(res=>(
                         <tr key={res.ser_cod}>
-                            <td>{getPlaca(res.car_id)}</td>
+                            <td>{getPlaca(res.carro.car_id)}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_status)}</td>
                             <td>

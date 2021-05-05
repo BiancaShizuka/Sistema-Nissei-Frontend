@@ -24,18 +24,18 @@ function VisualizarServiço()
         
     },[])
     async function recuperarServico(){
-        await api.get(`/servicoInfo/${localStorage.getItem('cod_ser')}`).then((resp)=>{
+        await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
            
-            setCarro(resp.data[0].car_placa);
-            setCliente(resp.data[0].cli_nome);
-            setFuncionario(resp.data[0].func_nome);
-            setDescricao(resp.data[0].ser_descricao);
-            setDtInicio(resp.data[0].ser_inicio);
-            setDtFim(resp.data[0].ser_fim);
-            setMaoObra(resp.data[0].ser_maoObra);
-            setStatus(resp.data[0].ser_status);
-            setCodFun(resp.data[0].func_cod);
-            listarPecsUtiizadas(resp.data[0].ser_maoObra);
+            setCarro(resp.data.carro.car_placa);
+            setCliente(resp.data.cliente.pes_nome);
+            setFuncionario(resp.data.funcionario.pes_nome);
+            setDescricao(resp.data.ser_descricao);
+            setDtInicio(resp.data.ser_inicio);
+            setDtFim(resp.data.ser_fim);
+            setMaoObra(resp.data.ser_maoObra);
+            setStatus(resp.data.ser_status);
+            setCodFun(resp.data.funcionario.pes_cod);
+            listarPecsUtiizadas(resp.data.ser_maoObra);
         });
         
     }

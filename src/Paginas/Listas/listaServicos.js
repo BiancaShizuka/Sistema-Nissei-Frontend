@@ -4,7 +4,7 @@ import history from '../../history'
 import '../../app.css'
 import './listaServicos.css'
 import Header from '../../Components/Header'
-
+import ReactLoading from 'react-loading';
 function ListaServicos()
 {
     const [funcionario,setFuncionario]=useState('');
@@ -15,6 +15,7 @@ function ListaServicos()
     const [marca,setMarca]=useState('');
     const [status,setStatus]=useState('');
     const [servicos,setServicos]=useState([]);
+    const [loading,setLoading]=useState(false);
 
     useEffect(()=>{
         localStorage.removeItem("cod_cli");
@@ -28,7 +29,7 @@ function ListaServicos()
     }
     
     function getStatus(status){
-        if(status===0)
+        if(status===1)
             return 'Em andamento';
         return 'Finalizado'; 
     }
@@ -43,9 +44,11 @@ function ListaServicos()
         history.push('/visualizarServico');
     }
     async function filtrar(){
+        setLoading(true);
         const response=await api.get(`/servicoFiltro/?cliente=${cliente}&dt_inicio=${dtInicio}&dt_saida=${dtSaida}&car_placa=${placa}&status=${status}`).then((resp)=>{
             setServicos(resp.data);
         })
+        setLoading(false);
     }
     function mudarEstruturaData(valor){
         var date=new Date(valor);
@@ -62,39 +65,39 @@ function ListaServicos()
         return dat;
     }
     return (
-    <div id="tela" className="background">
+    <div id="tela" class="background">
         <Header/>
-        <div className='filtro'>
+        <div class='filtro'>
             
             
-            <div className="input-block block-cliente">
+            <div class="input-block block-cliente">
                 <label htmlFor="cliente">Cliente: </label>
                 <input type="text" name="cliente" id="cliente" value={cliente} onChange={e=>setCliente(e.target.value)}/>
             </div>
-            <div className="input-block block-placa">
+            <div class="input-block block-placa">
                 <label htmlFor="placa">Placa: </label>
                 <input type="text" name="placa" id="placa" value={placa} onChange={e=>setPlaca(e.target.value)}/>
             </div>
-            <div className="input-block block-data" >
+            <div class="input-block block-data" >
                 <label htmlFor="dtInicio">Data de inicio: </label>
                 <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
             </div>
-            <div className="input-block block-data">
+            <div class="input-block block-data">
                 <label htmlFor="dtInicio">Data de fim: </label>
                 <input type="date" name="dtInicio" id="dtInicio" value={dtSaida} onChange={e=>setDtSaida(e.target.value)} required/>
             </div>
-            <div className="input-block block-placa">
+            <div class="input-block block-placa">
                 <label>Status: </label>
-                <select className="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
+                <select class="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
                         <option id="op-selecione" value="">Selecione uma opcao</option>
                         <option id="op-selecione" value="1">Encerrado</option>
                         <option id="op-selecione" value="0">Em andamento</option>
                 </select>
             </div>
-            <p className="p-filtrar"><button type="button" className="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
+            <p class="p-filtrar"><button type="button" class="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
         </div>
-        <div className="table-servicos">   
-        <table className='tableSer'>
+        <div class="table-servicos">   
+            <table class='tableSer'>
                 <thead>
                     <tr>
                         <td>Cliente</td>
@@ -108,21 +111,26 @@ function ListaServicos()
                 <tbody>
                     {servicos.map(res=>(
                         <tr key={res.ser_cod}>
-                            <td>{res.cli_nome}</td>
-                            <td>{res.fun_nome}</td>
-                            <td>{res.car_placa}</td>
+                            <td>{res.cliente.pes_nome}</td>
+                            <td>{res.funcionario.pes_nome}</td>
+                            <td>{res.carro.car_placa}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_status)}</td>
                             <td>
-                            <button onClick={()=>acessarServico(res.ser_cod,res.cli_cod)} className="button-item">Editar</button>
-                            <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Visualizar</button>
+                            <button onClick={()=>acessarServico(res.ser_cod,res.cli_cod)} class="button-item">Editar</button>
+                            <button onClick={()=>visualizarServico(res.ser_cod)} class="button-item">Visualizar</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {loading &&
+                <div class="modalTabelaServico">
+                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                </div>
+            }
         </div>
-        <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+        <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
     </div>
     );
 }
