@@ -64,6 +64,20 @@ function ListaServicos()
         
         return dat;
     }
+    function getFuncionario(func){
+        if(func!==null){
+            return func.pes_nome;
+        }else{
+            return "null";
+        }
+    }
+    function getPlaca(carro){
+        if(carro!==null){
+            return carro.car_placa;
+        }else{
+            return "null";
+        }
+    }
     return (
     <div id="tela" class="background">
         <Header/>
@@ -112,8 +126,8 @@ function ListaServicos()
                     {servicos.map(res=>(
                         <tr key={res.ser_cod}>
                             <td>{res.cliente.pes_nome}</td>
-                            <td>{res.funcionario.pes_nome}</td>
-                            <td>{res.carro.car_placa}</td>
+                            <td>{getFuncionario(res.funcionario)}</td>
+                            <td>{getPlaca(res.carro)}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_status)}</td>
                             <td>
