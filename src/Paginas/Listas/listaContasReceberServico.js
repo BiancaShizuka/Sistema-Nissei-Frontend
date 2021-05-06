@@ -98,7 +98,7 @@ function ListarContasReceberServico()
                         {contas.map(res=>(
                             <tr key={res.con_cod}>
                                 <td>{res.con_cod}</td>
-                                <td>R$ {res.con_valor}</td>
+                                <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
                                 <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
                                 <td>{getDtPgto(res.con_dtPgto)}</td>
                                 <td>
@@ -109,8 +109,9 @@ function ListarContasReceberServico()
                         ))}
                     </tbody>
                 </table>
+                <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
             </div>
-            <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+            
             {showModal &&
                 <div className="modal">
                     <div className="modal-content">

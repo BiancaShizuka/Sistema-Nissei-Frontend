@@ -133,17 +133,17 @@ function FechaServico()
                                     <tr key={pec.peca.pec_cod}>
                                         <td>{pec.peca.pec_descricao}</td>
                                         <td>{pec.uti_qtde}</td>
-                                        <td>R$ {pec.uti_precoUni}</td>
-                                        <td>R$ {pec.uti_qtde*pec.uti_precoUni}</td>
+                                        <td>R$ {parseFloat(pec.uti_precoUni).toFixed(2)}</td>
+                                        <td>R$ {parseFloat(pec.uti_qtde*pec.uti_precoUni).toFixed(2)}</td>
                                    
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
             </div>
-            <p className="p-valorPecas">Valor total das peças:R$ {valorPecs}</p>
-            <p className="p-maoObra">Valor da mão de obra: R$ {servico.ser_maoObra}</p>
-            <p className="p-total">Total: R$ {total}</p>
+            <p className="p-valorPecas">Valor total das peças:R$ {parseFloat(valorPecs).toFixed(2)}</p>
+            <p className="p-maoObra">Valor da mão de obra: R$ {parseFloat(servico.ser_maoObra).toFixed(2)}</p>
+            <p className="p-total">Total: R$ {parseFloat(total).toFixed(2)}</p>
             
             <div className="div-formaPgto">
                 <label>Forma de Pagamento: </label>
@@ -163,7 +163,7 @@ function FechaServico()
             </div>
             <div className="div-valorParcela">
                 <label>Valor da Parcela: </label>
-                <input type="number" disabled={true} value={valorParcela} className='input-valorParcela' onChange={e=>setValorParcela(e.target.value)} />
+                <input type="number" disabled={true} value={parseFloat(valorParcela).toFixed(2)} className='input-valorParcela' onChange={e=>setValorParcela(e.target.value)} />
             </div>
             <div className="div-visucontasReceber">   
                 <table className='table-visucontasReceber'>
@@ -178,7 +178,7 @@ function FechaServico()
                         {parcelas.map(res=>(
                             <tr key={res.cod}>
                                 <td >{res.cod}</td>
-                                <td >R$ {res.valor}</td>
+                                <td >R$ {parseFloat(res.valor).toFixed(2)}</td>
                                 <td >{mudarEstruturaData(res.dtVenc)}</td>
  
                             </tr>

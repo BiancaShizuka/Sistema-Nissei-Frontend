@@ -45,7 +45,7 @@ function VisualizarServiço()
         history.push('/listaContasReceberServico');
     }
     function fecharServico(){
-        console.log('passei');
+
         history.push('/fechaServico');
     }
     function voltarHome(){
@@ -53,18 +53,21 @@ function VisualizarServiço()
         history.goBack();
     }
     function mudarEstruturaData(valor){
-        var date=new Date(valor);
-        let dat="";
-        if(date.getDate()<10)
-            dat+='0';
-        dat+=date.getDate()+"/";
-        if(date.getMonth()+1<10)
-            dat+='0';
-        dat+=(date.getMonth()+1)+"/";
-        dat+=date.getFullYear();
-        
-        
-        return dat;
+        if(valor!==null){
+            var date=new Date(valor);
+            let dat="";
+            if(date.getDate()<10)
+                dat+='0';
+            dat+=date.getDate()+"/";
+            if(date.getMonth()+1<10)
+                dat+='0';
+            dat+=(date.getMonth()+1)+"/";
+            dat+=date.getFullYear();
+            
+            
+            return dat;
+        }
+        return "Não finalizado";
     }
     async function cancelarFechamento(){
         
@@ -75,18 +78,10 @@ function VisualizarServiço()
             ser_cod: localStorage.getItem('cod_ser'),
 
         }).then((response)=>{
-        
             if(response.data.ser_fim!==null){
-                
                 setShowModalAviso(true);
             }
-          
-            api.get(`/func/${codFun}}`).then((resp)=>{
-                if(resp.data[0].fun_status===0){
-                    api.put(`/servicoFuncNull/${codFun}`);
-                }
-                recuperarServico();
-            });
+            recuperarServico();
         })
       
         
@@ -112,11 +107,11 @@ function VisualizarServiço()
                 <p className="p-dtInicio"><strong>Data Inicio:</strong> {mudarEstruturaData(dtInicio)}</p>
                 <p className="p-dtFim"><strong>Data Fim:</strong> {mudarEstruturaData(dtFim)}</p>
                 <p className="p-descricao"><strong>Descricao:</strong></p>
-                <textarea value={descricao} readOnly>
+                <textarea rows="10" cols="110" value={descricao} readOnly>
                 </textarea>
                 
                 
-                <p className="p-maoObra"><strong>Mao de obra:</strong>R$ {maoObra}</p>
+                <p className="p-maoObra"><strong>Mao de obra:</strong>R$ {parseFloat(maoObra).toFixed(2)}</p>
             
                     <table className="tableSerPecas">
                         <thead>
@@ -133,14 +128,14 @@ function VisualizarServiço()
                                 <tr key={pec.peca.pec_cod}>
                                     <td>{pec.peca.pec_descricao}</td>
                                     <td>{pec.uti_qtde}</td>
-                                    <td>R$ {pec.uti_precoUni}</td>
+                                    <td>R$ {parseFloat(pec.uti_precoUni).toFixed(2)}</td>
                                     
                                 
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <p className="p-valorTotal"><strong>Total:</strong>R$ {total}</p>
+                    <p className="p-valorTotal"><strong>Total:</strong>R$ {parseFloat(total).toFixed(2)}</p>
                
                 <div className="div-buttons">
                     <button className="button-acao" onClick={()=>fecharServico()} disabled={!status}>Fechar Serviço</button>

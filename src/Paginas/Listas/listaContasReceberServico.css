@@ -17,6 +17,7 @@
 .table-contasReceber{
     border:#fff;
     text-align: center;
+    margin-bottom: 5px;
 }
 .table-contasReceber thead{
     width:100%;
