@@ -48,7 +48,7 @@ function FechaServico()
             setServico(resp.data);     
             setTotal(resp.data.total);
             setPecasUti(resp.data.pecas); 
-     
+            setValorParcela(resp.data.total);
             
         });
         

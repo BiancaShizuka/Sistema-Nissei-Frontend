@@ -69,13 +69,18 @@ function VisualizarServiço()
     async function cancelarFechamento(){
         
         btnFecharModal();
-        await api.delete(`/contaPorServico/${localStorage.getItem('cod_ser')}`);
+      
 
         await api.put('/cancelarFechamento',{
             ser_cod: localStorage.getItem('cod_ser'),
 
         }).then((response)=>{
- 
+        
+            if(response.data.ser_fim!==null){
+                
+                setShowModalAviso(true);
+            }
+          
             api.get(`/func/${codFun}}`).then((resp)=>{
                 if(resp.data[0].fun_status===0){
                     api.put(`/servicoFuncNull/${codFun}`);
@@ -87,17 +92,8 @@ function VisualizarServiço()
         
     }
     async function btnClickCancelarFechamento(){
- 
-        await api.get(`/contaPaga/${localStorage.getItem('cod_ser')}`).then((response)=>{
-            if(response.data.length===0){
-                setShowModal(true);
-            }
-            else{
-                setShowModalAviso(true);
-            }
-        })
-        
-        
+        setShowModal(true);
+
     }
 
     async function btnFecharModal(){
@@ -134,7 +130,7 @@ function VisualizarServiço()
                         </thead>
                         <tbody>
                             {pecsUti.map(pec=>(
-                                <tr key={pec.pec_cod}>
+                                <tr key={pec.peca.pec_cod}>
                                     <td>{pec.peca.pec_descricao}</td>
                                     <td>{pec.uti_qtde}</td>
                                     <td>R$ {pec.uti_precoUni}</td>
