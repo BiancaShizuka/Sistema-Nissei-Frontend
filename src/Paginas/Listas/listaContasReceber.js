@@ -19,8 +19,8 @@ function ListarContasReceber()
         history.goBack();
     }
     async function filtrar(){
-        const response=await api.get(`/contaFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
-            console.log(resp.data);
+        const response=await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
+       
             setParcelas(resp.data);
         })
     }
@@ -61,7 +61,7 @@ function ListarContasReceber()
     }
     async function confirmarPagamento(){
         btnFecharModal();
-        await api.put('/conta',{
+        await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: localStorage.getItem('cod_ser'),
             con_dtPgto: dtPgto
@@ -71,7 +71,7 @@ function ListarContasReceber()
     }
     async function cancelarPagamento(){
         btnFecharModalCancel();
-        await api.put('/conta',{
+        await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: localStorage.getItem('cod_ser'),
             con_dtPgto: null
@@ -123,7 +123,7 @@ function ListarContasReceber()
                             {parcelas.map(res=>(
                                 <tr key={[res.con_cod,res.ser_cod]}>
                                     <td>{res.con_cod}</td>
-                                    <td>R$ {res.con_valor}</td>
+                                    <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
                                     <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
                                     <td>{getDtPgto(res.con_dtPgto)}</td>
                                     <td>
