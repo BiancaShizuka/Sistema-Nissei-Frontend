@@ -36,6 +36,7 @@ function ListaServicos()
     function acessarServico(cod_ser,cod_cli){
         localStorage.setItem('cod_ser',cod_ser);
         localStorage.setItem('cod_cli',cod_cli);
+        console.log("cod_ser: "+cod_ser+"  cod_cli"+cod_cli);
         history.push('/cadastroServico');
     }
    
@@ -131,7 +132,7 @@ function ListaServicos()
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_status)}</td>
                             <td>
-                            <button onClick={()=>acessarServico(res.ser_cod,res.cli_cod)} class="button-item">Editar</button>
+                            <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} class="button-item">Editar</button>
                             <button onClick={()=>visualizarServico(res.ser_cod)} class="button-item">Visualizar</button>
                             </td>
                         </tr>
