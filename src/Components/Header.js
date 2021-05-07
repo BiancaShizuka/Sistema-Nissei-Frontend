@@ -19,11 +19,11 @@ function Header(){
         history.push('/cadastroFuncionario');
     }
     return(
-    <header class='header'>
-        <button type="button" class='button-inicio' onClick={voltarTela}>Nissei</button>
-        <div class="divHeader">
-            <button type="button" onClick={logout} class="button-logout">Sair</button>
-            <button type="button" onClick={alterarPerfil} class="button-logout">Alterar perfil</button>
+    <header className='header'>
+        <button type="button" className='button-inicio' onClick={voltarTela}>Nissei</button>
+        <div className="divHeader">
+            <button type="button" onClick={logout} className="button-logout">Sair</button>
+            <button type="button" onClick={alterarPerfil} className="button-logout">Alterar perfil</button>
         </div>
     </header>
     );

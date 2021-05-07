@@ -67,31 +67,16 @@ function FormularioPeca()
     async function Excluir()
     {
         btnFecharModal();
-        const response = await api.get(`/servicoPecasPeca/${codigo}`).then((resp)=>{
-            console.log(resp.data.length)
-        
-            if(resp.data.length==0){
-                const response2 = api.delete(`/peca/${codigo}`);
-            }
-            else{
-                const response2= api.put(`/pecaLog/${codigo}`);
-            }
-            
-        });
+        await api.delete(`/peca/${codigo}`);
         setPecas(pecas.filter(pecas=>pecas.pec_cod!==codigo));
-     
-
     }
     async function Alterar(cod)
     {
-  
-       
-        const response = await api.get(`/peca/${cod}`).then((resp)=>{
+        await api.get(`/peca/${cod}`).then((resp)=>{
             setDescricao(resp.data[0].pec_descricao);
             setCodigo(resp.data[0].pec_cod);
         });
         setButton('Alterar');
-
     }
     return (
     <div className='background'>

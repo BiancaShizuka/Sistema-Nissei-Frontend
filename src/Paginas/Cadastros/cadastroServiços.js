@@ -25,9 +25,10 @@ function CadastroServicos(){
     const [titulo,setTitulo]=useState('Cadastro de serviço');
     const [loading,setLoading]=useState(false);
     async function listarCarros(){
-        await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
+        const resp=await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`)
+            console.log(resp.data.carros);
             setCarros(resp.data.carros);
-        });
+        
     }
     
     async function listarPecas(){
