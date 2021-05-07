@@ -51,10 +51,11 @@ function FormularioFuncionario()
             setEmailAtual(resp.data[0].pes_email);
         });
         await api.get(`/func/${localStorage.getItem('cod_fun')}`).then((resp)=>{
-            setAno(resp.data[0].fun_anoInicio);
-            setSenha(resp.data[0].fun_senha);
-            setConfSenha(resp.data[0].fun_senha);
-            setNivel(resp.data[0].fun_nivel);
+            console.log(resp.data);
+            setAno(resp.data.fun_ano);
+            setSenha(resp.data.fun_senha);
+            setConfSenha(resp.data.fun_senha);
+            setNivel(resp.data.fun_nivel);
     
         });
     }
