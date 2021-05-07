@@ -186,7 +186,7 @@ function FechaServico()
                     </tbody>
                 </table>
             </div>
-            <button type="button" onClick={()=>btnClickVizualizar()} className="button-marca">Vizualizar conta a receber</button>
+            <button type="button" onClick={()=>btnClickVizualizar()} className="button-vizualizarConta">Vizualizar conta a receber</button>
             <button type="button" onClick={()=>btnClickGerarConta()} className="button-marca">Gerar conta a receber</button>
             <button type="button" onClick={voltarHome} className="button-voltarMarca">Voltar</button>
         </div>

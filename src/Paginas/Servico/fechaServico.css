@@ -88,4 +88,24 @@
 .table-visucontasReceber thead .td-dtVenc{
   width: 40%;
 }
-
+.button-vizualizarConta{
+  margin-top: 3vh;
+  border: none;
+  width: 20vw;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  background: #424141;
+  font-weight: bold;
+  color: rgb(216, 216, 216);
+  cursor: pointer;
+}
+.button-vizualizarConta:hover{
+  background: #686866;
+  font-weight: bold;
+  color: rgb(216, 216, 216);
+}
