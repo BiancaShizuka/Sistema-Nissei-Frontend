@@ -62,7 +62,7 @@ function ListaServicosCliente()
 
     }
     async function listarCarros(){
-        const response2 = await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
+        await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
             setCarros(resp.data); 
         });
 

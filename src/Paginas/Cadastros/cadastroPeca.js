@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../../servicos/api';
 import history from '../../history'
 import './cadastroPeca.css'
@@ -16,7 +16,7 @@ function FormularioPeca()
     async function listarPecaPorFiltro(){
         
         if(filtro.length>0){
-            const response = await api.get(`/pecafiltro/${filtro}`).then((response)=>{
+            await api.get(`/pecafiltro/${filtro}`).then((response)=>{
                 setPecas(response.data);
             })
         }
@@ -26,7 +26,7 @@ function FormularioPeca()
 
     }
     async function listarPecas(){
-        const response = await api.get(`/peca`).then((response)=>{
+        await api.get(`/peca`).then((response)=>{
             setPecas(response.data);
         })
 
@@ -39,7 +39,7 @@ function FormularioPeca()
         e.preventDefault();
   
         if(button==='Salvar'){
-            const response=await api.post('/peca',{
+            await api.post('/peca',{
                 pec_descricao: descricao,
                 
             })
@@ -47,7 +47,7 @@ function FormularioPeca()
        
         }
         else{
-            const response=await api.put('/peca',{
+            await api.put('/peca',{
                 pec_cod: codigo,
                 pec_descricao: descricao
             })

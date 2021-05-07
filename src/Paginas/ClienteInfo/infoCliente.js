@@ -6,7 +6,7 @@ import './infoCliente.css'
 import Header from '../../Components/Header'
 function Home()
 {
-    const [codigo,setCodigo]=useState('');
+
     const [nome,setNome]=useState('');
     const [email,setEmail]=useState('');
     const [cpf,setCpf]=useState('');
@@ -16,11 +16,11 @@ function Home()
 
     const [carros,setCarros]=useState([]);
     useEffect(()=>{
-        setCodigo(localStorage.getItem('cod_cli'));
+
         procurarInfo();
     },[]);
     async function procurarInfo(){
-        const response = await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
+        await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
             setNome(resp.data.pes_nome);
             setCpf(resp.data.pes_cpf);
             setEmail(resp.data.pes_email);

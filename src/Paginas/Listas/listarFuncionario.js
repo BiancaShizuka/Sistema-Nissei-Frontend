@@ -22,7 +22,7 @@ function ListaFuncionarios()
     async function listarFuncionarios(){
         await api.get(`/pessoasFun`).then((response)=>{    
          
-            setPessoas(response.data.filter(pessoas=>pessoas.pes_cod!=localStorage.getItem('cod_user')));
+            setPessoas(response.data.filter(pessoas=>pessoas.pes_cod!==localStorage.getItem('cod_user')));
         })
 
     }
@@ -31,7 +31,7 @@ function ListaFuncionarios()
         if(filtro.length>0){
             await api.get(`/pessoasFunFiltro/${filtro}`).then((response)=>{
 
-                setPessoas(response.data.filter(pessoas=>pessoas.pes_cod!=localStorage.getItem('cod_user')));
+                setPessoas(response.data.filter(pessoas=>pessoas.pes_cod!==localStorage.getItem('cod_user')));
             })
         }
         else

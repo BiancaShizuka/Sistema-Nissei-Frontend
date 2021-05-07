@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import api from '../../servicos/api';
 import history from '../../history'
 import '../../app.css'
@@ -20,7 +20,7 @@ function ListarContasReceber()
         history.goBack();
     }
     async function filtrar(){
-        const response=await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
+        await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
        
             setParcelas(resp.data);
         })

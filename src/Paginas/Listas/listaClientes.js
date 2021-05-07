@@ -18,7 +18,7 @@ function ListaClientes()
         history.goBack();
     }
     async function listarClientes(){
-        const response = await api.get(`/pessoasCli`).then((response)=>{
+         await api.get(`/pessoasCli`).then((response)=>{
             setPessoas(response.data);
         })
 
@@ -31,7 +31,7 @@ function ListaClientes()
     async function listarClientePorFiltro(){
         
         if(filtro.length>0){
-            const response = await api.get(`/pessoasCliFiltro/${filtro}`).then((resp)=>{
+            await api.get(`/pessoasCliFiltro/${filtro}`).then((resp)=>{
                 setPessoas(resp.data);
             })
         }
@@ -49,9 +49,9 @@ function ListaClientes()
     }
     async function excluirCliente(){
         btnFecharModal();
-        const response = await api.get(`/carroPes/${codPes}`).then((resp)=>{
+        await api.get(`/carroPes/${codPes}`).then((resp)=>{
        
-            if(resp.data.length==0){
+            if(resp.data.length===0){
            
                 api.delete(`/cliente/${codPes}`);
             }

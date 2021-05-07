@@ -64,17 +64,11 @@ function FormularioFuncionario()
             localStorage.removeItem('cod_fun');
         history.goBack();
     } 
-    function vazio(valor)
-    {
-        let v=''+valor;
-        if(v.length<=0)
-            return true;
-        return false;
-    }
+  
     
     function validarCPF(valor)
     {
-        var reg=/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+        var reg=/^\d{3}.\d{3}.\d{3}-\d{2}$/;
         if(valor.match(reg)!=null)
             return true;
         return false;
@@ -93,13 +87,7 @@ function FormularioFuncionario()
         return false;
     }
 
-    function validarTexto(valor)
-    {
-        if(!/[0-9]/.test(valor))
-        return true;
-        else
-        return false;
-    }
+   
 
     function validarSexo(valor){
         if(valor==='M' || valor==='F')
@@ -140,7 +128,6 @@ function FormularioFuncionario()
         var confere=false;
         const respCPF= await validarCPFRepetido(cpf);
         const respEmail= await validarEmailRepetido(email);
-        var confere=false;
 
         if(validarCPF(cpf) && validarEmail(email) && validarSexo(sexo) && validarSenha(senha,confSenha) && validarAno(ano))
         {
@@ -271,7 +258,7 @@ function FormularioFuncionario()
                                     <input type="radio" name="Nivel" value="U" checked={nivel==='U'} onClick={e=>setNivel(e.target.value)} onChange={e=>setNivel(e.target.value)}/>
                                 </label>
                                 <label className="input-block">Administrador
-                                    <input type="radio" name="Nivel" value="A" checked={nivel=='A'} onClick={e=>setNivel(e.target.value)} onChange={e=>setNivel(e.target.value)}/>
+                                    <input type="radio" name="Nivel" value="A" checked={nivel==='A'} onClick={e=>setNivel(e.target.value)} onChange={e=>setNivel(e.target.value)}/>
                                 </label>
                             </div>
                         }

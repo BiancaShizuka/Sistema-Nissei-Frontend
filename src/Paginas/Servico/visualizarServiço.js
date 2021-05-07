@@ -15,7 +15,7 @@ function VisualizarServiço()
     const [total,setTotal]=useState(0);
     const [pecsUti,setPecasUti] = useState([]);
     const [status,setStatus] = useState(false);
-    const [codFun,setCodFun] = useState(0);
+
 
     const [showModal,setShowModal]=useState(false);
     const [showModalAviso,setShowModalAviso]=useState(false);
@@ -28,13 +28,19 @@ function VisualizarServiço()
            
             setCarro(resp.data.carro.car_placa);
             setCliente(resp.data.cliente.pes_nome);
-            setFuncionario(resp.data.funcionario.pes_nome);
+            if(resp.data.funcionario!==null){
+                setFuncionario(resp.data.funcionario.pes_nome);
+
+            }
+            else{
+                setFuncionario("");
+            }
             setDescricao(resp.data.ser_descricao);
             setDtInicio(resp.data.ser_inicio);
             setDtFim(resp.data.ser_fim);
             setMaoObra(resp.data.ser_maoObra);
             setStatus(resp.data.ser_status);
-            setCodFun(resp.data.funcionario.pes_cod);
+            
             setTotal(resp.data.total);
             setPecasUti(resp.data.pecas);
         });

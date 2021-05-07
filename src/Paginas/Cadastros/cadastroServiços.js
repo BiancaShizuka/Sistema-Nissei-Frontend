@@ -141,13 +141,10 @@ function CadastroServicos(){
     async function cadastrarServico(e){
         setLoading(true);
         e.preventDefault();
-        var codSer;
-        let totalSer=0;
-  
   
         if(ValidarCampos()){
             if(button==='Salvar'){
-                const response=await api.post('/servico',{
+               await api.post('/servico',{
                     car_id:carro,
                     fun_cod:func,
                     cli_cod:localStorage.getItem('cod_cli'),
@@ -162,7 +159,7 @@ function CadastroServicos(){
                 history.goBack();
             }
             else{
-                const response=await api.put('/servico',{
+                await api.put('/servico',{
                     ser_cod:localStorage.getItem('cod_ser'),
                     car_id:carro,
                     fun_cod:func,
@@ -191,7 +188,7 @@ function CadastroServicos(){
             while(i<pecs.length && pecs[i].pec_descricao!==peca)
                 i++;
 
-            if(i==pecs.length)
+            if(i===pecs.length)
             {
                 mensagem.innerHTML="<p>Peça não cadastrada</p>"
             }

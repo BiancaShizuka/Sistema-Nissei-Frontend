@@ -73,14 +73,14 @@ function Formulario()
         return false;
     }
     function validarCep(valor){
-        var reg=/^\d{5}\-\d{3}$/;
+        var reg=/^\d{5}-\d{3}$/;
         if(valor.match(reg)!=null)
             return true;
         return false;
     }
     function validarCPF(valor)
     {
-        var reg=/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+        var reg=/^\d{3}.\d{3}\.\d{3}-\d{2}$/;
         if(valor.match(reg)!=null)
             return true;
         return false;
@@ -94,7 +94,7 @@ function Formulario()
     }
     function validarTelefone(valor)
     {
-        var reg=/^\(\d{2}\)\d{4,5}\-\d{4}$/;
+        var reg=/^\(\d{2}\)\d{4,5}-\d{4}$/;
         if(valor.match(reg)!==null)
             return true;
         else
@@ -102,13 +102,7 @@ function Formulario()
         
     }
 
-    function validarTexto(valor)
-    {
-        if(!/[0-9]/.test(valor))
-        return true;
-        else
-        return false;
-    }
+    
 
     function validarSexo(valor){
         if(valor==='M' || valor==='F')
@@ -185,7 +179,7 @@ function Formulario()
                     })
 
                     codUser=response.data.lastId;
-                    const response2=await api.post('/clientes',{
+                    await api.post('/clientes',{
                         pes_cod:codUser,
                         cli_bairro:bairro,
                         cli_rua:rua,
@@ -197,7 +191,7 @@ function Formulario()
                     
                     for(let i=0;i<verContatos.length;i++)
                     {
-                        const response3=await api.post('/contatos',{
+                        await api.post('/contatos',{
                             pes_cod:codUser,
                             cont_numero:verContatos[i].numero,
                             cont_tipo:verContatos[i].tipo

@@ -45,7 +45,7 @@ function voltar(){
     }
     async function listarMarcas(){
  
-        const response = await api.get(`/marcas`).then((response)=>{
+        await api.get(`/marcas`).then((response)=>{
             setMarcas(response.data);
         })
 
@@ -99,7 +99,7 @@ function voltar(){
         if(ValidarCamposCarro()){
             
             if(button==='Salvar'){
-                const response=await api.post('/carro',{
+                await api.post('/carro',{
                     pes_cod: localStorage.getItem('cod_cli'),
                     mar_cod: marca,
                     car_placa: placa,
@@ -111,7 +111,7 @@ function voltar(){
             }
             else
             {
-                const response=await api.put('/carro',{
+                await api.put('/carro',{
                     car_id: localStorage.getItem('car_id'),
                     pes_cod: localStorage.getItem('cod_cli'),
                     mar_cod: marca,

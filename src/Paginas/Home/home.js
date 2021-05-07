@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import history from '../../history'
 import "./home.css"
-import api from '../../servicos/api';
 import Header from '../../Components/Header'
 
 function Home()
@@ -12,7 +11,7 @@ function Home()
     },[]);
     async function getStatus(){
   
-        if(localStorage.getItem('nivel_user')=='A')
+        if(localStorage.getItem('nivel_user')==='A')
             setIsOpen(true);
        
 

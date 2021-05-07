@@ -33,9 +33,7 @@ function Login(){
     }
 
 
-    function irFormulario(){
-        history.push('/cadastroFuncionario');
-    }
+
 
     return (
       <div id='login' className="backgroundLogin">

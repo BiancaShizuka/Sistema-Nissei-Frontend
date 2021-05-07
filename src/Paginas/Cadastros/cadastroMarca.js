@@ -21,7 +21,7 @@ function FormularioMarca()
     async function listarMarcaPorFiltro(){
      
         if(filtro.length>0){
-            const response = await api.get(`/marcasfiltro/${filtro}`).then((response)=>{
+            await api.get(`/marcasfiltro/${filtro}`).then((response)=>{
                 setMarcas(response.data);
             })
         }
@@ -30,7 +30,7 @@ function FormularioMarca()
 
     }
     async function listarMarca(){
-        const response = await api.get(`/marcas`).then((response)=>{
+        await api.get(`/marcas`).then((response)=>{
             setMarcas(response.data);
         })
 
@@ -43,7 +43,7 @@ function FormularioMarca()
         e.preventDefault();
   
         if(button==='Salvar'){
-            const response=await api.post('/marcas',{
+            await api.post('/marcas',{
                 mar_descricao: descricao,
                 
             })
@@ -51,7 +51,7 @@ function FormularioMarca()
           
         }
         else{
-            const response=await api.put('/marcas',{
+            await api.put('/marcas',{
                 mar_cod: codigo,
                 mar_descricao: descricao
             })
@@ -71,10 +71,10 @@ function FormularioMarca()
     async function Excluir()
     {
         btnFecharModal();
-        const response = await api.get(`/carroMarca/${codigo}`).then((resp)=>{
+        await api.get(`/carroMarca/${codigo}`).then((resp)=>{
             console.log(resp.data.length)
         
-            if(resp.data.length==0){
+            if(resp.data.length===0){
                 api.delete(`/marcas/${codigo}`);
             }
             else{
@@ -91,7 +91,7 @@ function FormularioMarca()
     {
   
        
-        const response = await api.get(`/marcas/${cod}`).then((resp)=>{
+        await api.get(`/marcas/${cod}`).then((resp)=>{
             setDescricao(resp.data[0].mar_descricao);
             setCodigo(resp.data[0].mar_cod);
         });

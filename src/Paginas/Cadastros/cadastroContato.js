@@ -34,7 +34,7 @@ function CadastroContatos(){
      }
     function validarTelefone(valor)
     {
-        var reg=/^\(\d{2}\)\d{4,5}\-\d{4}$/;
+        var reg=/^\(\d{2}\)\d{4,5}-\d{4}$/;
         if(valor.match(reg)!==null)
             return true;
         else

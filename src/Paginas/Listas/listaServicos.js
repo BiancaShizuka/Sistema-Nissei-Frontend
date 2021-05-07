@@ -7,12 +7,11 @@ import Header from '../../Components/Header'
 import ReactLoading from 'react-loading';
 function ListaServicos()
 {
-    const [funcionario,setFuncionario]=useState('');
+
     const [cliente,setCliente]=useState('');
     const [dtInicio,setDtInicio]=useState('');
     const [dtSaida,setDtSaida]=useState('');
     const [placa,setPlaca]=useState('');
-    const [marca,setMarca]=useState('');
     const [status,setStatus]=useState('');
     const [servicos,setServicos]=useState([]);
     const [loading,setLoading]=useState(false);
@@ -46,7 +45,7 @@ function ListaServicos()
     }
     async function filtrar(){
         setLoading(true);
-        const response=await api.get(`/servicoFiltro/?cliente=${cliente}&dt_inicio=${dtInicio}&dt_saida=${dtSaida}&car_placa=${placa}&status=${status}`).then((resp)=>{
+        await api.get(`/servicoFiltro/?cliente=${cliente}&dt_inicio=${dtInicio}&dt_saida=${dtSaida}&car_placa=${placa}&status=${status}`).then((resp)=>{
             setServicos(resp.data);
         })
         setLoading(false);
