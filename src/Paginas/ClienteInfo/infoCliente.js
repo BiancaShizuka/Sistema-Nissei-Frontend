@@ -20,14 +20,11 @@ function Home()
         procurarInfo();
     },[]);
     async function procurarInfo(){
-    
-        const response = await api.get(`/pessoaCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
-            setNome(resp.data[0].pes_nome);
-            setCpf(resp.data[0].pes_cpf);
-            setEmail(resp.data[0].pes_email);
-        });
-        const response2 = await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
-            setCarros(resp.data);
+        const response = await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
+            setNome(resp.data.pes_nome);
+            setCpf(resp.data.pes_cpf);
+            setEmail(resp.data.pes_email);
+            setCarros(resp.data.carros);
         });
     }
     function cadastrarCarro(){
@@ -86,7 +83,7 @@ function Home()
         <div className="card">
             <div>
                 <p>Nome:{nome}</p>
-                <p>Emal:{email}</p>
+                <p>Email:{email}</p>
                 <p>CPF:{cpf}</p>
             </div>
             {carros.length>0 && <div id="divTable" className="table-carro">

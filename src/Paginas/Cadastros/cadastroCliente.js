@@ -43,20 +43,18 @@ function Formulario()
         const cpf_input =  document.querySelector("#cpf");
         cpf_input.disabled=true;
         setIsOpen(false);
-        await api.get(`/pessoaCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
-            setNome(resp.data[0].pes_nome);
-            setCpf(resp.data[0].pes_cpf);
-            setSexo(resp.data[0].pes_sexo);
-            setEmail(resp.data[0].pes_email);
-            setEmailAtual(resp.data[0].pes_email);
-        });
 
         await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
-                setBairro(resp.data[0].cli_bairro);
-                setRua(resp.data[0].cli_rua);
-                setCidade(resp.data[0].cli_cidade);
-                setUf(resp.data[0].cli_uf);
-                setCep(resp.data[0].cli_cep);
+                setNome(resp.data.pes_nome);
+                setCpf(resp.data.pes_cpf);
+                setSexo(resp.data.pes_sexo);
+                setEmail(resp.data.pes_email);
+                setEmailAtual(resp.data.pes_email);
+                setBairro(resp.data.cli_bairro);
+                setRua(resp.data.cli_rua);
+                setCidade(resp.data.cli_cidade);
+                setUf(resp.data.cli_uf);
+                setCep(resp.data.cli_cep);
         });
         
     }

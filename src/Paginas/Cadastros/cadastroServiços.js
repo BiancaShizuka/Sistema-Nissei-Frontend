@@ -19,14 +19,14 @@ function CadastroServicos(){
     const [quant,setQuant]=useState('');
     const [valorUni,setValorUni]=useState('');
     const [peca,setPeca]=useState('');
-
+    const [pecsExc,setPecsExc]=useState([]);
 
     const [button,setButton]=useState('Salvar');
     const [titulo,setTitulo]=useState('Cadastro de serviço');
     const [loading,setLoading]=useState(false);
     async function listarCarros(){
-        await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
-            setCarros(resp.data);
+        await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`).then((resp)=>{
+            setCarros(resp.data.carros);
         });
     }
     
@@ -113,8 +113,11 @@ function CadastroServicos(){
             i++;
         }
         console.log(i);
+        let pecsAux=pecsExc;
         if(pecsUti[i].banco===1){
-            await api.delete(`/servicopeca/${localStorage.getItem('cod_ser')}/${pecsUti[i].pec_cod}`);
+            pecsAux.push(pecsUti[i]);
+            setPecsExc(pecsAux);
+            //await api.delete(`/servicopeca/${localStorage.getItem('cod_ser')}/${pecsUti[i].pec_cod}`);
         }
         setPecsUti(pecsUti.filter(pecsUti=>pecsUti.cod!==codigo));
     }
@@ -165,6 +168,7 @@ function CadastroServicos(){
                     ser_maoObra:maoObra,
                     ser_inicio:dtInicio,
                     pecas:pecsUti,
+                    pecasExc:pecsExc,
                     ser_status:true
                 })
                 alert('Serviço Alterado');
