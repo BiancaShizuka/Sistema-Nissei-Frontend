@@ -10,6 +10,7 @@ function ListarContasReceber()
     const [showModal,setShowModal]=useState(false);
     const [showModalCancel,setShowModalCancel]=useState(false);
     const [conCod,setConCod] = useState(0);
+    const [serCod,setSerCod] = useState(0);
     const [dtPgto, setDtPgto] = useState(new Date());
     const [dtInicio,setDtInicio] = useState('');
     const [dtFim,setDtFim] = useState('');
@@ -44,15 +45,16 @@ function ListarContasReceber()
             return 'Não pago';
         return mudarEstruturaData(date);
     }
-    async function btnClickCancelarPgto(con_cod){
+    async function btnClickCancelarPgto(con_cod,ser_cod){
         setConCod(con_cod);
+        setSerCod(ser_cod);
         setShowModalCancel(true);
     }
     async function btnFecharModalCancel(){
         setShowModalCancel(false);
     }
-    async function btnClickConfPgto(con_cod){
-        
+    async function btnClickConfPgto(con_cod,ser_cod){
+        setSerCod(ser_cod);
         setConCod(con_cod);
         setShowModal(true);
     }
@@ -61,9 +63,10 @@ function ListarContasReceber()
     }
     async function confirmarPagamento(){
         btnFecharModal();
+  
         await api.put('/contaReceber',{
             con_cod: conCod,
-            ser_cod: localStorage.getItem('cod_ser'),
+            ser_cod: serCod,
             con_dtPgto: dtPgto
             
         })
@@ -73,7 +76,7 @@ function ListarContasReceber()
         btnFecharModalCancel();
         await api.put('/contaReceber',{
             con_cod: conCod,
-            ser_cod: localStorage.getItem('cod_ser'),
+            ser_cod: serCod,
             con_dtPgto: null
             
         })
@@ -127,8 +130,8 @@ function ListarContasReceber()
                                     <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
                                     <td>{getDtPgto(res.con_dtPgto)}</td>
                                     <td>
-                                    <button onClick={()=>btnClickConfPgto(res.con_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
-                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
+                                    <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
+                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
                                     </td>
                                 </tr>
                             ))}
