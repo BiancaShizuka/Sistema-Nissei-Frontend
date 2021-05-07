@@ -109,7 +109,10 @@ function ListarContasReceber()
                                 Aguardando pagamento
                             </option>
                         </select>
-                        <button tyoe="button" onClick={()=>filtrar()}>Filtrar</button>
+                        <div className="div-buttonFiltrar">
+                            <button tyoe="button" onClick={()=>filtrar()} className="button-filtrarContasReceber">Filtrar</button>
+                        </div>
+                        
                     </div>
                     
                     <table className='table-contasReceber'>

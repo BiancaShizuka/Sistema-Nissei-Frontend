@@ -7,3 +7,20 @@ margin-right: 10px;
 .div-pesquisaConta .input-dtFim{
     margin-right: 10px;
 }
+.div-buttonFiltrar{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.button-filtrarContasReceber{
+    width: 20%;
+    background: rgb(109, 108, 108);
+    color: rgb(216, 216, 216);
+    border-radius: 15px;
+}
+.button-filtrarContasReceber:hover{
+    color: rgb(0, 0, 0);
+    background: rgb(230, 230, 230);
+}
