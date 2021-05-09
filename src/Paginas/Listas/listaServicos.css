@@ -1,55 +1,117 @@
-.table-servicos {
-    height: 100%;
-    width: 80%;
-    overflow-y: auto;
-    border-radius: 25px;
-    background-color: rgb(0, 0, 0, 0.95);
-    color: white;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
+.lista-servicos{
+  width:80%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding:2%;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.tabela-servicos {
+  height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  border-radius: 30px;
+  background-color: rgba(228, 228, 228, 0.95);
+  color: rgb(61, 61, 61);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
   
-  }
+.tableSer thead{
+  width:100%;
+  font-size: 20px;
+
+  background-color: rgb(104, 100, 100);
+  color: #fff;
+}
+.button-tabServico {
+  border: none;
+  background: rgb(151, 151, 151);
+  color: rgb(22, 22, 22);
+  font-weight: bold;
+  width: 170px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button-tabServico:hover{
+  background: #fefffe;
+  color:rgba(34, 33, 33, 0.849)
+}
+.modalTabelaServico{
+  padding-top: 5%;
+  padding-left: 43%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}
+.filtro{
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  flex-flow:wrap;
+  flex-direction:row;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color:rgb(255, 255, 255);
+}
+.filtro input{
+  border-radius: 7px;
+}
+.filtro select{
+  border-radius: 7px;
+}
+.filtro .p-filtrar{
+  width: 100%;
+  text-align: center;
   
-  .tableSer thead{
-    width:100%;
-    font-size: 20px;
-  
-    background-color: rgb(104, 100, 100);
-    color: #fff;
-  }
-  .filtro{
-      display: flex;
-      flex-flow: row wrap;
-      flex-direction: row;
-      width: 60%;
-      color:rgb(255, 255, 255)
-  }
-  .filtro select{
-      width: 100%;
-  }
-  .filtro .p-filtrar{
-    width: 100%;
-    text-align: center;
-  }
-  .filtro .button-filtrar{
-    
-  }
-  .modalTabelaServico{
-    /*position: absolute; 
-    z-index: 1; 
-    padding-top: 100px; */
-    left: 0;
-    top: 0; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    padding-left: 38%;
-  }
+}
+.filtro .button-filtrar{
+  padding:10px;
+  border:none;
+  width:25%;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 14px;
+  border-radius: 10px;
+  color:#fff;
+  background-color: rgba(100, 99, 99, 0.95);
+}
+.filtro .button-filtrar:hover{
+  color: #fff;
+  background-color: rgba(58, 58, 58, 0.95);
+}
+
+.filtro-cliente{
+  width: 25%;
+}
+.filtro-placa{
+  width: 25%;
+}
+.filtro-dataInicio{
+  width: 25%;
+}
+.filtro-dataFim{
+  width: 25%;
+}
+.filtro-status{
+  width: 100%;
+}
+.filtro select{
+  width: 30%;
+}
 
   

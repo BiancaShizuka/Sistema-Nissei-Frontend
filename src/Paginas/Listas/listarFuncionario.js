@@ -5,11 +5,13 @@ import '../../app.css'
 import './listarFuncionario.css'
 import './listaClientes.css'
 import Header from '../../Components/Header'
+import ReactLoading from 'react-loading';
 function ListaFuncionarios()
 {
     const [pessoas,setPessoas]=useState([]);
     const [filtro,setFiltro] = useState('');
     const [showModal,setShowModal]=useState(false);
+    const [loading,setLoading]=useState(false);
     const [codPes,setCodPes] = useState(0);
     useEffect(()=>{
        
@@ -27,7 +29,7 @@ function ListaFuncionarios()
 
     }
     async function listarFuncionarioPorFiltro(){
-        
+        setLoading(true);
         if(filtro.length>0){
             await api.get(`/pessoasFunFiltro/${filtro}`).then((response)=>{
 
@@ -37,7 +39,7 @@ function ListaFuncionarios()
         else
             listarFuncionarios();
   
-
+        setLoading(false);
     }
     async function acessarFuncionario(codigo){
         localStorage.setItem('cod_fun',codigo)
@@ -74,7 +76,7 @@ function ListaFuncionarios()
                     </tr>
                 </thead>
                 <tbody>
-                    {pessoas.map(res=>(
+                    {!loading && pessoas.map(res=>(
                         <tr key={res.pes_cpf}>
                             <td>{res.pes_cpf}</td>
                             <td>{res.pes_nome}</td>
@@ -86,6 +88,11 @@ function ListaFuncionarios()
                     ))}
                 </tbody>
             </table>
+            {loading &&
+                <div class="loadingListaFuncionario">
+                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                </div>
+            }
         </div>
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
         {showModal &&

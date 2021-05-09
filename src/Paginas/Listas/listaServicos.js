@@ -81,70 +81,70 @@ function ListaServicos()
     return (
     <div id="tela" class="background">
         <Header/>
-        <div class='filtro'>
-            
-            
-            <div class="input-block block-cliente">
-                <label htmlFor="cliente">Cliente: </label>
-                <input type="text" name="cliente" id="cliente" value={cliente} onChange={e=>setCliente(e.target.value)}/>
-            </div>
-            <div class="input-block block-placa">
-                <label htmlFor="placa">Placa: </label>
-                <input type="text" name="placa" id="placa" value={placa} onChange={e=>setPlaca(e.target.value)}/>
-            </div>
-            <div class="input-block block-data" >
-                <label htmlFor="dtInicio">Data de inicio: </label>
-                <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
-            </div>
-            <div class="input-block block-data">
-                <label htmlFor="dtInicio">Data de fim: </label>
-                <input type="date" name="dtInicio" id="dtInicio" value={dtSaida} onChange={e=>setDtSaida(e.target.value)} required/>
-            </div>
-            <div class="input-block block-placa">
-                <label>Status: </label>
-                <select class="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
-                        <option id="op-selecione" value="">Selecione uma opcao</option>
-                        <option id="op-selecione" value="1">Encerrado</option>
-                        <option id="op-selecione" value="0">Em andamento</option>
-                </select>
-            </div>
-            <p class="p-filtrar"><button type="button" class="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
-        </div>
-        <div class="table-servicos">   
-            <table class='tableSer'>
-                <thead>
-                    <tr>
-                        <td>Cliente</td>
-                        <td>Funcionário</td>
-                        <td>Carro</td>
-                        <td>Data de inicio</td>
-                        <td>Status</td>
-                        <td>Acao</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {servicos.map(res=>(
-                        <tr key={res.ser_cod}>
-                            <td>{res.cliente.pes_nome}</td>
-                            <td>{getFuncionario(res.funcionario)}</td>
-                            <td>{getPlaca(res.carro)}</td>
-                            <td>{mudarEstruturaData(res.ser_inicio)}</td>
-                            <td>{getStatus(res.ser_status)}</td>
-                            <td>
-                            <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} class="button-item">Editar</button>
-                            <button onClick={()=>visualizarServico(res.ser_cod)} class="button-item">Visualizar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            {loading &&
-                <div class="modalTabelaServico">
-                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+        <div class="lista-servicos"> 
+            <div class='filtro'>
+                <div class="filtro-cliente">
+                    <label htmlFor="cliente">Cliente: </label>
+                    <input type="text" name="cliente" id="cliente" value={cliente} onChange={e=>setCliente(e.target.value)}/>
                 </div>
-            }
+                <div class="filtro-placa">
+                    <label htmlFor="placa">Placa: </label>
+                    <input type="text" name="placa" id="placa" value={placa} onChange={e=>setPlaca(e.target.value)}/>
+                </div>
+                <div class="filtro-dataInicio" >
+                    <label htmlFor="dtInicio">Data de inicio: </label>
+                    <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
+                </div>
+                <div class="filtro-dataFim">
+                    <label htmlFor="dtInicio">Data de fim: </label>
+                    <input type="date" name="dtInicio" id="dtInicio" value={dtSaida} onChange={e=>setDtSaida(e.target.value)} required/>
+                </div>
+                <div class="filtro-status">
+                    <label>Status do Serviço: </label>
+                    <select class="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
+                            <option id="op-selecione" value="">Selecione uma opcao</option>
+                            <option id="op-selecione" value="0">Encerrado</option>
+                            <option id="op-selecione" value="1">Em andamento</option>
+                    </select>
+                </div>
+                <p class="p-filtrar"><button type="button" class="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
+            </div>
+            <div class="tabela-servicos">   
+                <table class='tableSer'>
+                    <thead>
+                        <tr>
+                            <td>Cliente</td>
+                            <td>Funcionário</td>
+                            <td>Carro</td>
+                            <td>Data de inicio</td>
+                            <td>Status</td>
+                            <td>Acao</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {!loading && servicos.map(res=>(
+                            <tr key={res.ser_cod}>
+                                <td>{res.cliente.pes_nome}</td>
+                                <td>{getFuncionario(res.funcionario)}</td>
+                                <td>{getPlaca(res.carro)}</td>
+                                <td>{mudarEstruturaData(res.ser_inicio)}</td>
+                                <td>{getStatus(res.ser_status)}</td>
+                                <td>
+                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} class="button-tabServico">Editar</button>
+                                <button onClick={()=>visualizarServico(res.ser_cod)} class="button-tabServico">Visualizar</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {loading &&
+                    <div class="modalTabelaServico">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
+            </div>
+            <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
         </div>
-        <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
     </div>
     );
 }

@@ -77,3 +77,11 @@
   background: #fefffe;
   color:rgba(34, 33, 33, 0.849)
 }
+.loadingListaCliente{
+  padding-top: 5%;
+  padding-left: 43%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0.4); 
+}

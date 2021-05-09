@@ -3,6 +3,7 @@ import history from '../../history';
 import './visualizarServiço.css';
 import api from '../../servicos/api';
 import Header from '../../Components/Header'
+import ReactLoading from 'react-loading';
 function VisualizarServiço()
 {
     const [carro,setCarro]=useState('');
@@ -16,7 +17,7 @@ function VisualizarServiço()
     const [pecsUti,setPecasUti] = useState([]);
     const [status,setStatus] = useState(false);
 
-
+    const [loading,setLoading]=useState(false);
     const [showModal,setShowModal]=useState(false);
     const [showModalAviso,setShowModalAviso]=useState(false);
     useEffect(()=>{
@@ -24,6 +25,7 @@ function VisualizarServiço()
         
     },[])
     async function recuperarServico(){
+        setLoading(true);
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
             if(resp.data.carro!==null)
                 setCarro(resp.data.carro.car_placa);
@@ -44,7 +46,7 @@ function VisualizarServiço()
             setTotal(resp.data.total);
             setPecasUti(resp.data.pecas);
         });
-        
+        setLoading(false);
     }
     
     function abrirContasReceber(){
@@ -174,6 +176,12 @@ function VisualizarServiço()
                         <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
                     </div>
                 </div>
+            </div>
+        }
+        {loading &&
+            <div class="modalSer">
+                
+                <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
             </div>
         }
     </div>

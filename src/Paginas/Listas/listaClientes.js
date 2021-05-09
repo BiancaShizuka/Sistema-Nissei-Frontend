@@ -4,12 +4,14 @@ import history from '../../history'
 import '../../app.css'
 import './listaClientes.css'
 import Header from '../../Components/Header'
+import ReactLoading from 'react-loading';
 function ListaClientes()
 {
     const [pessoas,setPessoas]=useState([]);
     const [filtro,setFiltro]=useState('');
     const [showModal,setShowModal]=useState(false);
     const [codPes,setCodPes] = useState(0);
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
         
     },[]);
@@ -18,9 +20,11 @@ function ListaClientes()
         history.goBack();
     }
     async function listarClientes(){
+        setLoading(true);
          await api.get(`/pessoasCli`).then((response)=>{
             setPessoas(response.data);
         })
+        setLoading(false);
 
     }
     async function acessarCliente(codigo){
@@ -29,7 +33,7 @@ function ListaClientes()
         history.push("/infoCliente");
     }
     async function listarClientePorFiltro(){
-        
+        setLoading(true);
         if(filtro.length>0){
             await api.get(`/pessoasCliFiltro/${filtro}`).then((resp)=>{
                 setPessoas(resp.data);
@@ -37,7 +41,7 @@ function ListaClientes()
         }
         else
             listarClientes();
-      
+        setLoading(false);
 
     }
     async function btnClickExcluir(pesId){
@@ -80,7 +84,7 @@ function ListaClientes()
                     </tr>
                 </thead>
                 <tbody>
-                    {pessoas.map(res=>(
+                    {!loading && pessoas.map(res=>(
                         <tr key={res.pes_cpf}>
                             <td>{res.pes_cpf}</td>
                             <td>{res.pes_nome}</td>
@@ -92,6 +96,11 @@ function ListaClientes()
                     ))}
                 </tbody>
             </table>
+            {loading &&
+                <div class="loadingListaCliente">
+                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                </div>
+            }
         </div>
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
         {showModal &&
