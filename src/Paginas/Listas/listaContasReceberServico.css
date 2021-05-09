@@ -55,6 +55,24 @@
 	background:#009900;
   color: #ffffff;
 }
+.button-item-visualiza{
+  border: none;
+  background:#ffffff;
+  color: #000;
+  font-weight: bold;
+  width: 170px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+.button-item-visualiza:hover{
+  background:#575757;
+  color: #ffffff;
+}
 .button-item-cancela{
   border: none;
   background:#ff6666;

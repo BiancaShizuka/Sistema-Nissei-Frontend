@@ -4,7 +4,7 @@ import history from '../../history'
 import '../../app.css'
 import Header from '../../Components/Header'
 import './listaContasReceber.css'
-
+import ReactLoading from 'react-loading';
 function ListarContasReceber()
 {
     const [showModal,setShowModal]=useState(false);
@@ -16,14 +16,17 @@ function ListarContasReceber()
     const [dtFim,setDtFim] = useState('');
     const [status,setStatus] = useState('');
     const [parcelas,setParcelas] = useState([]);
+    const [loading,setLoading]=useState(false);
     function voltarHome(){
         history.goBack();
     }
     async function filtrar(){
+        setLoading(true);
         await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
        
             setParcelas(resp.data);
         })
+        setLoading(false);
     }
     function mudarEstruturaData(valor){
         var date=new Date(valor);
@@ -71,6 +74,10 @@ function ListarContasReceber()
             
         })
         filtrar();
+    }
+    function visualizarServico(ser_cod){
+        localStorage.setItem('cod_ser',ser_cod);
+        history.push('/visualizarServico');
     }
     async function cancelarPagamento(){
         btnFecharModalCancel();
@@ -135,6 +142,7 @@ function ListarContasReceber()
                                     <td>
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
+                                    <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Vizualizar Serviço</button>
                                     </td>
                                 </tr>
                             ))}
@@ -142,6 +150,11 @@ function ListarContasReceber()
                     </table>
                 </div>
                 <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+                {loading &&
+                    <div className="modalFechaServico">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
                 {showModal &&
                 <div className="modal">
                     <div className="modal-content">

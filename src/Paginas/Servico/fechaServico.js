@@ -4,6 +4,7 @@ import history from '../../history'
 import './fechaServico.css'
 import '../../app.css'
 import Header from '../../Components/Header'
+import ReactLoading from 'react-loading';
 function FechaServico()
 {
     const [disabledQtde,setDisabledQtde]=useState(false);
@@ -17,6 +18,7 @@ function FechaServico()
     const [valorPecs,setValorPecs]=useState(0);
     const [showModal,setShowModal]=useState(false);
     const [parcelas,setParcelas]=useState([]);
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
         listarServico();   
     },[]);
@@ -44,6 +46,7 @@ function FechaServico()
     
     
     async function listarServico(){
+        setLoading(true);
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
             setServico(resp.data);     
             setTotal(resp.data.total);
@@ -51,6 +54,7 @@ function FechaServico()
             setValorParcela(resp.data.total);
             
         });
+        setLoading(false);
         
     }
   
@@ -101,13 +105,13 @@ function FechaServico()
     }
     async function gerarContaReceber(){
         btnFecharModal();
-     
+        setLoading(true);
         await api.post('/fecharServico',{
             ser_cod: localStorage.getItem('cod_ser'),
             qtde_parcelas:qtdeParcela,
 
         })
-     
+        setLoading(false);
         voltarHome();
     }
    
@@ -190,6 +194,11 @@ function FechaServico()
             <button type="button" onClick={()=>btnClickGerarConta()} className="button-marca">Gerar conta a receber</button>
             <button type="button" onClick={voltarHome} className="button-voltarMarca">Voltar</button>
         </div>
+        {loading &&
+                    <div className="modalFechaServico">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
         {showModal &&
             <div className="modal">
                 <div className="modal-content">
