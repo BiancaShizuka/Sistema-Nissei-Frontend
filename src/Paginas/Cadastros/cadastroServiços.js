@@ -275,19 +275,19 @@ function CadastroServicos(){
         history.goBack();
     }
     return(
-        <div id="tela" class="background">   
+        <div id="tela" className="background">   
             <Header/> 
-            <aside class="div-servico">
+            <aside className="div-servico">
                 <h1>{titulo}</h1>
-                <form class='formularioServico' onSubmit={cadastrarServico}>
-                    <div class="input-block block-data" >
+                <form className='formularioServico' onSubmit={cadastrarServico}>
+                    <div className="input-block block-data" >
                         <label htmlFor="dtInicio">Data de inicio: </label>
                         <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
                     </div>
 
-                    <div class="input-block block-carro">
+                    <div className="input-block block-carro">
                         <label>Carro: </label>
-                        <select class="select-carro" value={carro} onChange={e=>setCarro(e.target.value)}>
+                        <select className="select-carro" value={carro} onChange={e=>setCarro(e.target.value)}>
                                 <option id="op-selecione" value="">
                                     Selecione uma opcao
                                 </option>
@@ -299,9 +299,9 @@ function CadastroServicos(){
                         </select>
                     </div>
 
-                    <div class="input-block block-func">
+                    <div className="input-block block-func">
                         <label>Funcionário: </label>
-                        <select class="select-func" value={func} onChange={e=>setFunc(e.target.value)}>
+                        <select className="select-func" value={func} onChange={e=>setFunc(e.target.value)}>
                                 <option id="op-selecione" value="">
                                     Selecione uma opcao
                                 </option>
@@ -313,31 +313,31 @@ function CadastroServicos(){
                         </select>
                     </div>
                     
-                    <div class="input-block block-maoObra" >
+                    <div className="input-block block-maoObra" >
                         <label htmlFor="maoObra">Valor Mão de Obra: </label>
                         <input type="number" step="0.01" name="maoObra" id="maoObra" value={maoObra} onChange={e=>setMaoObra(e.target.value)} required/>
                     </div>
 
-                    <div class="input-block block-desc">
+                    <div className="input-block block-desc">
                         <label htmlFor="descricao">Descrição</label>
-                        <textarea name="descricao" class="txtArea" rows="10" cols="110" id="descricao" value={descricao} onChange={e=>setDescricao(e.target.value)} required></textarea>
+                        <textarea name="descricao" className="txtArea" rows="10" cols="110" id="descricao" value={descricao} onChange={e=>setDescricao(e.target.value)} required></textarea>
                     </div>
 
-                    <h1 class="tituloPecas">Adicionar peças Utilizadas</h1>
-                    <div class="cadastroPecas">
-                        <div class="input-block block-quant">
+                    <h1 className="tituloPecas">Adicionar peças Utilizadas</h1>
+                    <div className="cadastroPecas">
+                        <div className="input-block block-quant">
                             <label htmlFor="quant">Qtde:</label>
                             <input type="number" name="quant" id="quant" value={quant} onChange={e=>setQuant(e.target.value)} />
                         </div>
 
-                        <div class="input-block block-valorUni">
+                        <div className="input-block block-valorUni">
                             <label htmlFor="valorUni">Valor Uni:</label>
                             <input type="number" step="0.01" name="valorUni" id="valorUni" value={valorUni} onChange={e=>setValorUni(e.target.value)} />
                         </div>
                         {pecs && (
-                            <div class="input-block block-peca">
+                            <div className="input-block block-peca">
                                 <label>Peça: </label>
-                                <input type="text" autoComplete="off" name="peca" list="pecanome" class="select-peca" value={peca} placeholder="Digite pelo menos 3 letras" onChange={e=>setPeca(e.target.value)}/>
+                                <input type="text" autoComplete="off" name="peca" list="pecanome" className="select-peca" value={peca} placeholder="Digite pelo menos 3 letras" onChange={e=>setPeca(e.target.value)}/>
                                     <datalist id="pecanome">
                                         {pecs.map(pec=>(
                                             <option key={pec.pec_cod} value={pec.pec_descricao}></option>
@@ -345,13 +345,13 @@ function CadastroServicos(){
                                     </datalist>
                             </div>
                         )}
-                        <div class="divAdicionarPec">
-                            <button class="btnAdicionarPec" onClick={addPeca}>+</button>
+                        <div className="divAdicionarPec">
+                            <button className="btnAdicionarPec" onClick={addPeca}>+</button>
                         </div>
-                        <div id="mensagemPecas" class="mensagem">
+                        <div id="mensagemPecas" className="mensagem">
 
                         </div>
-                        <button type="button" onClick={addLista} class="btnFormPecas">Adicionar Peças</button>
+                        <button type="button" onClick={addLista} className="btnFormPecas">Adicionar Peças</button>
                     </div>         
                     <div id="divTable">
                         <table id="tabelaCont">
@@ -370,7 +370,7 @@ function CadastroServicos(){
                                         <td>R$ {pec.uti_precoUni}</td>
                                         <td>{pec.pec_desc}</td>
                                         <td>
-                                            <button id="btexcluir" class="btnExcluirPec" onClick={()=>Excluir(pec.cod)} type="button">
+                                            <button id="btexcluir" className="btnExcluirPec" onClick={()=>Excluir(pec.cod)} type="button">
                                             Excluir
                                             </button>
                                         </td>
@@ -382,12 +382,12 @@ function CadastroServicos(){
                     <div id="mensagem">
 
                     </div> 
-                    <button type="submit" class="btnFormSalvar">{button}</button>
+                    <button type="submit" className="btnFormSalvar">{button}</button>
                 </form>
                 <button type="button" onClick={voltar}>Voltar</button>
             </aside>
             {loading &&
-                <div class="modalSer">
+                <div className="modalSer">
                     
                     <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                 </div>

@@ -79,38 +79,38 @@ function ListaServicos()
         }
     }
     return (
-    <div id="tela" class="background">
+    <div id="tela" className="background">
         <Header/>
-        <div class="lista-servicos"> 
-            <div class='filtro'>
-                <div class="filtro-cliente">
+        <div className="lista-servicos"> 
+            <div className='filtro'>
+                <div className="filtro-cliente">
                     <label htmlFor="cliente">Cliente: </label>
                     <input type="text" name="cliente" id="cliente" value={cliente} onChange={e=>setCliente(e.target.value)}/>
                 </div>
-                <div class="filtro-placa">
+                <div className="filtro-placa">
                     <label htmlFor="placa">Placa: </label>
                     <input type="text" name="placa" id="placa" value={placa} onChange={e=>setPlaca(e.target.value)}/>
                 </div>
-                <div class="filtro-dataInicio" >
+                <div className="filtro-dataInicio" >
                     <label htmlFor="dtInicio">Data de inicio: </label>
                     <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)} required/>
                 </div>
-                <div class="filtro-dataFim">
+                <div className="filtro-dataFim">
                     <label htmlFor="dtInicio">Data de fim: </label>
                     <input type="date" name="dtInicio" id="dtInicio" value={dtSaida} onChange={e=>setDtSaida(e.target.value)} required/>
                 </div>
-                <div class="filtro-status">
+                <div className="filtro-status">
                     <label>Status do Serviço: </label>
-                    <select class="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
+                    <select className="select-status" value={status} onChange={e=>setStatus(e.target.value)}>
                             <option id="op-selecione" value="">Selecione uma opcao</option>
                             <option id="op-selecione" value="0">Encerrado</option>
                             <option id="op-selecione" value="1">Em andamento</option>
                     </select>
                 </div>
-                <p class="p-filtrar"><button type="button" class="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
+                <p className="p-filtrar"><button type="button" className="button-filtrar" onClick={()=>filtrar()}>Filtrar</button></p>
             </div>
-            <div class="tabela-servicos">   
-                <table class='tableSer'>
+            <div className="tabela-servicos">   
+                <table className='tableSer'>
                     <thead>
                         <tr>
                             <td>Cliente</td>
@@ -130,20 +130,20 @@ function ListaServicos()
                                 <td>{mudarEstruturaData(res.ser_inicio)}</td>
                                 <td>{getStatus(res.ser_fim)}</td>
                                 <td>
-                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} disabled={res.ser_fim!=null} class="button-tabServico">Editar</button>
-                                <button onClick={()=>visualizarServico(res.ser_cod)} class="button-tabServico">Visualizar</button>
+                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} disabled={res.ser_fim!=null} className="button-tabServico">Editar</button>
+                                <button onClick={()=>visualizarServico(res.ser_cod)} className="button-tabServico">Visualizar</button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 {loading &&
-                    <div class="modalTabelaServico">
+                    <div className="modalTabelaServico">
                         <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                     </div>
                 }
             </div>
-            <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
+            <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
         </div>
     </div>
     );

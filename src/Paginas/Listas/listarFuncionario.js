@@ -89,7 +89,7 @@ function ListaFuncionarios()
                 </tbody>
             </table>
             {loading &&
-                <div class="loadingListaFuncionario">
+                <div className="loadingListaFuncionario">
                     <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                 </div>
             }

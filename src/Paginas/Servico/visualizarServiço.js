@@ -188,7 +188,7 @@ function VisualizarServiço()
             </div>
         }
         {loading &&
-            <div class="modalSer">
+            <div className="modalSer">
                 
                 <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
             </div>

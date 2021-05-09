@@ -201,7 +201,7 @@ function ListaServicosCliente()
                 </tbody>
             </table>
             {loading &&
-                <div class="loadingListaCliente">
+                <div className="loadingListaCliente">
                     <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                 </div>
             }
@@ -209,7 +209,7 @@ function ListaServicosCliente()
         
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
         {loadingTela &&
-            <div class="modalSer">
+            <div className="modalSer">
                 
                 <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
             </div>

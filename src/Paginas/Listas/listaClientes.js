@@ -86,7 +86,7 @@ function ListaClientes()
                 </tbody>
             </table>
             {loading &&
-                <div class="loadingListaCliente">
+                <div className="loadingListaCliente">
                     <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
                 </div>
             }
