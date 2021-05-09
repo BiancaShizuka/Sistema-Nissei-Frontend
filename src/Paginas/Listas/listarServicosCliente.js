@@ -4,15 +4,16 @@ import history from '../../history'
 import '../../app.css'
 import './listarServicosCliente.css'
 import Header from '../../Components/Header'
-
+import ReactLoading from 'react-loading';
 function ListaServicosCliente()
 {
     const [carros,setCarros]=useState([]);
     const [servicos,setServicos]=useState([]);
-    const [filtro,setFiltro]=useState('todas');
+    const [filtro,setFiltro]=useState('');
     const [filtros,setFiltros]=useState([]);
     const [showModal,setShowModal]=useState(false);
     const [serCod,setSerCod] = useState(0);
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
         listarCarros();
     },[]);
@@ -39,12 +40,17 @@ function ListaServicosCliente()
         i=0;
     },[carros]);
     useEffect(()=>{
-        if(filtro===null || filtro==="todas")
-            listarServicos();
-        else
+        if(filtro!=='null' && filtro.length>0)
         {
+        
            listarServicosCarro(filtro);
         }
+        else{
+            if(filtro==='null'){
+                listarServicosCarroNull();
+            }
+        }
+
     },[filtro]);
     function voltarHome(){
    
@@ -57,12 +63,23 @@ function ListaServicosCliente()
 
     }
     async function listarServicosCarro(cod){
+       
         await api.get(`/servicoCarro/${cod}`).then((response)=>{
+
             setServicos(response.data);
-        })
+        }) 
+
+    }
+    async function listarServicosCarroNull(cod){
+       
+        await api.get(`/servicoCarroNull`).then((response)=>{
+
+            setServicos(response.data);
+        }) 
 
     }
     async function listarCarros(){
+
         await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
             setCarros(resp.data); 
         });
@@ -137,9 +154,13 @@ function ListaServicosCliente()
     <div id="tela" className="background">
         <Header/>
         <div className='filtroCarro'>
+            <label>Carro: </label>
             <select id="select-filtro" value={filtro}  onChange={e=>setFiltro(e.target.value)}>
-                <option value="todas">
-                    Todas
+                <option>
+                    Selecione uma opção
+                </option>
+                <option value='null'>
+                    Null
                 </option>
                 {filtros.map(res=>(
                     <option value={res.car_id} key={res.car_id}>
@@ -169,7 +190,7 @@ function ListaServicosCliente()
                             <button onClick={()=>acessarServico(res.ser_cod)} disabled={!res.ser_status} className="button-item">Editar</button>
     
                             <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Vizualizar</button>
-                            <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item">Excluir</button>
+                            <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item-excluirServico">Excluir</button>
                             </td>
                         </tr>
                     ))}
@@ -178,6 +199,11 @@ function ListaServicosCliente()
         </div>
         
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+        {loading &&
+                    <div class="modalTabelaServico">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
         {showModal &&
             <div className="modal">
                 <div className="modal-content">
