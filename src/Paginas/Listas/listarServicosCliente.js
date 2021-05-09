@@ -14,6 +14,7 @@ function ListaServicosCliente()
     const [showModal,setShowModal]=useState(false);
     const [serCod,setSerCod] = useState(0);
     const [loading,setLoading]=useState(false);
+    const [loadingTela,setLoadingTela]=useState(false);
     useEffect(()=>{
         listarCarros();
     },[]);
@@ -57,33 +58,35 @@ function ListaServicosCliente()
         history.goBack();
     }
     async function listarServicos(){
+        setLoading(true);
         await api.get(`/servicoCliente/${localStorage.getItem('cod_cli')}`).then((response)=>{
             setServicos(response.data);
         })
-
+        setLoading(false);
     }
     async function listarServicosCarro(cod){
-       
+       setLoading(true);
         await api.get(`/servicoCarro/${cod}`).then((response)=>{
 
             setServicos(response.data);
         }) 
+        setLoading(false);
 
     }
     async function listarServicosCarroNull(cod){
-       
+       setLoading(true);
         await api.get(`/servicoCarroNull`).then((response)=>{
 
             setServicos(response.data);
         }) 
-
+        setLoading(false);
     }
     async function listarCarros(){
-
+        setLoadingTela(true);
         await api.get(`/carroPes/${localStorage.getItem('cod_cli')}`).then((resp)=>{
             setCarros(resp.data); 
         });
-
+        setLoadingTela(false);
     }
     function getPlaca(carro){
         var i=0;
@@ -181,7 +184,7 @@ function ListaServicosCliente()
                     </tr>
                 </thead>
                 <tbody>
-                    {servicos.map(res=>(
+                    {!loading && servicos.map(res=>(
                         <tr key={res.ser_cod}>
                             <td>{getPlaca(res.carro)}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
@@ -196,14 +199,20 @@ function ListaServicosCliente()
                     ))}
                 </tbody>
             </table>
+            {loading &&
+                <div class="loadingListaCliente">
+                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                </div>
+            }
         </div>
         
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
-        {loading &&
-                    <div class="modalTabelaServico">
-                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
-                    </div>
-                }
+        {loadingTela &&
+            <div class="modalSer">
+                
+                <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+            </div>
+        }
         {showModal &&
             <div className="modal">
                 <div className="modal-content">

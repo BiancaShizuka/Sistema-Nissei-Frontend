@@ -20,6 +20,8 @@ function VisualizarServiço()
     const [loading,setLoading]=useState(false);
     const [showModal,setShowModal]=useState(false);
     const [showModalAviso,setShowModalAviso]=useState(false);
+
+    
     useEffect(()=>{
         recuperarServico();
         
@@ -88,7 +90,7 @@ function VisualizarServiço()
         
         btnFecharModal();
       
-
+        setLoading(true);
         await api.put('/cancelarFechamento',{
             ser_cod: localStorage.getItem('cod_ser'),
 
