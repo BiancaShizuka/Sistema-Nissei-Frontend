@@ -77,6 +77,13 @@ function VisualizarServiço()
         }
         return "Não finalizado";
     }
+    function totalPecas(){
+        let total=0;
+        for(var i=0;i<pecsUti.length;i++){
+            total+=pecsUti[i].total;
+        }
+        return total;
+    }
     async function cancelarFechamento(){
         
         btnFecharModal();
@@ -127,7 +134,7 @@ function VisualizarServiço()
                                 <td>Descrição</td>
                                 <td>Quantidade</td>
                                 <td>Valor Uni.</td>
-                                
+                                <td>Valor</td>
                             
                             </tr>
                         </thead>
@@ -137,13 +144,13 @@ function VisualizarServiço()
                                     <td>{pec.peca.pec_descricao}</td>
                                     <td>{pec.uti_qtde}</td>
                                     <td>R$ {parseFloat(pec.uti_precoUni).toFixed(2)}</td>
-                                    
-                                
+                                    <td>R$ {parseFloat(pec.total).toFixed(2)}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <p className="p-valorTotal"><strong>Total:</strong>R$ {parseFloat(total).toFixed(2)}</p>
+                    <p className="p-valorPecasTotal"><strong>Total das peças:</strong>R$ {parseFloat(totalPecas()).toFixed(2)}</p>
+                    <p className="p-valorTotal"><strong>Valor do Serviço:</strong>R$ {parseFloat(total).toFixed(2)}</p>
                
                 <div className="div-buttons">
                     <button className="button-acao" onClick={()=>fecharServico()} disabled={!status}>Fechar Serviço</button>

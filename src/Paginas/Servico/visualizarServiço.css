@@ -48,10 +48,15 @@ width: 100%;
 .div-infoBasica .p-maoObra{
 width: 100%;
 }
-.div-infoBasica .p-valorTotal{
+.div-infoBasica .p-valorPecasTotal{
 width: 100%;
 text-align: right;
 }
+.div-infoBasica .p-valorTotal{
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  }
 .div-infoBasica .p-cliente{
   width: 40%;
   text-align: right;
