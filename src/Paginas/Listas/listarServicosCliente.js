@@ -103,7 +103,8 @@ function ListaServicosCliente()
         }
     }
     function getStatus(status){
-        if(status===1)
+        console.log(status);
+        if(status===null)
             return 'Em andamento';
         return 'Finalizado'; 
     }
@@ -188,9 +189,9 @@ function ListaServicosCliente()
                         <tr key={res.ser_cod}>
                             <td>{getPlaca(res.carro)}</td>
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
-                            <td>{getStatus(res.ser_status)}</td>
+                            <td>{getStatus(res.ser_fim)}</td>
                             <td>
-                            <button onClick={()=>acessarServico(res.ser_cod)} disabled={!res.ser_status} className="button-item">Editar</button>
+                            <button onClick={()=>acessarServico(res.ser_cod)} disabled={res.ser_fim!=null} className="button-item">Editar</button>
     
                             <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Vizualizar</button>
                             <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item-excluirServico">Excluir</button>

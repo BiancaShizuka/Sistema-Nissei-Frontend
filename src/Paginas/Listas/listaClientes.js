@@ -52,20 +52,9 @@ function ListaClientes()
         setShowModal(false);
     }
     async function excluirCliente(){
-        btnFecharModal();
-        await api.get(`/carroPes/${codPes}`).then((resp)=>{
-       
-            if(resp.data.length===0){
-           
-                api.delete(`/cliente/${codPes}`);
-            }
-            else{
-                api.put(`/cliente/${codPes}`);
-            }
-        });
-
+        btnFecharModal();  
+        await api.delete(`/cliente/${codPes}`);
         setPessoas(pessoas.filter(pessoas=>pessoas.pes_cod!==codPes));
-        
     }
     return (
     <div id="tela" className="background">

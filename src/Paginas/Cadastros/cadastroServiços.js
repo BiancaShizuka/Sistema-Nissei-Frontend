@@ -246,7 +246,7 @@ function CadastroServicos(){
                 const response=await api.post('/peca',{
                     pec_descricao: peca,
                 })
-              
+                console.log(response);
                 pecsAux.push(response.data[0])
                 setPecs(pecsAux);
                 alert("Nova peça adicionada");

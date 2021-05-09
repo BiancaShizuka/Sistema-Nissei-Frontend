@@ -44,7 +44,10 @@ function FechaServico()
             setValorParcela(total/qtdeParcela);
         }    
     },[pgto,qtdeParcela]);
-    
+    useEffect(()=>{
+        if(pgto!=='vista')
+            setQtdeParcela(2);
+    },[pgto])
     async function listarServico(){
         setLoading(true);
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((resp)=>{
@@ -163,7 +166,7 @@ function FechaServico()
             </div>
             <div className="div-qtdeParcela">
                 <label>Quatidade de parcelas: </label>
-                <input type="number" disabled={disabledQtde} min={1} className='input-qtdeParcela' value={qtdeParcela} onChange={e=>setQtdeParcela(e.target.value)} />
+                <input type="number" disabled={disabledQtde} min={2} className='input-qtdeParcela' value={qtdeParcela} onChange={e=>setQtdeParcela(e.target.value)} />
             </div>
             <div className="div-valorParcela">
                 <label>Valor da Parcela: </label>

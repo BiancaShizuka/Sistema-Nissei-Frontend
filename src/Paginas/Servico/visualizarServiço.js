@@ -15,7 +15,6 @@ function VisualizarServiço()
     const [maoObra,setMaoObra]=useState('0');
     const [total,setTotal]=useState(0);
     const [pecsUti,setPecasUti] = useState([]);
-    const [status,setStatus] = useState(false);
 
     const [loading,setLoading]=useState(false);
     const [showModal,setShowModal]=useState(false);
@@ -43,7 +42,6 @@ function VisualizarServiço()
             setDtInicio(resp.data.ser_inicio);
             setDtFim(resp.data.ser_fim);
             setMaoObra(resp.data.ser_maoObra);
-            setStatus(resp.data.ser_status);
             
             setTotal(resp.data.total);
             setPecasUti(resp.data.pecas);
@@ -97,8 +95,10 @@ function VisualizarServiço()
         }).then((response)=>{
             if(response.data.ser_fim!==null){
                 setShowModalAviso(true);
+                setLoading(false);
             }
-            recuperarServico();
+            else
+                recuperarServico();
         })
       
         
@@ -155,9 +155,9 @@ function VisualizarServiço()
                     <p className="p-valorTotal"><strong>Valor do Serviço:</strong>R$ {parseFloat(total).toFixed(2)}</p>
                
                 <div className="div-buttons">
-                    <button className="button-acao" onClick={()=>fecharServico()} disabled={!status}>Fechar Serviço</button>
-                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()} disabled={status}>Cancelar fechamento de serviço</button>
-                    <button className="button-acao" onClick={()=>abrirContasReceber()} disabled={status}>Abrir contas a receber</button>
+                    <button className="button-acao" onClick={()=>fecharServico()} disabled={dtFim!==null}>Fechar Serviço</button>
+                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()} disabled={dtFim==null}>Cancelar fechamento de serviço</button>
+                    <button className="button-acao" onClick={()=>abrirContasReceber()} disabled={dtFim==null}>Abrir contas a receber</button>
                 </div>
             </div>
             <button className="button-voltar" onClick={voltarHome}>Voltar</button>

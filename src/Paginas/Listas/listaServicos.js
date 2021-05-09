@@ -28,7 +28,7 @@ function ListaServicos()
     }
     
     function getStatus(status){
-        if(status===1)
+        if(status===null)
             return 'Em andamento';
         return 'Finalizado'; 
     }
@@ -128,9 +128,9 @@ function ListaServicos()
                                 <td>{getFuncionario(res.funcionario)}</td>
                                 <td>{getPlaca(res.carro)}</td>
                                 <td>{mudarEstruturaData(res.ser_inicio)}</td>
-                                <td>{getStatus(res.ser_status)}</td>
+                                <td>{getStatus(res.ser_fim)}</td>
                                 <td>
-                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} class="button-tabServico">Editar</button>
+                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} disabled={res.ser_fim!=null} class="button-tabServico">Editar</button>
                                 <button onClick={()=>visualizarServico(res.ser_cod)} class="button-tabServico">Visualizar</button>
                                 </td>
                             </tr>
