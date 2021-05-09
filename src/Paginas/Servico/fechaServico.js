@@ -40,10 +40,10 @@ function FechaServico()
         }
         else{
             setDisabledQtde(false);
+            console.log(qtdeParcela);
             setValorParcela(total/qtdeParcela);
         }    
     },[pgto,qtdeParcela]);
-    
     
     async function listarServico(){
         setLoading(true);
@@ -88,7 +88,7 @@ function FechaServico()
         let parcAux=[];
      
         for(var i=1;i<=qtdeParcela;i++){
-            let date2 = date.setDate(date.getDate()+30);
+            let date2 = date.setDate(date.getDate());
   
             let data= {
                     cod: i,
@@ -96,7 +96,7 @@ function FechaServico()
                     dtVenc: date2
                 
                 };
-            
+            date.setDate(date.getDate()+30);
             parcAux.push(data);
          
         }
