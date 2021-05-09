@@ -11,7 +11,8 @@ function ListaServicosCliente()
     const [servicos,setServicos]=useState([]);
     const [filtro,setFiltro]=useState('todas');
     const [filtros,setFiltros]=useState([]);
-
+    const [showModal,setShowModal]=useState(false);
+    const [serCod,setSerCod] = useState(0);
     useEffect(()=>{
         listarCarros();
     },[]);
@@ -112,7 +113,26 @@ function ListaServicosCliente()
         localStorage.setItem('cod_ser',cod);
         history.push('/visualizarServico');
     }
-  
+    async function excluirServico(){
+        
+        btnFecharModal();
+      
+     
+        api.delete(`/servico/${serCod}`);
+
+        setServicos(servicos.filter(servico=>servico.ser_cod!==serCod));
+     
+        
+    }
+    async function btnClickCancelarFechamento(ser_cod){
+        setSerCod(ser_cod);
+        setShowModal(true);
+
+    }
+    async function btnFecharModal(){
+        setShowModal(false);
+
+    }
     return (
     <div id="tela" className="background">
         <Header/>
@@ -149,6 +169,7 @@ function ListaServicosCliente()
                             <button onClick={()=>acessarServico(res.ser_cod)} disabled={!res.ser_status} className="button-item">Editar</button>
     
                             <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Vizualizar</button>
+                            <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item">Excluir</button>
                             </td>
                         </tr>
                     ))}
@@ -157,6 +178,19 @@ function ListaServicosCliente()
         </div>
         
         <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+        {showModal &&
+            <div className="modal">
+                <div className="modal-content">
+                    <div className="modal-content-text"> 
+                        <p>Deseja realmente excluir serviço?</p>
+                    </div>
+                    <div className="modal-content-btns">
+                        <button type="button" className="btn-confirma" onClick={excluirServico}>Confirmar</button>
+                        <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
     );
 }

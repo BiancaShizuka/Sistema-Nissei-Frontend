@@ -112,13 +112,20 @@ function Home()
                 </table>
             </div>}
 
-            <div>
-                <button type="button" onClick={editarCliente} className="button-info-cliente">Editar Cliente</button>
-                <button type="button" onClick={cadastrarCarro} className="button-info-cliente">Cadastrar Carros</button>
-                <button type="button" onClick={cadastrarContato} className="button-info-cliente">Cadastrar Contatos</button>
-                <button type="button" onClick={exibirServicos} className="button-info-cliente">Exibir servicos</button>
-                <button type="button" onClick={gerarServico} disabled={VerificarCarros(carros.length)} className="button-info-cliente">Gerar Serviço</button>
-                <button type="button" onClick={voltar} className="button-info-cliente">Voltar</button>
+            <div className="div-buttonsAcoes">
+                <div className="div-buttonsCliente">
+                    <button type="button" onClick={editarCliente} className="button-info-cliente">Editar Cliente</button>
+                    <button type="button" onClick={cadastrarCarro} className="button-info-cliente">Cadastrar Carros</button>
+                    <button type="button" onClick={cadastrarContato} className="button-info-cliente">Cadastrar Contatos</button>
+                </div>
+                <div className="div-buttonsServico">
+                    <button type="button" onClick={exibirServicos} className="button-info-cliente">Exibir servicos</button>
+                    <button type="button" onClick={gerarServico} disabled={VerificarCarros(carros.length)} className="button-info-cliente">Gerar Serviço</button>
+                </div>   
+                
+            </div>
+            <div className="div-buttonVoltar">
+                    <button type="button" onClick={voltar} className="button-info-cliente">Voltar</button>
             </div>
         </div>
         {showModal &&
