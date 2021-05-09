@@ -12,12 +12,15 @@ function ListarContasReceberServico()
     const [showModalCancel,setShowModalCancel]=useState(false);
     const [conCod,setConCod] = useState(0);
     const [dtPgto, setDtPgto] = useState(new Date());
+    const [servico,setServico] = useState('');
     useEffect(()=>{
         listarContas();
     },[]);
     async function listarContas(){
-        await api.get(`/contaReceber/${localStorage.getItem('cod_ser')}`).then((response)=>{
-            setContas(response.data);
+        await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((response)=>{
+         
+            setServico(response.data);
+            setContas(response.data.contasReceber);
         })
     }
     async function btnClickCancelarPgto(con_cod){
@@ -84,6 +87,9 @@ function ListarContasReceberServico()
             
             
             <div className="div-contasReceber">   
+                <div>
+                    <p><strong>Cliente: </strong>{servico.cliente.pes_nome}</p>
+                </div>
                 <table className='table-contasReceber'>
                     <thead>
                         <tr>
