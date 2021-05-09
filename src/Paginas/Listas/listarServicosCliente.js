@@ -193,7 +193,7 @@ function ListaServicosCliente()
                             <td>
                             <button onClick={()=>acessarServico(res.ser_cod)} disabled={res.ser_fim!=null} className="button-item">Editar</button>
     
-                            <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Vizualizar</button>
+                            <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Visualizar</button>
                             <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item-excluirServico">Excluir</button>
                             </td>
                         </tr>
