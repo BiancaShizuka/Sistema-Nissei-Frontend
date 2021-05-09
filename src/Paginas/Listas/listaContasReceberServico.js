@@ -4,7 +4,7 @@ import history from '../../history'
 import '../../app.css'
 import './listaContasReceberServico.css'
 import Header from '../../Components/Header'
-
+import ReactLoading from 'react-loading';
 function ListarContasReceberServico()
 {
     const [contas,setContas] = useState([]);
@@ -12,16 +12,21 @@ function ListarContasReceberServico()
     const [showModalCancel,setShowModalCancel]=useState(false);
     const [conCod,setConCod] = useState(0);
     const [dtPgto, setDtPgto] = useState(new Date());
-    const [servico,setServico] = useState('');
+    const [cliente,setCliente] =useState('')
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
         listarContas();
     },[]);
     async function listarContas(){
+    
+        setLoading(true);
+     
         await api.get(`/servico/${localStorage.getItem('cod_ser')}`).then((response)=>{
-         
-            setServico(response.data);
+            setCliente(response.data.cliente.pes_nome)
             setContas(response.data.contasReceber);
         })
+
+        setLoading(false);
     }
     async function btnClickCancelarPgto(con_cod){
         setConCod(con_cod);
@@ -88,7 +93,7 @@ function ListarContasReceberServico()
             
             <div className="div-contasReceber">   
                 <div>
-                    <p><strong>Cliente: </strong>{servico.cliente.pes_nome}</p>
+                    <p><strong>Cliente: </strong>{cliente}</p>
                 </div>
                 <table className='table-contasReceber'>
                     <thead>
@@ -117,7 +122,11 @@ function ListarContasReceberServico()
                 </table>
                 <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
             </div>
-            
+            {loading &&
+                    <div className="modalFechaServico">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
             {showModal &&
                 <div className="modal">
                     <div className="modal-content">
