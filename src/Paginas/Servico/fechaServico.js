@@ -166,7 +166,7 @@ function FechaServico()
             </div>
             <div className="div-qtdeParcela">
                 <label>Quatidade de parcelas: </label>
-                <input type="number" disabled={disabledQtde} min={2} className='input-qtdeParcela' value={qtdeParcela} onChange={e=>setQtdeParcela(e.target.value)} />
+                <input type="number" disabled={disabledQtde} min={2} max={3} className='input-qtdeParcela' value={qtdeParcela} onChange={e=>setQtdeParcela(e.target.value)} />
             </div>
             <div className="div-valorParcela">
                 <label>Valor da Parcela: </label>
