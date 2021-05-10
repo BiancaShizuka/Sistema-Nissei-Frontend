@@ -41,14 +41,16 @@ function ListaServicosCliente()
         i=0;
     },[carros]);
     useEffect(()=>{
-        if(filtro!=='null' && filtro.length>0)
+        if(filtro!=="null" && filtro!=="todos" && filtro.length>0)
         {
         
            listarServicosCarro(filtro);
         }
         else{
-            if(filtro==='null'){
+            if(filtro==="null")
                 listarServicosCarroNull();
+            if(filtro==="todos"){
+                listarServicos();
             }
         }
 
@@ -159,8 +161,11 @@ function ListaServicosCliente()
         <div className='filtroCarro'>
             <label>Carro: </label>
             <select id="select-filtro" value={filtro}  onChange={e=>setFiltro(e.target.value)}>
-                <option>
+                <option value="">
                     Selecione uma opção
+                </option>
+                <option value="todos">
+                    Todos
                 </option>
                 <option value='null'>
                     Null
