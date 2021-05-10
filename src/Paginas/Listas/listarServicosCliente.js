@@ -73,9 +73,9 @@ function ListaServicosCliente()
         setLoading(false);
 
     }
-    async function listarServicosCarroNull(cod){
+    async function listarServicosCarroNull(){
        setLoading(true);
-        await api.get(`/servicoCarroNull`).then((response)=>{
+        await api.get(`/servicoCarroNull/${localStorage.getItem('cod_cli')}`).then((response)=>{
 
             setServicos(response.data);
         }) 
@@ -103,7 +103,6 @@ function ListaServicosCliente()
         }
     }
     function getStatus(status){
-        console.log(status);
         if(status===null)
             return 'Em andamento';
         return 'Finalizado'; 
