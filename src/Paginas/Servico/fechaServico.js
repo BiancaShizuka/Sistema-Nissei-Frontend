@@ -17,6 +17,7 @@ function FechaServico()
 
     const [valorPecs,setValorPecs]=useState(0);
     const [showModal,setShowModal]=useState(false);
+    const [showModalAviso,setShowModalAviso]=useState(false);
     const [parcelas,setParcelas]=useState([]);
     const [loading,setLoading]=useState(false);
     useEffect(()=>{
@@ -84,6 +85,7 @@ function FechaServico()
     }
     async function btnFecharModal(){
         setShowModal(false);
+        setShowModalAviso(false);
     }
     function btnClickVizualizar(){
         let date = new Date();
@@ -113,9 +115,20 @@ function FechaServico()
             ser_cod: localStorage.getItem('cod_ser'),
             qtde_parcelas:qtdeParcela,
 
+        }).then((response)=>{
+            setLoading(false);
+
+            if(response.data.ser_fim===null){
+                setShowModalAviso(true);
+                
+            }
+            else{
+                voltarHome();
+            }
+
         })
-        setLoading(false);
-        voltarHome();
+        
+       
     }
    
     return (
@@ -210,6 +223,18 @@ function FechaServico()
                     </div>
                     <div className="modal-content-btns">
                         <button type="button" className="btn-confirma" onClick={gerarContaReceber}>Confirmar</button>
+                        <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
+                    </div>
+                </div>
+            </div>
+        }
+        {showModalAviso &&
+            <div className="modal">
+                <div className="modal-content">
+                    <div className="modal-content-text"> 
+                        <p>A quantidade de parcelas deve ser no máximo 3.</p>
+                    </div>
+                    <div className="modal-content-btns">
                         <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
                     </div>
                 </div>
