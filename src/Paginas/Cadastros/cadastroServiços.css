@@ -62,7 +62,7 @@ body{
 }
 
 .formularioServico .input-block label{
-    color: #e0dfdf;
+    color: #ffffff;
     font-size: 14px;
     font-weight: bold;
     display: block;
@@ -172,7 +172,7 @@ body{
 }
 
 .formularioServico .cadastroPecas{
-    color: #e0dfdf;
+    color: #ffffff;
     margin-top: 10px;
     width: 100%;
     display: flex;
@@ -181,7 +181,7 @@ body{
     justify-content: flex-start;
 }
 .formularioServico .cadastroPecas .input-block label{
-    color: #9a9a9a;
+    color: #ffffff;
     font-size: 14px;
     font-weight: bold;
     display: block;
@@ -190,7 +190,7 @@ body{
     width: 100%;
     height: 32px;
     font-size: 14px;
-    color: #666;
+    color: rgb(255, 255, 255);
     border: 0;
     border-bottom: 3px solid #ccc;
   

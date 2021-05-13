@@ -25,9 +25,7 @@ function CadastroServicos(){
     const [titulo,setTitulo]=useState('Cadastro de serviço');
     const [loading,setLoading]=useState(false);
     async function listarCarros(){
-        console.log("vou exibir os carros do cliente");
         const resp=await api.get(`/clienteCod/${localStorage.getItem('cod_cli')}`)
-            console.log(resp.data.carros);
             setCarros(resp.data.carros);
         
     }
@@ -67,7 +65,6 @@ function CadastroServicos(){
 
         setPecsUti([]);
         const resp=await api.get(`/servico/${localStorage.getItem('cod_ser')}`)
-            console.log(resp.data);
             if(resp.data.carro===null)
                 setCarro("");
             else{
@@ -101,7 +98,6 @@ function CadastroServicos(){
                     pec_cod:resp.data.pecas[i].peca.pec_cod
                 };
                 pecsAux.push(data);
-                console.log(pecsUti);
                 i=i+1;
             }
             setPecsUti(pecsAux);
@@ -114,7 +110,6 @@ function CadastroServicos(){
         while(i<pecsUti.length && pecsUti[i].cod!==codigo){
             i++;
         }
-        console.log(i);
         let pecsAux=pecsExc;
         if(pecsUti[i].banco===1){
             pecsAux.push(pecsUti[i]);
@@ -185,7 +180,7 @@ function CadastroServicos(){
         
         if(valorPositivo(quant) && valorPositivo(valorUni) && !vazio(peca)){
             var i=0;
-            while(i<pecs.length && pecs[i].pec_descricao!==peca)
+            while(i<pecs.length && pecs[i].pec_descricao.toUpperCase()!==peca.toUpperCase())
                 i++;
 
             if(i===pecs.length)
@@ -195,7 +190,7 @@ function CadastroServicos(){
             else
             {
                 var k=0;
-                while(k<pecsUti.length && peca!==pecsUti[k].pec_desc)
+                while(k<pecsUti.length && peca.toUpperCase()!==pecsUti[k].pec_desc.toUpperCase())
                     k++;
                 if(k<pecsUti.length){
                     mensagem.innerHTML="<p>Peça já foi registrada. Exclua e coloque novamente</p>"
@@ -237,19 +232,21 @@ function CadastroServicos(){
     async function addPeca(e){
         e.preventDefault();
         var pecsAux = pecs;
-        setPecs([]);
+        
         if(!vazio(peca)){
             var i=0;
-            while(i<pecs.length && pecs[i].pec_descricao!==peca)
+            while(i<pecs.length && pecs[i].pec_descricao.toUpperCase()!==peca.toUpperCase())
                 i++;
             if(i===pecs.length){
+                setPecs([]);
                 const response=await api.post('/peca',{
                     pec_descricao: peca,
                 })
-                console.log(response);
                 pecsAux.push(response.data[0])
                 setPecs(pecsAux);
                 alert("Nova peça adicionada");
+            }else{
+                alert("Peça já registrada");
             }
         }
     }
