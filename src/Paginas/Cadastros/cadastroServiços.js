@@ -267,7 +267,6 @@ function CadastroServicos(){
     }
 
     function voltar(){
-        localStorage.removeItem("cod_ser");
         history.goBack();
     }
     return(

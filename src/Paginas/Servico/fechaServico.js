@@ -41,7 +41,6 @@ function FechaServico()
         }
         else{
             setDisabledQtde(false);
-            console.log(qtdeParcela);
             setValorParcela(total/qtdeParcela);
         }    
     },[pgto,qtdeParcela]);
