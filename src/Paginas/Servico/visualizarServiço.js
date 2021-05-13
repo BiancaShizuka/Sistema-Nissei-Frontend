@@ -32,7 +32,7 @@ function VisualizarServiço()
                 setCarro(resp.data.carro.car_placa);
             else
                 setCarro("");
-            setCliente(resp.data.cliente.pes_nome);
+            setCliente(resp.data.cliente);
             if(resp.data.funcionario!==null)
                 setFuncionario(resp.data.funcionario.pes_nome);
 
@@ -61,6 +61,7 @@ function VisualizarServiço()
         history.goBack();
     }
     function editarServico(cod){
+        localStorage.setItem('cod_cli',cliente.pes_cod);
         history.push('/cadastroServico');
     }
 
@@ -123,7 +124,7 @@ function VisualizarServiço()
             <h1>Informações do Serviço</h1>
             <div className="div-infoBasica">
                 <p className="p-funcionario"><strong>Funcionário:</strong> {funcionario}</p>
-                <p className="p-cliente"><strong>Cliente:</strong> {cliente}</p>
+                <p className="p-cliente"><strong>Cliente:</strong> {cliente.pes_nome}</p>
                 <p className="p-carro"><strong>Carro:</strong> {carro}</p>
                 <p className="p-dtInicio"><strong>Data Inicio:</strong> {mudarEstruturaData(dtInicio)}</p>
                 <p className="p-dtFim"><strong>Data Fim:</strong> {mudarEstruturaData(dtFim)}</p>

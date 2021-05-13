@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import api from '../../servicos/api';
 import history from '../../history'
 import '../../app.css'
@@ -17,6 +17,10 @@ function ListarContasReceber()
     const [status,setStatus] = useState('');
     const [parcelas,setParcelas] = useState([]);
     const [loading,setLoading]=useState(false);
+    useEffect(()=>{
+        localStorage.removeItem("cod_cli");
+   
+    },[]);
     function voltarHome(){
         history.goBack();
     }
