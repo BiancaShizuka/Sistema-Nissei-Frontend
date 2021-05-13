@@ -103,11 +103,7 @@ function ListaServicosCliente()
             return 'Em andamento';
         return 'Finalizado'; 
     }
-    function acessarServico(cod){
-        localStorage.setItem('cod_ser',cod);
-        history.push('/cadastroServico');
-    }
-
+    
     
     function mudarEstruturaData(valor){
         var date=new Date(valor);
@@ -189,7 +185,6 @@ function ListaServicosCliente()
                             <td>{mudarEstruturaData(res.ser_inicio)}</td>
                             <td>{getStatus(res.ser_fim)}</td>
                             <td>
-                            <button onClick={()=>acessarServico(res.ser_cod)} disabled={res.ser_fim!=null} className="button-item">Editar</button>
     
                             <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item">Visualizar</button>
                             <button onClick={()=>btnClickCancelarFechamento(res.ser_cod)} className="button-item-excluirServico">Excluir</button>

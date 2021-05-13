@@ -166,7 +166,6 @@ function CadastroServicos(){
                     ser_status:true
                 })
                 alert('Serviço Alterado');
-                localStorage.removeItem("cod_ser");
                 history.goBack();
             }
         }

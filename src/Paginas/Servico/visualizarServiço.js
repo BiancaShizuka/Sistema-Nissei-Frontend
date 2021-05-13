@@ -60,6 +60,10 @@ function VisualizarServiço()
         localStorage.removeItem('cod_ser');
         history.goBack();
     }
+    function editarServico(cod){
+        history.push('/cadastroServico');
+    }
+
     function mudarEstruturaData(valor){
         if(valor!==null){
             var date=new Date(valor);
@@ -155,9 +159,10 @@ function VisualizarServiço()
                     <p className="p-valorTotal"><strong>Valor do Serviço:</strong>R$ {parseFloat(total).toFixed(2)}</p>
                
                 <div className="div-buttons">
-                    <button className="button-acao" onClick={()=>fecharServico()} disabled={dtFim!==null || funcionario.length==0 || carro.length==0}>Fechar Serviço</button>
-                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()} disabled={dtFim==null}>Cancelar fechamento de serviço</button>
-                    <button className="button-acao" onClick={()=>abrirContasReceber()} disabled={dtFim==null}>Abrir contas a receber</button>
+                <button className="button-acao" onClick={()=>editarServico()} disabled={dtFim!==null}>Editar serviço</button>
+                    <button className="button-acao" onClick={()=>fecharServico()} disabled={dtFim!==null || funcionario.length===0 || carro.length==0}>Fechar Serviço</button>
+                    <button className="button-acao" onClick={()=>btnClickCancelarFechamento()} disabled={dtFim===null}>Cancelar fechamento de serviço</button>
+                    <button className="button-acao" onClick={()=>abrirContasReceber()} disabled={dtFim===null}>Abrir contas a receber</button>
                 </div>
             </div>
             <button className="button-voltar" onClick={voltarHome}>Voltar</button>

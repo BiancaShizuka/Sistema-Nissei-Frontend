@@ -32,12 +32,7 @@ function ListaServicos()
             return 'Em andamento';
         return 'Finalizado'; 
     }
-    function acessarServico(cod_ser,cod_cli){
-        localStorage.setItem('cod_ser',cod_ser);
-        localStorage.setItem('cod_cli',cod_cli);
-        console.log("cod_ser: "+cod_ser+"  cod_cli"+cod_cli);
-        history.push('/cadastroServico');
-    }
+
    
     function visualizarServico(cod){
         localStorage.setItem('cod_ser',cod);
@@ -130,7 +125,6 @@ function ListaServicos()
                                 <td>{mudarEstruturaData(res.ser_inicio)}</td>
                                 <td>{getStatus(res.ser_fim)}</td>
                                 <td>
-                                <button onClick={()=>acessarServico(res.ser_cod,res.cliente.pes_cod)} disabled={res.ser_fim!=null} className="button-tabServico">Editar</button>
                                 <button onClick={()=>visualizarServico(res.ser_cod)} className="button-tabServico">Visualizar</button>
                                 </td>
                             </tr>
