@@ -69,7 +69,6 @@ function ListaServicosCliente()
     async function listarServicosCarro(cod){
        setLoading(true);
         await api.get(`/servicoCarro/${cod}`).then((response)=>{
-
             setServicos(response.data);
         }) 
         setLoading(false);
@@ -93,12 +92,7 @@ function ListaServicosCliente()
     function getPlaca(carro){
         var i=0;
         if(carro!==null){
-            if(carros.length>0){
-                while(i<carros.length && carros[i].car_id!==carro.car_id)
-                    i++;
-                
-                return carros[i].car_placa +" - "+carros[i].car_modelo;
-            }
+            return carro.car_placa+" - "+carro.car_modelo;
         }
         else{
             return "null";
