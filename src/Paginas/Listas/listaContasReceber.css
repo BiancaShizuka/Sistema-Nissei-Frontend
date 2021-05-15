@@ -1,11 +1,27 @@
 .div-pesquisaConta{
     margin-bottom: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+.div-pesquisaConta input{
+    border-radius: 10px;
+}
+.div-pesquisaConta select{
+    border-radius: 10px;
 }
 .div-pesquisaConta .input-dtInicio{
-margin-right: 10px;
+    margin-right: 10px;
 }
 .div-pesquisaConta .input-dtFim{
     margin-right: 10px;
+}
+.div-pesquisaConta .label-nomeCliente{
+    width: 10%;
+}
+.div-pesquisaConta .input-nomeCliente{
+    margin-right: 35px;
 }
 .div-buttonFiltrar{
     margin-top: 10px;

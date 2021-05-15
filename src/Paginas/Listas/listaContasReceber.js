@@ -17,6 +17,7 @@ function ListarContasReceber()
     const [status,setStatus] = useState('');
     const [parcelas,setParcelas] = useState([]);
     const [loading,setLoading]=useState(false);
+    const [nomeCliente,setNomeCliente]=useState('');
     useEffect(()=>{
         localStorage.removeItem("cod_cli");
    
@@ -26,7 +27,7 @@ function ListarContasReceber()
     }
     async function filtrar(){
         setLoading(true);
-        await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}`).then((resp)=>{
+        await api.get(`/contaReceberFiltros/?dt_inicio=${dtInicio}&dt_fim=${dtFim}&status=${status}&cliente=${nomeCliente}`).then((resp)=>{
        
             setParcelas(resp.data);
         })
@@ -120,6 +121,8 @@ function ListarContasReceber()
                                 Aguardando pagamento
                             </option>
                         </select>
+                        <label htmlFor="nomeCliente" className="label-nomeCliente">Cliente: </label>
+                        <input className="input-nomeCliente" type="text" name="nomeCliente" id="nomeCliente" value={nomeCliente} onChange={e=>setNomeCliente(e.target.value)} />
                         <div className="div-buttonFiltrar">
                             <button tyoe="button" onClick={()=>filtrar()} className="button-filtrarContasReceber">Filtrar</button>
                         </div>
@@ -129,6 +132,7 @@ function ListarContasReceber()
                     <table className='table-contasReceber'>
                         <thead>
                             <tr>
+                                <td>Nome do Cliente</td>
                                 <td className="td-num">Nº</td>
                                 <td className="td-valor">Valor</td>
                                 <td className="td-venc">Data de Vencimento</td>
@@ -139,6 +143,7 @@ function ListarContasReceber()
                         <tbody className="tbodycolor">
                             {parcelas.map(res=>(
                                 <tr key={[res.con_cod,res.ser_cod]}>
+                                    <td>{res.cli_nome}</td>
                                     <td>{res.con_cod}</td>
                                     <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
                                     <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
@@ -146,7 +151,7 @@ function ListarContasReceber()
                                     <td>
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
-                                    <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Vizualizar Serviço</button>
+                                    <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
                             ))}

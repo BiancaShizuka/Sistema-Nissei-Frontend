@@ -41,7 +41,8 @@ function FechaServico()
         }
         else{
             setDisabledQtde(false);
-            setValorParcela(total/qtdeParcela);
+            let v=parseFloat((parseFloat(total/qtdeParcela).toFixed(1))).toFixed(2)
+            setValorParcela(v);
         }    
     },[pgto,qtdeParcela]);
     useEffect(()=>{
@@ -197,7 +198,7 @@ function FechaServico()
                         {parcelas.map(res=>(
                             <tr key={res.cod}>
                                 <td >{res.cod}</td>
-                                <td >R$ {parseFloat(res.valor).toFixed(2)}</td>
+                                <td >R$ {parseFloat((parseFloat(res.valor).toFixed(1))).toFixed(2)}</td>
                                 <td >{mudarEstruturaData(res.dtVenc)}</td>
  
                             </tr>
@@ -205,7 +206,7 @@ function FechaServico()
                     </tbody>
                 </table>
             </div>
-            <button type="button" onClick={()=>btnClickVizualizar()} className="button-vizualizarConta">Vizualizar conta a receber</button>
+            <button type="button" onClick={()=>btnClickVizualizar()} className="button-vizualizarConta">Visualizar conta a receber</button>
             <button type="button" onClick={()=>btnClickGerarConta()} className="button-marca">Gerar conta a receber</button>
             <button type="button" onClick={voltarHome} className="button-voltarMarca">Voltar</button>
         </div>
