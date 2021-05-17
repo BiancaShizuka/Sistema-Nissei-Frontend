@@ -37,6 +37,28 @@
 .table-contasReceber .td-pgto{
     width: 10%;
 }
+
+.button-item-pgtoparc{
+  border: none;
+  background: #A6D5F2;
+  color: #000;
+  font-weight: bold;
+  width: 170px;
+  height: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 2px;
+}
+
+.button-item-pgtoparc:hover{
+	background:#1978B3;
+  color: #ffffff;
+}
+
 .button-item-confirma{
   border: none;
   background:rgb(51, 243, 33);
@@ -50,6 +72,7 @@
   font-size: 14px;
   border-radius: 25px;
   cursor: pointer;
+  margin: 2px;
 }
 .button-item-confirma:hover{
 	background:#009900;
@@ -68,6 +91,7 @@
   font-size: 14px;
   border-radius: 25px;
   cursor: pointer;
+  margin: 2px;
 }
 .button-item-visualiza:hover{
   background:#575757;
@@ -86,6 +110,7 @@
   font-size: 14px;
   border-radius: 25px;
   cursor: pointer;
+  margin: 2px;
 }
 .button-item-cancela:hover{
 	background:#ff0000;

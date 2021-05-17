@@ -66,6 +66,10 @@ function ListarContasReceber()
         setConCod(con_cod);
         setShowModal(true);
     }
+    async function btnClickPgtoParcial(con_cod,ser_cod)
+    {
+        //stand by
+    }
     async function btnFecharModal(){
         setShowModal(false);
     }
@@ -76,7 +80,6 @@ function ListarContasReceber()
             con_cod: conCod,
             ser_cod: serCod,
             con_dtPgto: dtPgto
-            
         })
         filtrar();
     }
@@ -89,11 +92,11 @@ function ListarContasReceber()
         await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: serCod,
-            con_dtPgto: null
-            
+            con_dtPgto: null   
         })
         filtrar();
     }
+    
     return (
         <div id="tela" className="background">
             <Header/>
@@ -151,6 +154,7 @@ function ListarContasReceber()
                                     <td>
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
+                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
