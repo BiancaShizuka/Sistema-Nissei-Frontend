@@ -40,3 +40,17 @@
     color: rgb(0, 0, 0);
     background: rgb(230, 230, 230);
 }
+
+.modal-content-pgto {
+    color: #fff;
+    border: 5px solid rgb(187, 190, 187);
+    background-color: #575555;
+    text-align: center;
+    margin: auto;
+    width: 350px;
+    height: 240px;
+  }
+
+  .modal-content-pgto button{
+    padding: 12px;
+  }

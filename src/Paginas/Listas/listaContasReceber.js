@@ -18,6 +18,11 @@ function ListarContasReceber()
     const [parcelas,setParcelas] = useState([]);
     const [loading,setLoading]=useState(false);
     const [nomeCliente,setNomeCliente]=useState('');
+
+    const [showModalPgtoParc,setShowModalPgtoParc] = useState(false);
+    const [conValor,setConValor] = useState(0);
+    const [valorParc,setValorParc] = useState(0);
+
     useEffect(()=>{
         localStorage.removeItem("cod_cli");
    
@@ -65,11 +70,7 @@ function ListarContasReceber()
         setSerCod(ser_cod);
         setConCod(con_cod);
         setShowModal(true);
-    }
-    async function btnClickPgtoParcial(con_cod,ser_cod)
-    {
-        //stand by
-    }
+    } 
     async function btnFecharModal(){
         setShowModal(false);
     }
@@ -96,12 +97,33 @@ function ListarContasReceber()
         })
         filtrar();
     }
+
+    async function btnClickPgtoParcial(con_cod,ser_cod,con_valor)
+    {
+       setSerCod(ser_cod);
+       setConCod(con_cod);
+       setConValor(con_valor)
+       setShowModalPgtoParc(true);
+    }   
+    async function btnFecharModalPgtoParc()
+    {
+        setShowModalPgtoParc(false);    
+    }
+    async function pagarParc(){
+        setShowModal(false);
+        await api.put('/contaReceber',
+        {
+            con_cod: conCod,
+            ser_cod: serCod,
+            con_valor: conValor,
+            con_dtPgto: dtPgto,
+
+        })
+    }
     
     return (
         <div id="tela" className="background">
-            <Header/>
-            
-            
+            <Header/>   
                 <div className="div-contasReceber">   
                     <h1>Contas a Receber</h1>
                     <div className="div-pesquisaConta">
@@ -127,7 +149,7 @@ function ListarContasReceber()
                         <label htmlFor="nomeCliente" className="label-nomeCliente">Cliente: </label>
                         <input className="input-nomeCliente" type="text" name="nomeCliente" id="nomeCliente" value={nomeCliente} onChange={e=>setNomeCliente(e.target.value)} />
                         <div className="div-buttonFiltrar">
-                            <button tyoe="button" onClick={()=>filtrar()} className="button-filtrarContasReceber">Filtrar</button>
+                            <button type="button" onClick={()=>filtrar()} className="button-filtrarContasReceber">Filtrar</button>
                         </div>
                         
                     </div>
@@ -154,7 +176,7 @@ function ListarContasReceber()
                                     <td>
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
-                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
+                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
@@ -173,7 +195,6 @@ function ListarContasReceber()
                     <div className="modal-content">
                         <div className="modal-content-text"> 
                             <p>Deseja realmente confirmar pagamento?</p>
-                            
                             <input type="date"  value={dtPgto} onChange={e=>setDtPgto(e.target.value)} required/>
                         </div>
                         <div className="modal-content-btns">
@@ -187,8 +208,7 @@ function ListarContasReceber()
                 <div className="modal">
                     <div className="modal-content">
                         <div className="modal-content-text"> 
-                            <p>Deseja realmente cancelar pagamento?</p>
-                     
+                            <p>Deseja realmente cancelar pagamento?</p> 
                         </div>
                         <div className="modal-content-btns">
                             <button type="button" className="btn-confirma" onClick={cancelarPagamento}>Confirmar</button>
@@ -197,6 +217,29 @@ function ListarContasReceber()
                     </div>
                 </div>
             }
+            {showModalPgtoParc &&
+                <div className="modal">
+                    <div className="modal-content-pgto"> 
+                        <div className="modal-content-text">
+                            <p>Qual o valor que deseja pagar?
+                            <br></br><br></br>Valor da parcela: R$ {parseFloat(conValor).toFixed(2)}</p>
+                            
+                            <p><label htmlFor="valorParc">R$ </label>
+                            <input name="valorParc" id="valorParc" type="text" value={valorParc} onChange={e=>setValorParc(e.target.value)} required/>
+                            <br></br>
+                            <label htmlFor="dtPgto">Data </label>
+                            <input name="dtPgto" id="dtPgto" type="date"  value={dtPgto} onChange={e=>setDtPgto(e.target.value)} required/>
+                            </p>
+                            
+                        </div>
+                        <div clasName="modal-content-btns">
+                            <button type="button" className="btn-confirma" onClick={pagarParc}>Confirmar</button>
+                            <button type="button" className="btn-cancela" onClick={btnFecharModalPgtoParc}>Fechar</button>
+                        </div>
+                    </div>
+                </div>    
+            }
+
         </div>
 
     );
