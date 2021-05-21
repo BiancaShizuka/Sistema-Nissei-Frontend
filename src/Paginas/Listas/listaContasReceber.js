@@ -119,21 +119,16 @@ function ListarContasReceber()
     async function pagarParc(){   
         
         fecharModalPgtoParc();
-
         await api.put('/contaReceberAlterarValor',{
             con_cod: conCod,
             ser_cod: serCod,
             con_valor: parseFloat(conValor).toFixed(2) - parseFloat(valorParc).toFixed(2),  
         })
-
-        /*
-            tem que ter uma função aqui
-            vou criar uma route que faz altera o valor da conta atual OK
-
-            vou criar uma route que cria uma nova conta a pagar com o dt de hj ja paga
-        */
-        filtrar(); 
-        
+        await api.put('/adicionarContaReceber',{
+            ser_cod: serCod,
+            con_valor: parseFloat(valorParc).toFixed(2),
+        })
+        filtrar();      
     }
     
     return (
@@ -245,7 +240,7 @@ function ListarContasReceber()
 
                         </div>
                         <div clasName="modal-content-btns">
-                            <button type="button" className="btn-confirma" onClick={pagarParc}disabled={valorParc===0 || valorParc > conValor}>Confirmar</button>
+                            <button type="button" className="btn-confirma" onClick={pagarParc}disabled={valorParc<=0 || valorParc > conValor}>Confirmar</button>
                             <button type="button" className="btn-cancela" onClick={btnFecharModalPgtoParc}>Fechar</button>
                         </div>
                     </div>
