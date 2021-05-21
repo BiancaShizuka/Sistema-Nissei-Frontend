@@ -5,6 +5,7 @@ import '../../app.css'
 import Header from '../../Components/Header'
 import './listaContasReceber.css'
 import ReactLoading from 'react-loading';
+import { isElementOfType } from 'react-dom/test-utils';
 function ListarContasReceber()
 {
     const [showModal,setShowModal]=useState(false);
@@ -98,27 +99,41 @@ function ListarContasReceber()
         filtrar();
     }
 
+    async function fecharModalPgtoParc()
+    {
+        setShowModalPgtoParc(false); 
+    }
     async function btnClickPgtoParcial(con_cod,ser_cod,con_valor)
     {
        setSerCod(ser_cod);
        setConCod(con_cod);
        setConValor(con_valor)
+       setValorParc(0);
        setShowModalPgtoParc(true);
     }   
     async function btnFecharModalPgtoParc()
     {
-        setShowModalPgtoParc(false);    
+        fecharModalPgtoParc();
     }
-    async function pagarParc(){
-        setShowModal(false);
-        await api.put('/contaReceber',
-        {
+
+    async function pagarParc(){   
+        
+        fecharModalPgtoParc();
+
+        await api.put('/contaReceberAlterarValor',{
             con_cod: conCod,
             ser_cod: serCod,
-            con_valor: conValor,
-            con_dtPgto: dtPgto,
-
+            con_valor: parseFloat(conValor).toFixed(2) - parseFloat(valorParc).toFixed(2),  
         })
+
+        /*
+            tem que ter uma função aqui
+            vou criar uma route que faz altera o valor da conta atual OK
+
+            vou criar uma route que cria uma nova conta a pagar com o dt de hj ja paga
+        */
+        filtrar(); 
+        
     }
     
     return (
@@ -221,19 +236,16 @@ function ListarContasReceber()
                 <div className="modal">
                     <div className="modal-content-pgto"> 
                         <div className="modal-content-text">
-                            <p>Qual o valor que deseja pagar?
-                            <br></br><br></br>Valor da parcela: R$ {parseFloat(conValor).toFixed(2)}</p>
-                            
+                            <p>Valor da parcela: R$ {parseFloat(conValor).toFixed(2)}
+                            <br></br><br></br>Qual o valor que deseja pagar?</p>
+
                             <p><label htmlFor="valorParc">R$ </label>
-                            <input name="valorParc" id="valorParc" type="text" value={valorParc} onChange={e=>setValorParc(e.target.value)} required/>
-                            <br></br>
-                            <label htmlFor="dtPgto">Data </label>
-                            <input name="dtPgto" id="dtPgto" type="date"  value={dtPgto} onChange={e=>setDtPgto(e.target.value)} required/>
+                            <input name="valorParc" id="valorParc" type="number" value={valorParc} onChange={e=>setValorParc(e.target.value)} required/>
                             </p>
-                            
+
                         </div>
                         <div clasName="modal-content-btns">
-                            <button type="button" className="btn-confirma" onClick={pagarParc}>Confirmar</button>
+                            <button type="button" className="btn-confirma" onClick={pagarParc}disabled={valorParc===0 || valorParc > conValor}>Confirmar</button>
                             <button type="button" className="btn-cancela" onClick={btnFecharModalPgtoParc}>Fechar</button>
                         </div>
                     </div>
