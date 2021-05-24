@@ -184,11 +184,12 @@ function ListarContasReceber()
                                     <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
                                     <td>{getDtPgto(res.con_dtPgto)}</td>
                                     <td>
-                                    <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
-                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
-                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
+                 
+
+                               
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
+                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
