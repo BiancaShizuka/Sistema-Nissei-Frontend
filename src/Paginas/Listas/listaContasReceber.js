@@ -167,11 +167,11 @@ function ListarContasReceber()
                     <table className='table-contasReceber'>
                         <thead>
                             <tr>
-                                <td>Nome do Cliente</td>
+                                <td className="td-cliente">Nome do Cliente</td>
                                 <td className="td-num">Nº</td>
                                 <td className="td-valor">Valor</td>
                                 <td className="td-venc">Data de Vencimento</td>
-                                <td className="td-pgto">Data de Pagamento</td>
+                                <td className="td-pgto">Data de Recebimento</td>
                                 <td>Acao</td>
                             </tr>
                         </thead>
@@ -187,6 +187,8 @@ function ListarContasReceber()
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
                                     <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
+                                    <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
+                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
@@ -204,7 +206,9 @@ function ListarContasReceber()
                 <div className="modal">
                     <div className="modal-content">
                         <div className="modal-content-text"> 
-                            <p>Deseja realmente confirmar pagamento?</p>
+              
+                            <p>Deseja realmente confirmar recebimento?</p>
+                            
                             <input type="date"  value={dtPgto} onChange={e=>setDtPgto(e.target.value)} required/>
                         </div>
                         <div className="modal-content-btns">
@@ -218,7 +222,9 @@ function ListarContasReceber()
                 <div className="modal">
                     <div className="modal-content">
                         <div className="modal-content-text"> 
-                            <p>Deseja realmente cancelar pagamento?</p> 
+
+                            <p>Deseja realmente cancelar recebimento?</p>
+                     
                         </div>
                         <div className="modal-content-btns">
                             <button type="button" className="btn-confirma" onClick={cancelarPagamento}>Confirmar</button>

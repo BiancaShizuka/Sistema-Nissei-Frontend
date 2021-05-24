@@ -13,8 +13,8 @@ function FechaServico()
     const [servico,setServico]=useState([]);
     const [pecsUti,setPecasUti] = useState([]);
     const [total,setTotal] = useState(0);
+    
     const [valorParcela,setValorParcela]=useState(0);
-
     const [valorPecs,setValorPecs]=useState(0);
     const [showModal,setShowModal]=useState(false);
     const [showModalAviso,setShowModalAviso]=useState(false);
@@ -37,13 +37,14 @@ function FechaServico()
         if(pgto==="vista"){
             setDisabledQtde(true);
             setQtdeParcela(1);
-            setValorParcela(total);
+           
         }
         else{
             setDisabledQtde(false);
-            let v=parseFloat((parseFloat(total/qtdeParcela).toFixed(1))).toFixed(2)
-            setValorParcela(v);
-        }    
+       
+        }
+       
+          
     },[pgto,qtdeParcela]);
     useEffect(()=>{
         if(pgto!=='vista')
@@ -89,23 +90,34 @@ function FechaServico()
     }
     function btnClickVizualizar(){
         let date = new Date();
-        
+        let valorParcela=total/qtdeParcela;
         let parcAux=[];
-     
-        for(var i=1;i<=qtdeParcela;i++){
+        let auxv;
+        for(var i=1;i<=qtdeParcela-1;i++){
             let date2 = date.setDate(date.getDate());
   
             let data= {
                     cod: i,
-                    valor: valorParcela,
+                    valor: parseFloat(valorParcela).toFixed(2),
                     dtVenc: date2
                 
                 };
             date.setDate(date.getDate()+30);
             parcAux.push(data);
-         
         }
-   
+        if(qtdeParcela>1){
+            auxv=parseFloat(valorParcela).toFixed(2)*(qtdeParcela-1);
+            valorParcela=total-auxv;
+        }
+        let date2 = date.setDate(date.getDate());
+      
+        let data= {
+            cod: i,
+            valor: parseFloat(valorParcela).toFixed(2),
+            dtVenc: date2
+        
+        };
+        parcAux.push(data);
         setParcelas(parcAux);
     }
     async function gerarContaReceber(){
@@ -181,10 +193,7 @@ function FechaServico()
                 <label>Quatidade de parcelas: </label>
                 <input type="number" disabled={disabledQtde} min={2} max={3} className='input-qtdeParcela' value={qtdeParcela} onChange={e=>setQtdeParcela(e.target.value)} />
             </div>
-            <div className="div-valorParcela">
-                <label>Valor da Parcela: </label>
-                <input type="number" disabled={true} value={parseFloat(valorParcela).toFixed(2)} className='input-valorParcela' onChange={e=>setValorParcela(e.target.value)} />
-            </div>
+       
             <div className="div-visucontasReceber">   
                 <table className='table-visucontasReceber'>
                     <thead>
@@ -198,7 +207,7 @@ function FechaServico()
                         {parcelas.map(res=>(
                             <tr key={res.cod}>
                                 <td >{res.cod}</td>
-                                <td >R$ {parseFloat((parseFloat(res.valor).toFixed(1))).toFixed(2)}</td>
+                                <td >R$ {parseFloat(res.valor).toFixed(2)}</td>
                                 <td >{mudarEstruturaData(res.dtVenc)}</td>
  
                             </tr>

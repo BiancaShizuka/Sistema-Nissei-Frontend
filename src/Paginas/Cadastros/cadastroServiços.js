@@ -75,7 +75,7 @@ function CadastroServicos(){
                 setFunc(resp.data.funcionario.pes_cod);
             else
                 setFunc("");
-            setMaoObra(resp.data.ser_maoObra);
+            setMaoObra(parseFloat(resp.data.ser_maoObra).toFixed(2));
 
             var date=new Date(resp.data.ser_inicio);
             var dat=date.getFullYear()+"-";
