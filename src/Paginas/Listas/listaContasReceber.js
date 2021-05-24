@@ -77,7 +77,7 @@ function ListarContasReceber()
     }
     async function confirmarPagamento(){
         btnFecharModal();
-  
+        setLoading(true);
         await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: serCod,
@@ -91,6 +91,7 @@ function ListarContasReceber()
     }
     async function cancelarPagamento(){
         btnFecharModalCancel();
+        setLoading(true);
         await api.put('/contaReceber',{
             con_cod: conCod,
             ser_cod: serCod,
