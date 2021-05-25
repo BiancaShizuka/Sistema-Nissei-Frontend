@@ -120,14 +120,11 @@ function ListarContasReceber()
     async function pagarParc(){   
         
         fecharModalPgtoParc();
-        await api.put('/contaReceberAlterarValor',{
+        setLoading(true);
+        await api.put('/contaReceberParcial',{
             con_cod: conCod,
             ser_cod: serCod,
-            con_valor: parseFloat(conValor).toFixed(2) - parseFloat(valorParc).toFixed(2),  
-        })
-        await api.put('/adicionarContaReceber',{
-            ser_cod: serCod,
-            con_valor: parseFloat(valorParc).toFixed(2),
+            con_valor: parseFloat(valorParc).toFixed(2),  
         })
         filtrar();      
     }
