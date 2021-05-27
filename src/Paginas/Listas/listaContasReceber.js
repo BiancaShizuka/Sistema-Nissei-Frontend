@@ -23,6 +23,8 @@ function ListarContasReceber()
     const [showModalPgtoParc,setShowModalPgtoParc] = useState(false);
     const [conValor,setConValor] = useState(0);
     const [valorParc,setValorParc] = useState(0);
+    const [paiCon,setPaiCon] = useState(0);
+    const [paiSer,setPaiSer] = useState(0);
 
     useEffect(()=>{
         localStorage.removeItem("cod_cli");
@@ -59,9 +61,11 @@ function ListarContasReceber()
             return 'Não pago';
         return mudarEstruturaData(date);
     }
-    async function btnClickCancelarPgto(con_cod,ser_cod){
+    async function btnClickCancelarPgto(con_cod,ser_cod,pai_con,pai_ser){
         setConCod(con_cod);
         setSerCod(ser_cod);
+        setPaiCon(pai_con);
+        setPaiSer(pai_ser);
         setShowModalCancel(true);
     }
     async function btnFecharModalCancel(){
@@ -186,7 +190,7 @@ function ListarContasReceber()
 
                                
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
-                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
+                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod, res.pai_con, res.pai_ser)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
                                     <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Receber Parcial</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
