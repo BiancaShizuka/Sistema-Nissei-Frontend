@@ -28,14 +28,14 @@ function ListarContasReceberServico()
 
         setLoading(false);
     }
-    async function btnClickCancelarPgto(con_cod){
+    async function btnClickCancelar(con_cod){
         setConCod(con_cod);
         setShowModalCancel(true);
     }
     async function btnFecharModalCancel(){
         setShowModalCancel(false);
     }
-    async function btnClickConfPgto(con_cod){
+    async function btnClickConf(con_cod){
         
         setConCod(con_cod);
         setShowModal(true);
@@ -43,7 +43,7 @@ function ListarContasReceberServico()
     async function btnFecharModal(){
         setShowModal(false);
     }
-    async function confirmarPagamento(){
+    async function confirmarRecebimento(){
         btnFecharModal();
         setLoading(true);
         await api.put('/contaReceber',{
@@ -55,7 +55,7 @@ function ListarContasReceberServico()
     
         listarContas();
     }
-    async function cancelarPagamento(){
+    async function cancelarRecebimento(){
         btnFecharModalCancel();
         setLoading(true);
         await api.put('/contaReceber',{
@@ -73,7 +73,7 @@ function ListarContasReceberServico()
     function getDtPgto(date){
 
         if(date==null)
-            return 'Não pago';
+            return 'Não Recebido';
         return mudarEstruturaData(date);
     }
     function mudarEstruturaData(valor){
@@ -105,7 +105,7 @@ function ListarContasReceberServico()
                             <td className="td-num">Nº</td>
                             <td className="td-valor">Valor</td>
                             <td className="td-venc">Data de Vencimento</td>
-                            <td className="td-pgto">Data de Pagamento</td>
+                            <td className="td-pgto">Data de Recebimento</td>
                             <td>Acao</td>
                         </tr>
                     </thead>
@@ -117,8 +117,8 @@ function ListarContasReceberServico()
                                 <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
                                 <td>{getDtPgto(res.con_dtPgto)}</td>
                                 <td>
-                                <button onClick={()=>btnClickConfPgto(res.con_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar Pagamento</button>
-                                <button onClick={()=>btnClickCancelarPgto(res.con_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Pagamento</button>
+                                <button onClick={()=>btnClickConf(res.con_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar</button>
+                                <button onClick={()=>btnClickCancelar(res.con_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
                                 </td>
                             </tr>
                         ))}
@@ -135,12 +135,12 @@ function ListarContasReceberServico()
                 <div className="modal">
                     <div className="modal-content">
                         <div className="modal-content-text"> 
-                            <p>Deseja realmente confirmar pagamento?</p>
+                            <p>Deseja realmente confirmar recebimento?</p>
                             
                             <input type="date"  value={dtPgto} onChange={e=>setDtPgto(e.target.value)} required/>
                         </div>
                         <div className="modal-content-btns">
-                            <button type="button" className="btn-confirma" onClick={confirmarPagamento}>Confirmar</button>
+                            <button type="button" className="btn-confirma" onClick={confirmarRecebimento}>Confirmar</button>
                             <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
                         </div>
                     </div>
@@ -150,11 +150,11 @@ function ListarContasReceberServico()
                 <div className="modal">
                     <div className="modal-content">
                         <div className="modal-content-text"> 
-                            <p>Deseja realmente cancelar pagamento?</p>
+                            <p>Deseja realmente cancelar recebimento?</p>
                      
                         </div>
                         <div className="modal-content-btns">
-                            <button type="button" className="btn-confirma" onClick={cancelarPagamento}>Confirmar</button>
+                            <button type="button" className="btn-confirma" onClick={cancelarRecebimento}>Confirmar</button>
                             <button type="button" className="btn-cancela" onClick={btnFecharModalCancel}>Fechar</button>
                         </div>
                     </div>

@@ -89,7 +89,7 @@ function ListarContasReceber()
         localStorage.setItem('cod_ser',ser_cod);
         history.push('/visualizarServico');
     }
-    async function cancelarPagamento(){
+    async function cancelarRecebimento(){
         btnFecharModalCancel();
         setLoading(true);
         await api.put('/contaReceber',{
@@ -147,11 +147,11 @@ function ListarContasReceber()
                             <option id="op-selecione" value="">
                                 Selecione uma opcao
                             </option>
-                            <option id="pago" value="Pagamento efetuado">
-                                Pagamento efetuado
+                            <option id="pago" value="Recebimento efetuado">
+                                Recebimento efetuado
                             </option>
-                            <option id="pago" value="Aguardando pagamento">
-                                Aguardando pagamento
+                            <option id="pago" value="Aguardando recebimento">
+                                Aguardando recebimeto
                             </option>
                         </select>
                         <label htmlFor="nomeCliente" className="label-nomeCliente">Cliente: </label>
@@ -187,7 +187,7 @@ function ListarContasReceber()
                                
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
-                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Pagar Parcialmente</button>
+                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Receber Parcial</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
@@ -226,7 +226,7 @@ function ListarContasReceber()
                      
                         </div>
                         <div className="modal-content-btns">
-                            <button type="button" className="btn-confirma" onClick={cancelarPagamento}>Confirmar</button>
+                            <button type="button" className="btn-confirma" onClick={cancelarRecebimento}>Confirmar</button>
                             <button type="button" className="btn-cancela" onClick={btnFecharModalCancel}>Fechar</button>
                         </div>
                     </div>
