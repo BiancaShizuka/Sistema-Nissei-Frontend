@@ -352,18 +352,20 @@ function CadastroServicos(){
                         <table id="tabelaCont">
                             <thead>
                                 <tr>
+                                <td>Descrição</td>
                                     <td>Quant</td>
                                     <td>Valor Uni.</td>
-                                    <td>Descrição</td>
+                                    
                                     <td>Excluir</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 {pecsUti.map(pec=>(
                                     <tr key={pec.cod}>
+                                        <td>{pec.pec_desc}</td>
                                         <td>{pec.uti_qtde}</td>
                                         <td>R$ {pec.uti_precoUni}</td>
-                                        <td>{pec.pec_desc}</td>
+                                        
                                         <td>
                                             <button id="btexcluir" className="btnExcluirPec" onClick={()=>Excluir(pec.cod)} type="button">
                                             Excluir

@@ -81,52 +81,57 @@ function Home()
     <div className="background">
         <Header/>
         <div className="card">
-            <div>
-                <p>Nome:{nome}</p>
-                <p>Email:{email}</p>
-                <p>CPF:{cpf}</p>
-            </div>
-            {carros.length>0 && <div id="divTable" className="table-carro">
-                <table id="tabelaCont">
-                    <thead>
-                        <tr>
-                            <td>Placa</td>
-                            <td>Desc</td>
-                            <td>Ano</td>
-                            <td>Ação</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {carros.map(carro=>(
-                            <tr key={carro.car_id}>
-                                <td>{carro.car_placa}</td>
-                                <td>{carro.car_modelo}</td>     
-                                <td>{carro.car_ano}</td>
-                                <td>
-                                    <button type="button" onClick={()=>editarCarro(carro.car_id)} className="table-edit-carro">Editar</button>
-                                    <button type="button" onClick={()=>btnClickExcluir(carro.car_id)} className="table-delete-carro">Excluir</button>
-                                </td>          
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>}
-
-            <div className="div-buttonsAcoes">
-                <div className="div-buttonsCliente">
-                    <button type="button" onClick={editarCliente} className="button-info-cliente">Editar Cliente</button>
-                    <button type="button" onClick={cadastrarCarro} className="button-info-cliente">Cadastrar Carros</button>
-                    <button type="button" onClick={cadastrarContato} className="button-info-cliente">Cadastrar Contatos</button>
+            <h1>Ficha do Cliente</h1>
+            <div className="div-fichaCliente">
+                <div className="div-infoCliente">
+                    <div className="div-pInfo">
+                        <p><strong>Nome: </strong>{nome}</p>
+                        <p><strong>Email: </strong>{email}</p>
+                        <p><strong>CPF: </strong>{cpf}</p>
+                    </div>
                 </div>
-                <div className="div-buttonsServico">
-                    <button type="button" onClick={exibirServicos} className="button-info-cliente">Exibir servicos</button>
-                    <button type="button" onClick={gerarServico} disabled={VerificarCarros(carros.length)} className="button-info-cliente">Gerar Serviço</button>
-                </div>   
-                
+                {carros.length>0 && <div id="divTable" className="table-carro">
+                    <table id="tabelaCont">
+                        <thead>
+                            <tr>
+                                <td>Placa</td>
+                                <td>Desc</td>
+                                <td>Ano</td>
+                                <td>Ação</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {carros.map(carro=>(
+                                <tr key={carro.car_id}>
+                                    <td>{carro.car_placa}</td>
+                                    <td>{carro.car_modelo}</td>     
+                                    <td>{carro.car_ano}</td>
+                                    <td>
+                                        <button type="button" onClick={()=>editarCarro(carro.car_id)} className="table-edit-carro">Editar</button>
+                                        <button type="button" onClick={()=>btnClickExcluir(carro.car_id)} className="table-delete-carro">Excluir</button>
+                                    </td>          
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>}
+
+                <div className="div-buttonsAcoes">
+                    <div className="div-buttonsCliente">
+                        <button type="button" onClick={editarCliente} className="button-info-cliente">Editar Cliente</button>
+                        <button type="button" onClick={cadastrarCarro} className="button-info-cliente">Cadastrar Carros</button>
+                        <button type="button" onClick={cadastrarContato} className="button-info-cliente">Cadastrar Contatos</button>
+                    </div>
+                    <div className="div-buttonsServico">
+                        <button type="button" onClick={exibirServicos} className="button-info-cliente">Exibir servicos</button>
+                        <button type="button" onClick={gerarServico} disabled={VerificarCarros(carros.length)} className="button-info-cliente">Gerar Serviço</button>
+                    </div>   
+                    
+                </div>
             </div>
-            <div className="div-buttonVoltar">
+        </div>
+        <div className="div-buttonVoltar">
                     <button type="button" onClick={voltar} className="button-info-cliente">Voltar</button>
-            </div>
         </div>
         {showModal &&
             <div className="modal">

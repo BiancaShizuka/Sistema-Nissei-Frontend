@@ -3,13 +3,40 @@
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  align-items: center;
   width: 50vw;
   height: 85vh;
   background-color: rgb(0, 0, 0, 0.95);
   color: white;
   border-radius: 25px;
+  margin-top: 25px;
 }
+.div-fichaCliente{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(221, 218, 218);
+  padding:5px;
+  border-radius: 15px;
+}
+.div-infoCliente{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
+  
+}
+.div-pInfo{
+  text-align: left;
+  width: 100%;
+  color: rgb(0,0,0);
 
+ 
+}
 .button-info-cliente {
   background: #414040;
   color: rgb(216, 216, 216);
@@ -35,7 +62,8 @@
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin: 0 25px;
+  width: 100%;
+  /*margin: 0 25px;*/
 }
 .table-delete-carro{
   background:rgb(248, 157, 157);
@@ -158,7 +186,7 @@ button[disabled]:hover{
   flex-direction: row;
 }
 .div-buttonsAcoes button{
-  background-color: rgb(112, 111, 111);
+  background-color: rgb(78, 78, 78);
   color: rgb(221, 218, 218)
 }
 .div-buttonsAcoes .div-buttonsCliente{
@@ -167,6 +195,7 @@ button[disabled]:hover{
   flex-direction: column;
   align-items: center;
   align-content: center;
+  
 }
 .div-buttonsAcoes .div-buttonsServico{
   width: 50%;
@@ -178,6 +207,10 @@ button[disabled]:hover{
 .div-buttonVoltar{
   width: 100%;
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .div-buttonVoltar button{
   width: 50%;
