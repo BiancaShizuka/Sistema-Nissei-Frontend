@@ -55,7 +55,6 @@ function FormularioPeca()
             setButton('Salvar');
             
         }
-        listarPecaPorFiltro();
         setDescricao('');
     }
     async function btnClickExcluir(pecId){

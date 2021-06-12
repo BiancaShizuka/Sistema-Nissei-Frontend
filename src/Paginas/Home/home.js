@@ -54,11 +54,7 @@ function Home()
                     <button type="button" onClick={cadastrarCliente} className="button-home">Cadastrar Clientes</button>
                     <button type="button" onClick={listarClientes} className="button-home">Listar Clientes</button>
 
-                    <button type="button" onClick={listarServicos} className="button-home">Listar Serviço</button>
-   
-                    
-                    
-                    
+                    <button type="button" onClick={listarServicos} className="button-home">Listar Serviço</button>               
                 </div>
             </div>
             {isOpen &&

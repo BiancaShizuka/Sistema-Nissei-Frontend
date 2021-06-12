@@ -58,7 +58,6 @@ function FormularioMarca()
             setButton('Salvar');
             
         }
-        listarMarcaPorFiltro();
         setDescricao('');
     }
     async function btnClickExcluir(carId){
