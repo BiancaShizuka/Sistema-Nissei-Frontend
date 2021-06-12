@@ -59,52 +59,54 @@ function ListaClientes()
     return (
     <div id="tela" className="background">
         <Header/>
-        <div className="div-pesquisa">
-                <input className="input-pesquisa" value={filtro} onChange={e=>setFiltro(e.target.value)}/>
-                <button className="button-pesquisa" onClick={listarClientePorFiltro} type="button" id="btnForm"></button>
-        </div>
-        <div className="table-clientes">
-        <table className='tableCli'>
-                <thead>
-                    <tr>
-                        <td>CPF</td>
-                        <td>Nome</td>
-                        <td>Acao</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {!loading && pessoas.map(res=>(
-                        <tr key={res.pes_cpf}>
-                            <td>{res.pes_cpf}</td>
-                            <td>{res.pes_nome}</td>
-                            <td>
-                            <button onClick={()=>acessarCliente(res.pes_cod)} className="button-item">Visualizar Cliente</button>
-                            <button onClick={()=>btnClickExcluir(res.pes_cod)} className="button-excluirItem">Excluir Cliente</button>
-                            </td>
+        <div className="div-principalPessoa">
+            <div className="div-pesquisaPes">
+                    <input className="input-pesquisaPes" value={filtro} onChange={e=>setFiltro(e.target.value)}/>
+                    <button className="button-pesquisaPes" onClick={listarClientePorFiltro} type="button" id="btnForm"></button>
+            </div>
+            <div className="table-pessoa">
+                <table className='tablePes'>
+                    <thead>
+                        <tr>
+                            <td className="tdPes-cpf">CPF</td>
+                            <td className="tdPes-nome">Nome</td>
+                            <td className="tdPes-acao">Ação</td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            {loading &&
-                <div className="loadingListaCliente">
-                    <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </thead>
+                    <tbody>
+                        {!loading && pessoas.map(res=>(
+                            <tr key={res.pes_cpf}>
+                                <td>{res.pes_cpf}</td>
+                                <td>{res.pes_nome}</td>
+                                <td>
+                                <button onClick={()=>acessarCliente(res.pes_cod)} className="button-item">Visualizar Cliente</button>
+                                <button onClick={()=>btnClickExcluir(res.pes_cod)} className="button-excluirItem">Excluir</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                {loading &&
+                    <div className="loadingListaCliente">
+                        <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
+                    </div>
+                }
+            </div>
+            <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+            {showModal &&
+                <div className="modal">
+                    <div className="modal-content">
+                        <div className="modal-content-text"> 
+                            <p>Deseja excluir o cliente? O cliente pode estar sendo utilizado em outros lugares</p>
+                        </div>
+                        <div className="modal-content-btns">
+                            <button type="button" className="btn-confirma" onClick={excluirCliente}>Confirmar</button>
+                            <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
-        <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
-        {showModal &&
-            <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-content-text"> 
-                        <p>Deseja excluir o cliente? O cliente pode estar sendo utilizado em outros lugares</p>
-                    </div>
-                    <div className="modal-content-btns">
-                        <button type="button" className="btn-confirma" onClick={excluirCliente}>Confirmar</button>
-                        <button type="button" className="btn-cancela" onClick={btnFecharModal}>Fechar</button>
-                    </div>
-                </div>
-            </div>
-        }
     </div>
     );
 }

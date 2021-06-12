@@ -1,27 +1,46 @@
-.table-clientes {
-  height: 100%;
-  width: 50%;
+.div-principalPessoa{
+  width:100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+.table-pessoa {
+  height: 65%;
+  width: 80%;
   overflow-y: auto;
   border-radius: 25px;
   background-color: rgb(0, 0, 0, 0.95);
   color: white;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding-bottom: 10px;
+
   text-align: center;
   display: flex;
   flex-direction: column;
   font-size: 16px;
 }
 
-.tableCli thead{
+.tablePes thead{
   width:100%;
   font-size: 20px;
 
   background-color: rgb(104, 100, 100);
   color: #fff;
 }
-
+.tablePes tr{
+ height: 40px;
+}
+.tablePes tr:nth-child(even) {
+  background-color: #1f1e1e;
+}
+.tablePes .tdPes-cpf{
+  width:10%;
+}
+.tablePes .tdPes-nome{
+  width:20%;
+}
+.tablePes .tdPes-acao{
+  width:20%;
+}
 .button-item {
   border: none;
   background: rgb(197, 193, 193);
@@ -62,14 +81,13 @@
   background: #414040;
   border: none;
   width: 25%;
-  height: 6vh;
+  height: 5%;
+  margin-top: 1%;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 14px;
   border-radius: 25px;
   cursor: pointer;
-  margin-bottom: 10px;
   font-weight: bold;
   color: rgb(216, 216, 216);
 }
@@ -82,6 +100,33 @@
   padding-left: 43%;
   height: 100%; 
   overflow: auto; 
-  background-color: rgba(0,0,0,0);
   background-color: rgba(0,0,0,0.4); 
+}
+.div-pesquisaPes{
+    height: 5%;
+    width: 60%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    display: flex;
+    flex-direction: row;
+}
+.div-pesquisaPes input{
+  width: 100%;
+  height: 77%;
+  border-right: none;
+  border-radius: 8px 0px 0px 8px;
+}
+.div-pesquisaPes .button-pesquisaPes{
+    background-image: url('./search.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    width:40px;
+    height: 100%;
+    border-left: none;
+    border-radius: 0px 8px 8px 0px;
+    background-color: rgb(194, 192, 192);
+}
+.div-pesquisaPes .button-pesquisaPes:hover{
+    opacity: 0.8;
 }
