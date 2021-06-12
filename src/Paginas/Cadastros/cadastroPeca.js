@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../servicos/api';
 import history from '../../history'
+import './cadastroMarca.css'
 import './cadastroPeca.css'
 import '../../app.css'
 import Header from '../../Components/Header'
@@ -95,6 +96,7 @@ function FormularioPeca()
                 </div>
                 <button className="button-peca" type="submit" id="btnForm">{button}</button>
             </form>
+            <h1 className="titulo-lista">Procurar Peca</h1>
             <div className="div-pesquisa">
                 <input className="input-pesquisa" value={filtro} onChange={e=>setFiltro(e.target.value)}/>
                 <button className="button-pesquisa" onClick={listarPecaPorFiltro} type="button" id="btnForm"></button>
@@ -102,9 +104,9 @@ function FormularioPeca()
             {pecas.length>0 && <table className='table-marca'>
                 <thead>
                     <tr>
-                        <td>Codigo</td>
-                        <td>Descricao</td>
-                        <td>Ação</td>
+                        <td className="td-Codigo">Codigo</td>
+                        <td className="td-Descricao">Descricao</td>
+                        <td className="td-Acao">Ação</td>
                     </tr>
                 </thead>
                 <tbody>

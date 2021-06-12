@@ -1,5 +1,6 @@
 .lista-servicos{
   width:80%;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -9,7 +10,9 @@
   border-radius: 5px;
   margin-bottom: 10px;
 }
-
+.lista-servicos{
+  color: #fff;
+}
 .tabela-servicos {
   height: 300px;
   overflow-y: auto;

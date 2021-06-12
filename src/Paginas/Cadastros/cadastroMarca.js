@@ -115,6 +115,7 @@ function FormularioMarca()
                 </div>
                 <button className="button-marca" type="submit" id="btnForm">{button}</button>
             </form>
+            <h1 className="titulo-lista">Procurar Marca</h1>
             <div className="div-pesquisa">
                 <input className="input-pesquisa" value={filtro} onChange={e=>setFiltro(e.target.value)}/>
                 <button className="button-pesquisa" onClick={listarMarcaPorFiltro} type="button" id="btnForm"></button>
@@ -122,9 +123,9 @@ function FormularioMarca()
             {marcas.length>0 && <table className='table-marca'>
                 <thead>
                     <tr>
-                        <td>Codigo</td>
-                        <td>Descricao</td>
-                        <td>Ação</td>
+                        <td className="td-Codigo">Codigo</td>
+                        <td className="td-Descricao">Descricao</td>
+                        <td className="td-Acao">Ação</td>
                     </tr>
                 </thead>
                 <tbody>

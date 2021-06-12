@@ -10,7 +10,7 @@
     align-items: center;
     align-content: center;
     justify-content: center;
-    width: 40%;
+    width: 60%;
     margin-top: 25px;
   }
 .form-marca{
@@ -99,6 +99,17 @@
 /*Tabela*/
 .table-marca{
     margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+.table-marca .td-Codigo{
+    width: 10%;
+}
+.table-marca .td-Descricao{
+    width: 30%;
+}
+.table-marca .td-Acao{
+    width: 30%;
 }
 .table-marca thead{
 width:100%;
@@ -107,9 +118,33 @@ text-align: center;
 background-color: rgb(104, 100, 100);
 color: #fff;
 }
+.titulo-lista{
+    margin-top: 50px;
+    font-size: 20px;
+}
 .div-pesquisa{
-    margin-top: 20px;
+    height: 10%;
+    width: 50%;
+    margin-top: 5px;
     display: flex;
     flex-direction: row;
-
+}
+.div-pesquisa .button-pesquisa{
+    background-image: url('./search.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 23px;
+    height: 20px;
+    border-radius: 0px 8px 8px 0px;
+}
+.div-pesquisa .button-pesquisa:hover{
+    opacity: 0.8;
+}
+.div-pesquisa .input-pesquisa{
+    border: none;
+    font-size: 15px;
+    border-radius: 8px 0px 0px 8px;
+    width: 100%;
+    height: 90%;
 }

@@ -78,7 +78,7 @@
   color: rgb(255, 255, 255);
 }
 .buttonBack {
-  background: #414040;
+  background: #0f0f0f;
   border: none;
   width: 25%;
   height: 5%;
@@ -89,7 +89,7 @@
   border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  color: rgb(216, 216, 216);
+  color: rgb(194, 187, 187);
 }
 .buttonBack:hover{
   background: #fefffe;

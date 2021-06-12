@@ -77,6 +77,7 @@ function ListaServicos()
     <div id="tela" className="background">
         <Header/>
         <div className="lista-servicos"> 
+            <h1>Serviços</h1>
             <div className='filtro'>
                 <div className="filtro-cliente">
                     <label htmlFor="cliente">Cliente: </label>
