@@ -10,7 +10,7 @@
     align-content: center;
     justify-content: center;
     width: 40%;
-   
+    margin-top: 25px;
   }
 .form-peca{
     display: flex;

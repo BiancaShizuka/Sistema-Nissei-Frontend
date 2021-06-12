@@ -23,7 +23,7 @@ function Header(){
         <button type="button" className='button-inicio' onClick={voltarTela}>Nissei</button>
         <div className="divHeader">
             <button type="button" onClick={logout} className="button-logout">Sair</button>
-            <button type="button" onClick={alterarPerfil} className="button-logout">Alterar perfil</button>
+            <button type="button" onClick={alterarPerfil} className="button-perfil">Alterar perfil</button>
         </div>
     </header>
     );
