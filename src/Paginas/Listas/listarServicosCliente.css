@@ -1,4 +1,4 @@
-.table-servicos {
+.table-servicosCli {
     height: 100%;
     width: 80%;
     overflow-y: auto;
@@ -11,16 +11,20 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 18px;
   
   }
   
-  .tableSer thead{
+  .tableSerCli thead{
     width:100%;
     font-size: 20px;
   
     background-color: rgb(104, 100, 100);
     color: #fff;
+  }
+
+  .tableSerCli tbody tr:hover{
+    background-color: rgb(77, 77, 77);
   }
   .filtroCarro{
       width: 30%;

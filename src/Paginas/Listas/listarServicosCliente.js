@@ -168,8 +168,8 @@ function ListaServicosCliente()
                 
             </select>
         </div>
-        <div className="table-servicos">   
-        <table className='tableSer'>
+        <div className="table-servicosCli">   
+        <table className='tableSerCli'>
                 <thead>
                     <tr>
                         <td>Carro</td>
