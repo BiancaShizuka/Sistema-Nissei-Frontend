@@ -28,7 +28,7 @@ function ListaFuncionarios()
         
             console.log(pessoas);
         })
-
+        setLoading(false);
     }
     async function listarFuncionarioPorFiltro(){
         setLoading(true);
@@ -37,11 +37,10 @@ function ListaFuncionarios()
 
                 setPessoas(response.data.filter(pessoas=>pessoas.pes_cod!=parseInt(localStorage.getItem('cod_user'))));
             })
+            setLoading(false);
         }
         else
             listarFuncionarios();
-  
-        setLoading(false);
     }
     async function acessarFuncionario(codigo){
         localStorage.setItem('cod_fun',codigo)

@@ -38,11 +38,10 @@ function ListaClientes()
             await api.get(`/pessoasCliFiltro/${filtro}`).then((resp)=>{
                 setPessoas(resp.data);
             })
+            setLoading(false);
         }
         else
             listarClientes();
-        setLoading(false);
-
     }
     async function btnClickExcluir(pesId){
         setCodPes(pesId);
