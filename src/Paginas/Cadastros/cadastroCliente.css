@@ -109,11 +109,11 @@
 .formularioCli form button[type=submit]{
     width: 100%;
     border: 0;
-
+    height: 30px;
     margin-top: 20px;
     background: #63b86a;
     border-radius: 5px;
-    padding: 15px 20px;
+    
     font-size: 16px;
     font-weight: bold;
     color: rgb(26, 25, 25);
@@ -131,11 +131,11 @@
 .formularioCli button[type=button]{
     width: 100%;
     border: 0;
+    height: 30px;
     margin-top: 30px;
     color:#ffff;
     background:#6b6b6b;
     border-radius: 5px;
-    padding: 15px 20px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -193,11 +193,12 @@
 .cadastroCliContato #btnFormContato {
     width: 70%;
     border: 0;
+    height: 30px;
     margin-top: 30px;
     margin-left:17%;
     background:#414040;
     border-radius: 5px;
-    padding: 15px 20px;
+
     font-size: 16px;
     font-weight: bold;
     color: #fff;
