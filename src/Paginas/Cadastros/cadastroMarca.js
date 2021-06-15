@@ -56,7 +56,7 @@ function FormularioMarca()
                 mar_descricao: descricao
             })
             setButton('Salvar');
-            
+            listarMarcaPorFiltro();
         }
         setDescricao('');
     }

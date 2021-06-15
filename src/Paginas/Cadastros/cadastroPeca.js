@@ -53,7 +53,7 @@ function FormularioPeca()
                 pec_descricao: descricao
             })
             setButton('Salvar');
-            
+            listarPecaPorFiltro();
         }
         setDescricao('');
     }
@@ -95,7 +95,7 @@ function FormularioPeca()
                 </div>
                 <button className="button-peca" type="submit" id="btnForm">{button}</button>
             </form>
-            <h1 className="titulo-lista">Procurar Peca</h1>
+            <h1 className="titulo-lista">Procurar Peça</h1>
             <div className="div-pesquisa">
                 <input className="input-pesquisa" value={filtro} onChange={e=>setFiltro(e.target.value)}/>
                 <button className="button-pesquisa" onClick={listarPecaPorFiltro} type="button" id="btnForm"></button>
@@ -103,8 +103,8 @@ function FormularioPeca()
             {pecas.length>0 && <table className='table-marca'>
                 <thead>
                     <tr>
-                        <td className="td-Codigo">Codigo</td>
-                        <td className="td-Descricao">Descricao</td>
+                        <td className="td-Codigo">Código</td>
+                        <td className="td-Descricao">Descrição</td>
                         <td className="td-Acao">Ação</td>
                     </tr>
                 </thead>

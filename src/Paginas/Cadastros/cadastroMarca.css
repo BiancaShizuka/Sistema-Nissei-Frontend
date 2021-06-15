@@ -148,3 +148,6 @@ color: #fff;
     width: 100%;
     height: 90%;
 }
+.div-pesquisa .input-pesquisa:focus{
+    outline: none;
+}
