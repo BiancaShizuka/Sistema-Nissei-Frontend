@@ -124,8 +124,9 @@ function ListarContasReceberServico()
                         ))}
                     </tbody>
                 </table>
-                <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+                <button type="button" onClick={voltarHome} className="button-voltar">Voltar</button>
             </div>
+          
             {loading &&
                     <div className="modalFechaServico">
                         <ReactLoading type={"spinningBubbles"} color={"#ffffff"} height={'20%'} width={'20%'} />
