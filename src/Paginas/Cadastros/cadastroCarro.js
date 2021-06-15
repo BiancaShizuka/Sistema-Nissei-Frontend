@@ -174,7 +174,7 @@ function voltar(){
                 </div>
                 <button type="submit" className='button-carro' id="btnForm">{button}</button>
             </form>
-            <button type="button" className='button-carro' onClick={voltar}>Voltar</button>
+            <button type="button" className='button-carro button-Cvoltar' onClick={voltar}>Voltar</button>
         </div>
         {loading &&
             <div className="modalCar">
