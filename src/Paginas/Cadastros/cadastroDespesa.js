@@ -7,6 +7,8 @@ import Header from '../../Components/Header'
 
 function formularioDespesa(){
     return(
+        <div></div>
+        /*
         <div className="background">
             <div className="div-cadDespesas">
                 <form class='form-despesas' onSubmit={adicionarFunc}>
@@ -28,7 +30,7 @@ function formularioDespesa(){
                 </form>
             </div> 
                 
-        </div>   
+        </div>  */ 
     );
 }
 export default formularioDespesa;

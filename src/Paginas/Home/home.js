@@ -43,6 +43,13 @@ function Home()
     }
     function listarContasReceber(){
         history.push('/listaContasReceber');
+        
+    }
+    function listarContasPagar(){
+        history.push('/listaContasPagar');
+    }
+    function cadastrarDespesas(){
+        history.push('/cadastroDespesas');
     }
     return (
     <div className="background">
@@ -70,6 +77,8 @@ function Home()
             <div className="div-headerList">
                 <h1>Contas</h1>
                 <div className="list">
+                    <button type="button" onClick={cadastrarDespesas} className="button-home">Cadastrar despesas</button>
+                    <button type="button" onClick={listarContasPagar} className="button-home">Listar Contas a Pagar</button>
                     <button type="button" onClick={listarContasReceber} className="button-home">Listar Contas a Receber</button>
                     
                 

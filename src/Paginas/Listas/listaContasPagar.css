@@ -89,11 +89,7 @@
 #divTable button[type=button]{
     margin-top: 0;
 }
-.buttonBack{
-    position: relative;
-    top: 70px;
-    left: 600px;
-}
+
 .tbodycolor{
     background-color:rgb(58, 57, 57);
 }
