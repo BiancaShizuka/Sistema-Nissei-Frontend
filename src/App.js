@@ -20,6 +20,8 @@ import ListaServicos from './Paginas/Listas/listaServicos'
 import ListaContaReceberServico from './Paginas/Listas/listaContasReceberServico'
 import VisualizarServiço from './Paginas/Servico/visualizarServiço'
 import ListaContaReceber from './Paginas/Listas/listaContasReceber'
+import CadastroDespesas from './Paginas/Cadastros/cadastroDespesa'
+import ListaDespesas from './Paginas/Listas/listaContasPagar'
 function App() {
   return (
     <Router history={history}>
@@ -42,6 +44,8 @@ function App() {
         <Route path="/visualizarServico" exact={true} component={VisualizarServiço}/>
         <Route path="/listaContasReceberServico" exact={true} component={ListaContaReceberServico}/>
         <Route path="/listaContasReceber" exact={true} component={ListaContaReceber}/>
+        <Route path="/listaContasPagar" exact={true} component={ListaDespesas}/>
+        <Route path="/cadastroDespesas" exact={true} component={CadastroDespesas}/>
       </Switch>
     </Router>
   );
