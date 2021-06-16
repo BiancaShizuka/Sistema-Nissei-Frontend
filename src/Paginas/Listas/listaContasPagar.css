@@ -1,16 +1,43 @@
-.filtro{
+.filtro-despesa{
     position: relative;
     width: 20%;
     left: 180px;
     top: -20px;
     display: inline; 
 }
-.filtro select{
+.filtro-despesa select{
     width: 100%;
 }
-.formularioDespesas .input-block {
+.div-filtrarDespesa{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    
+}
+.div-despesas .button-filtrarDespesa{
+    
+    width: 15%;
+    background: rgb(109, 108, 108);
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+}
+.div-despesas .button-filtrarDespesa:hover{
+    
+
+    background: rgb(59, 59, 59);
+    color: rgb(255, 255, 255);
+
+}
+.formularioDespesas{
+    margin: 2%;
+}
+.formularioDespesas input{
     margin-right: 3%;
     margin-top: 20px;
+    border-radius: 15px;
 }
 .formularioDespesas .input-block label{
     color: #e0dfdf;
@@ -30,66 +57,60 @@
     border-bottom: 3px solid rgb(255, 255, 255);
 }
 .div-despesasT{
-    background-color: rgb(0, 0, 0);
-    box-shadow: 0 0 14px 0 rgba(0 , 0 , 0, 0.02);
-    border-radius: 25px;
-    padding: 25px;
-    color: #ffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    width: 850px;
-    position: relative;
-    top: 50px;
-    left: 30px;
+    margin-top: 10px;
 }
 .div-despesas{
-    width: 70%;
+    width: 80%;
     background-color: rgb(0, 0, 0,.95);
     box-shadow: 0 0 14px 0 rgba(0 , 0 , 0, 0.02);
     border-radius: 25px;
-    padding: 30px;
     color: #ffff;
     position:absolute;
-    left:5%;
     top:20%;
-    width: 1300px;
 }
-.background {
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-    background-color: darkslategray;
-  }
-.table-despesas{
-    height: 100%;
-    width: 80%;
+.div-despesas h1{
+    width: 100%;
+    text-align: center;
+}
+
+
+.tabelaDes{
+
     overflow-y: auto;
-    border-radius: 25px;
     background-color: rgb(0, 0, 0, 0.95);
     color: white;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    padding-bottom: 10px;
+
     text-align: center;
     display: flex;
     flex-direction: column;
     font-size: 16px;
-  }
-.tabelaDes{
+
+}
+.tabelaDes thead{
     width:100%;
     font-size: 20px;
+  
     background-color: rgb(104, 100, 100);
     color: #fff;
-
-}  
-#divTable button[type=button]{
-    margin-top: 0;
+  }
+.tabelaDes .tdD-tipo{
+    width: 10%;
 }
-
-.tbodycolor{
-    background-color:rgb(58, 57, 57);
+.tabelaDes .tdD-valor{
+    width: 8%;
+}
+.tabelaDes .tdD-dtLancamento{
+    width: 5%;
+}
+.tabelaDes .tdD-dtVencimento{
+    width: 5%;
+}
+.tabelaDes .tdD-dtParcelas{
+    width: 5%;
+}
+.tabelaDes .tdD-tipoPgto{
+    width: 6%;
+}
+.tabelaDes .tdD-dtPgto{
+    width: 5%;
 }

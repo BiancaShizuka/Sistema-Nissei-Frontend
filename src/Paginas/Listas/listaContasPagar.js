@@ -7,40 +7,45 @@ import './listaContasPagar.css'
 import ReactLoading from 'react-loading';
 function ListarContasPagar()
 {
+
     return (
-        <div></div>
-       /*
+
         <div id="tela" className="background">
+            <Header/>
             <div class="div-despesas">
+                <h1>Contas a Pagar</h1>
                 <form class="formularioDespesas">
-                    <div class="filtro">
-                            <label >Tipo de Despesas:</label>
-                            <input type="text">
-                            <label >Data de Lançamento:</label>
-                            <input type="date">
-                            <label >Data de Vencimento:</label>
-                            <input type="date">
-                            <button>Pesquisar</button>    
+                    <div class="filtro-despesas">
+                            <label >Tipo de Despesas: </label>
+                            <input type="text"/>
+                            <label >Data de Lançamento: </label>
+                            <input type="date"/>
+                            <label >Data de Vencimento: </label>
+                            <input type="date"/>
+                            <div className="div-filtrarDespesa">
+                                <button className="button-filtrarDespesa">Pesquisar</button>  
+                            </div>  
                     </div>    
-                    <div class="">
+                    <div className="div-despesasT">
                         <table class='tabelaDes'>
                             <thead>
                                 <tr>
-                                    <td>Tipo</td>
-                                    <td>Valor</td>
-                                    <td>Data Lançamento</td>
-                                    <td>Data vencimento</td>
-                                    <td>Número de Parcelas</td>
-                                    <td>Tipo de Pagamento</td>
-                                    <td>Data de Pagamento</td>
+                                    <td className="tdD-tipo">Tipo</td>
+                                    <td className="tdD-valor">Valor</td>
+                                    <td className="tdD-dtLancamento">Data de Lançamento</td>
+                                    <td className="tdD-dtVencimento">Data de vencimento</td>
+                                    <td className="tdD-dtParcelas">Número de Parcelas</td>
+                                    <td className="tdD-tipoPgto">Tipo de Pagamento</td>
+                                    <td className="tdD-dtPgto">Data de Pagamento</td>
                                 </tr>
                             </thead>
                         </table>
-                        <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
+                       
                     </div> 
                 </form> 
             </div>
-        </div>*/
+        </div>
+       
     );
 }
 
