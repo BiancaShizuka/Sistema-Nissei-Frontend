@@ -40,20 +40,7 @@
     background: #044604;
     color:rgba(168, 168, 168, 0.849)
 }
-.buttonBack{
-    width: 100%;
-    border: 0;
-    margin-top: 30px;
-    color:#ffff;
-    background:#6b6b6b;
-    border-radius: 5px;
-    padding: 15px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.5s;
-    position: relative;
-}
+
 .form-despesas input{
     background-color: transparent;
     color:#fff;

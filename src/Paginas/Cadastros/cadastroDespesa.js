@@ -5,13 +5,22 @@ import './cadastroContato.css'
 import '../../app.css'
 import Header from '../../Components/Header'
 
-function formularioDespesa(){
+function FormularioDespesa(){
+    const [nivel,setNivel] =useState('');
+
+    function gravarDespesa(){
+
+    }
+    function voltarHome(){
+
+    }
     return(
         <div></div>
         /*
         <div className="background">
+            <Header/>
             <div className="div-cadDespesas">
-                <form class='form-despesas' onSubmit={adicionarFunc}>
+                <form class='form-despesas' onSubmit={gravarDespesa}>
                     <label>Tipo de despesas:</label>
                     <input type="text" id="tpDespesa" name="tpDespesas"/>
                     <label>Data de Lançamento:</label>
@@ -25,7 +34,7 @@ function formularioDespesa(){
                     <label for="parcelado">Parcelado</label>
                     <label>Número de Parcelas:</label>
                     <input type="number" id="NParcelas" name="NParcelas"/>
-                    <button type="button" onClick={salvarDespesas} class="buttonSave">Salvar</button>
+                    <button type="submit" class="buttonSave">Salvar</button>
                     <button type="button" onClick={voltarHome} class="buttonBack">Voltar</button>
                 </form>
             </div> 
@@ -33,4 +42,4 @@ function formularioDespesa(){
         </div>  */ 
     );
 }
-export default formularioDespesa;
+export default FormularioDespesa;
