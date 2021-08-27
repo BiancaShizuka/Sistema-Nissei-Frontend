@@ -39,6 +39,9 @@
     margin-top: 20px;
     border-radius: 15px;
 }
+.formularioDespesas select{
+    margin-right: 3%;
+}
 .formularioDespesas .input-block label{
     color: #e0dfdf;
     font-size: 14px;
@@ -58,8 +61,10 @@
 }
 .div-despesasT{
     margin-top: 10px;
+
 }
 .div-despesas{
+   
     width: 80%;
     background-color: rgb(0, 0, 0,.95);
     box-shadow: 0 0 14px 0 rgba(0 , 0 , 0, 0.02);

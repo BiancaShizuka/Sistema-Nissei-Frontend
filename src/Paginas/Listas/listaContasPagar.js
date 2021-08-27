@@ -7,20 +7,26 @@ import './listaContasPagar.css'
 import ReactLoading from 'react-loading';
 function ListarContasPagar()
 {
-    const [showModal,setShowModal]=useState(false);
-    const [showModalCancel,setShowModalCancel]=useState(false);
+    const [tipo,setTipo]=useState(0);
+    const [tdCod,setTdCod]=useState(0);
+    const [tipos,setTipos]=useState([]);
     const [conCod,setConCod] = useState(0);
-    const [desCod,setSerCod] = useState(0);
-    const [dtVencimento,setDtVencimento] = useState('');
-    const [dtPgto, setDtPgto] = useState(new Date());
-    const [loading,setLoading]=useState(false);
+    const [dtInicio,setDtInicio] = useState('');
+    const [dtFim,setDtFim] = useState('');
     const [parcelas,setParcelas] = useState([]);
     const [nome,setNome]=useState('');
     var tpPagamento;
     useEffect(()=>{
         localStorage.removeItem("cod_des");
-   
+        listarTipoDespesa();
     },[]);
+    async function listarTipoDespesa(){
+        await api.get(`/tipodespesa`).then((response)=>{
+            
+            setTipos(response.data);
+        })
+       
+    }
     function voltarHome(){
         history.goBack();
     }
@@ -39,12 +45,12 @@ function ListarContasPagar()
         return dat;
     }
     async function pesquisar(){
-        setLoading(true);
-        await api.get(`/buscarContasPagar/?td_nome=${nome}&con_dtVencimento=${dtVencimento}`).then((resp)=>{
+       
+        await api.get(`/buscarContasPagar/?td_cod=${tdCod}&dtInicio=${dtInicio}&dtFim=${dtFim}`).then((resp)=>{
        
             setParcelas(resp.data);
         })
-        setLoading(false);
+        
     }
     if(conCod>1)
     {
@@ -62,11 +68,21 @@ function ListarContasPagar()
                 <h1>Contas a Pagar</h1>
                 <form class="formularioDespesas">
                     <div class="filtro-despesas">
-                            <label >Tipo de Despesas: </label>
-                            <input type="text"/>
-                            <label >Data de Lançamento: </label>
+                            
+                            <label>Tipo de despesas:</label>
+                            <select id="select-tipodespesa" value={tipo} onChange={e=>setTipo(e.target.value)}>
+                                <option id="op-selecione" value="">
+                                    Selecione uma opcao
+                                </option>
+                                {tipos.map(tipo=>(
+                                    <option key={tipo.td_cod} value={tipo.td_cod} >
+                                        {tipo.td_nome}
+                                    </option>
+                                ))}
+                            </select>
+                            <label >Data de Inicio: </label>
                             <input type="date"/>
-                            <label >Data de Vencimento: </label>
+                            <label >Data de Fim: </label>
                             <input type="date"/>
                             <div className="div-filtrarDespesa">
                                 <button type="button" onClick={()=>pesquisar()} className="button-filtrarDespesa">Pesquisar</button>  
@@ -77,9 +93,10 @@ function ListarContasPagar()
                             <thead>
                                 <tr>
                                     <td className="tdD-tipo">Tipo</td>
+                                    <td className="tdD-dtParcelas">Nº</td>
                                     <td className="tdD-valor">Valor</td>
                                     <td className="tdD-dtVencimento">Data de vencimento</td>
-                                    <td className="tdD-dtParcelas">Número de Parcelas</td>
+                                    
                                     <td className="tdD-tipoPgto">Tipo de Pagamento</td>
                                     <td className="tdD-dtPgto">Data de Pagamento</td>
                                 </tr>
@@ -99,9 +116,11 @@ function ListarContasPagar()
                         </table>
                        
                     </div> 
-                    <button type="button" onClick={voltarHome} className="buttonBack">Voltar</button>
+                    
                 </form> 
+                
             </div>
+            
         </div>
        
     );
