@@ -107,15 +107,7 @@ function ListarContasReceber()
     async function fecharModalPgtoParc()
     {
         setShowModalPgtoParc(false); 
-    }
-    async function btnClickPgtoParcial(con_cod,ser_cod,con_valor)
-    {
-       setSerCod(ser_cod);
-       setConCod(con_cod);
-       setConValor(con_valor)
-       setValorParc(0);
-       setShowModalPgtoParc(true);
-    }   
+    } 
     async function btnFecharModalPgtoParc()
     {
         fecharModalPgtoParc();
@@ -191,7 +183,6 @@ function ListarContasReceber()
                                
                                     <button onClick={()=>btnClickConfPgto(res.con_cod,res.ser_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
                                     <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.ser_cod, res.pai_con, res.pai_ser)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
-                                    <button onClick={()=>btnClickPgtoParcial(res.con_cod, res.ser_cod, res.con_valor)} disabled={res.con_dtPgto!==null} className="button-item-pgtoparc">Receber Parcial</button>
                                     <button onClick={()=>visualizarServico(res.ser_cod)} className="button-item-visualiza">Visualizar Serviço</button>
                                     </td>
                                 </tr>
