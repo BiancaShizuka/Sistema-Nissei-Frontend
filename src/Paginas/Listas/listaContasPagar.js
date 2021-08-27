@@ -46,19 +46,30 @@ function ListarContasPagar()
     }
     async function pesquisar(){
        
-        await api.get(`/buscarContasPagar/?td_cod=${tdCod}&dtInicio=${dtInicio}&dtFim=${dtFim}`).then((resp)=>{
+        await api.get(`/contasFiltro/?td_cod=${tdCod}&dtInicio=${dtInicio}&dtFim=${dtFim}`).then((resp)=>{
        
             setParcelas(resp.data);
+           console.log(resp.data);
         })
         
     }
-    if(conCod>1)
-    {
-        tpPagamento="Parcelado";
+    async function confirmarPagamento(con_cod,des_cod){
+     
+        await api.put('/contaPagar',{
+            des_cod: des_cod,
+            con_cod: con_cod,
+            
+            con_dtPgto: new Date()
+        })
+        pesquisar();   
     }
-    else
-    {
-        tpPagamento="A vista";
+    async function btnClickCancelarPgto(con_cod,des_cod){
+        await api.put('/contaPagar',{
+            des_cod: des_cod,
+            con_cod:con_cod,
+            con_dtPgto:null,
+        })
+        pesquisar();
     }
     return (
 
@@ -96,20 +107,21 @@ function ListarContasPagar()
                                     <td className="tdD-dtParcelas">Nº</td>
                                     <td className="tdD-valor">Valor</td>
                                     <td className="tdD-dtVencimento">Data de vencimento</td>
-                                    
-                                    <td className="tdD-tipoPgto">Tipo de Pagamento</td>
                                     <td className="tdD-dtPgto">Data de Pagamento</td>
+                                    <td>Ações</td>
                                 </tr>
                             </thead>
                             <tbody className="tbodycolor">
                             {parcelas.map(res=>(
-                                <tr key={[res.des_cod]}>
-                                    <td>{res.nome}</td>
-                                    <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
-                                    <td>{mudarEstruturaData(res.con_dtVencimento)}</td> 
-                                    <td>{tpPagamento}</td>
+                                <tr key={[res.des_cod,res.con_cod]}>
+                                    <td>{res.td_nome}</td>
                                     <td>{res.con_cod}</td>
+                                    <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
                                     <td>{mudarEstruturaData(res.con_dtPgto)}</td>
+                                    <td>
+                                    <button onClick={()=>confirmarPagamento(res.con_cod,res.des_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
+                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.des_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
