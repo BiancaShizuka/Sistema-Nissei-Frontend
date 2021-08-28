@@ -8,7 +8,6 @@ import ReactLoading from 'react-loading';
 function ListarContasPagar()
 {
     const [tipo,setTipo]=useState(0);
-    const [tdCod,setTdCod]=useState(0);
     const [tipos,setTipos]=useState([]);
     const [conCod,setConCod] = useState(0);
     const [dtInicio,setDtInicio] = useState('');
@@ -44,21 +43,23 @@ function ListarContasPagar()
         
         return dat;
     }
+    function getDtPgto(date){
+
+        if(date==null)
+            return 'Não pago';
+        return mudarEstruturaData(date);
+    }
     async function pesquisar(){
-       
-        await api.get(`/contasFiltro/?td_cod=${tdCod}&dtInicio=${dtInicio}&dtFim=${dtFim}`).then((resp)=>{
+        await api.get(`/contasFiltro/?td_cod=${tipo}&dtInicio=${dtInicio}&dtFim=${dtFim}`).then((resp)=>{
        
             setParcelas(resp.data);
            console.log(resp.data);
         })
-        
     }
     async function confirmarPagamento(con_cod,des_cod){
-     
         await api.put('/contaPagar',{
             des_cod: des_cod,
             con_cod: con_cod,
-            
             con_dtPgto: new Date()
         })
         pesquisar();   
@@ -82,7 +83,7 @@ function ListarContasPagar()
                             
                             <label>Tipo de despesas:</label>
                             <select id="select-tipodespesa" value={tipo} onChange={e=>setTipo(e.target.value)}>
-                                <option id="op-selecione" value="">
+                                <option id="op-selecione" value='0'>
                                     Selecione uma opcao
                                 </option>
                                 {tipos.map(tipo=>(
@@ -91,10 +92,10 @@ function ListarContasPagar()
                                     </option>
                                 ))}
                             </select>
-                            <label >Data de Inicio: </label>
-                            <input type="date"/>
+                            <label htmlFor="dtInicio">Data de Inicio: </label>
+                            <input type="date" name="dtInicio" id="dtInicio" value={dtInicio} onChange={e=>setDtInicio(e.target.value)}/>
                             <label >Data de Fim: </label>
-                            <input type="date"/>
+                            <input type="date" name="dtFim" id="dtFim" value={dtFim} onChange={e=>setDtFim(e.target.value)}/>
                             <div className="div-filtrarDespesa">
                                 <button type="button" onClick={()=>pesquisar()} className="button-filtrarDespesa">Pesquisar</button>  
                             </div>  
@@ -117,10 +118,11 @@ function ListarContasPagar()
                                     <td>{res.td_nome}</td>
                                     <td>{res.con_cod}</td>
                                     <td>R$ {parseFloat(res.con_valor).toFixed(2)}</td>
-                                    <td>{mudarEstruturaData(res.con_dtPgto)}</td>
+                                    <td>{mudarEstruturaData(res.con_dtVencimento)}</td>
+                                    <td>{getDtPgto(res.con_dtPgto)}</td>
                                     <td>
-                                    <button onClick={()=>confirmarPagamento(res.con_cod,res.des_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
-                                    <button onClick={()=>btnClickCancelarPgto(res.con_cod,res.des_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
+                                    <button type="button" onClick={()=>confirmarPagamento(res.con_cod,res.des_cod)} disabled={res.con_dtPgto!==null} className="button-item-confirma">Confirmar </button>
+                                    <button type="button" onClick={()=>btnClickCancelarPgto(res.con_cod,res.des_cod)} disabled={res.con_dtPgto===null} className="button-item-cancela">Cancelar Recebimento</button>
                                     </td>
                                 </tr>
                             ))}
@@ -132,6 +134,7 @@ function ListarContasPagar()
                 </form> 
                 
             </div>
+            
             
         </div>
        
